@@ -1,0 +1,18 @@
+[
+  {
+    "UserId": 1,
+    "firstName": "Super",
+    "lastName": "Admin",
+    "gender": "male",
+    "birthDate": "1995-01-15",
+    "bio": "Iam the super admin of this application"
+  },
+  {
+    "UserId": 2,
+    "firstName": "Muhammad Ridho",
+    "lastName": "Amrullah",
+    "gender": "male",
+    "birthDate": "1999-10-10",
+    "bio": "Hello, I am a software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success. I am always eager to learn new technologies and improve my skills."
+  }
+]
