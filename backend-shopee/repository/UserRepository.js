@@ -11,8 +11,6 @@ class UserRepository {
       attributes: ["id", "password"],
     });
 
-    console.log(findUser, "<< findUser di UserRepoFindEmailLogin");
-
     return findUser;
   }
 

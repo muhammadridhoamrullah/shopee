@@ -27,6 +27,7 @@ async function authentication(req, res, next) {
       role: user.role,
       firstName: user.profile.firstName,
     };
+
     next();
   } catch (error) {
     next(error);

@@ -12,7 +12,6 @@ class AuthServices {
 
     // Cek password invalid atau tidak
     const checkPassword = await comparePassword(password, findUser.password);
-    console.log(checkPassword, "<< checkPass AuthLogin");
 
     if (!checkPassword) throw { name: "LOGIN_IDENTIFIER_PASSWORD_INVALID" };
 
