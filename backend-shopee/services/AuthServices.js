@@ -1,5 +1,6 @@
 const { comparePassword } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
+const { sendNotificationLogin } = require("../helpers/nodemailer");
 const { UserRepository } = require("../repository/UserRepository");
 
 class AuthServices {
@@ -24,6 +25,9 @@ class AuthServices {
     });
 
     // Nanti panggil service login notification menggunakan nodemailer
+    await sendNotificationLogin({
+      email: findUser.email,
+    });
 
     return access_token;
   }

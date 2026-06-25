@@ -8,7 +8,7 @@ class UserRepository {
       where: {
         [Op.or]: [{ email: identifier }, { username: identifier }],
       },
-      attributes: ["id", "password"],
+      attributes: ["id", "email", "password"],
     });
 
     return findUser;

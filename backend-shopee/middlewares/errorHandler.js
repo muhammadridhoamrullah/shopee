@@ -42,6 +42,11 @@ function errorHandler(err, req, res, next) {
       statusCode = 403;
       message = "Forbidden, you don't have access to this resource";
       break;
+
+    case "EMAIL_SEND_FAILED":
+      statusCode = 500;
+      message = err.message || "Failed to send email notification";
+      break;
   }
 
   return res.status(statusCode).json({
