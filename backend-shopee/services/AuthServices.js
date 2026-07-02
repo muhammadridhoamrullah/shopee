@@ -25,9 +25,9 @@ class AuthServices {
     });
 
     // Nanti panggil service login notification menggunakan nodemailer
-    await sendNotificationLogin({
-      email: findUser.email,
-    });
+    // await sendNotificationLogin({
+    //   email: findUser.email,
+    // });
 
     return access_token;
   }

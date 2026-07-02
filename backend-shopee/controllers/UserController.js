@@ -10,7 +10,7 @@ class UserController {
 
       res.status(200).json({
         status: "success",
-        message: "Successfully login",
+        message: "Successfully logged in",
         data: {
           access_token,
         },
