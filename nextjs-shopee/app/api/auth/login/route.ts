@@ -1,17 +1,31 @@
+import { schemaLogin } from "@/src/helpers/zod";
+import { loginUser } from "@/src/models/user/user";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
-    console.log("Hit");
+    console.log("Login Cuy");
 
-    // const body = await request.json();
+    const body = await request.json();
+    console.log(body, "body");
+
+    // Validasi menggunakan Zod Schema
+    // const validationSchema = schemaLogin.safeParse(body);
+    // console.log(validationSchema, "validationSchemaLogin");
+
+    // if (!validationSchema.success) {
+    //   throw validationSchema.error;
+    // }
+
+    // const access_token = await loginUser(body);
 
     return NextResponse.json(
       {
         success: true,
         message: "Login Successfully",
-        // data: body,
+        // data: access_token,
+        data: body,
       },
       {
         status: 200,
