@@ -3,6 +3,22 @@ export type inputLogin = {
   password: string;
 };
 
+export type inputRegister = {
+  username: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+};
+
+export type inputUpdateCreateUser = inputRegister & {
+  role: string;
+  isEmailVerified: boolean;
+  lastLoginAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt?: Date;
+};
+
 export interface User {
   _id: string;
   username: string;

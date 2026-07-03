@@ -7,7 +7,7 @@ const router = require("express").Router();
 // Routes user
 router.use("/users", userRouter);
 router.get("/health", (req, res) => {
-  res.status(200).json({ message: "Server is running" });
+  res.status(200).json({ message: "Server is running yeay" });
 });
 
 // Error handling

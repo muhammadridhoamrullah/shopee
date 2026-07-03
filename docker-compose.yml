@@ -80,6 +80,8 @@ services:
     volumes:
       - ./nextjs-shopee:/app
       - /app/node_modules
+      - nextjs_next_cache:/app/.next
 
 volumes:
   db_data:
+  nextjs_next_cache:
