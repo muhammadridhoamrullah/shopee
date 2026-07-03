@@ -3,6 +3,11 @@ import { getDB } from "../../db/config";
 import { inputLogin, inputRegister } from "../../type/type";
 import { UserRepository } from "./user.repository";
 import { signToken } from "@/src/helpers/jwt";
+import {
+  sendNotificationLogin,
+  sendVerificationEmail,
+} from "@/src/helpers/nodemailer";
+import * as jose from "jose";
 
 export async function loginUser(input: inputLogin) {
   // Find by username or email
@@ -37,6 +42,10 @@ export async function loginUser(input: inputLogin) {
   });
 
   // Send Notification email nanti
+  await sendNotificationLogin({
+    email: findUser.email,
+    username: findUser.username,
+  });
 
   return access_token;
 }
@@ -86,10 +95,40 @@ export async function registerUser(input: inputRegister) {
   });
 
   // Panggil Email Verification Service
+  await sendVerificationEmail({
+    email: input.email,
+    username: input.username,
+    token: tokenEmailVerification,
+  });
 
   return {
     _id: create.insertedId.toString(),
     username: input.username,
     email: input.email,
+  };
+}
+
+export async function verifyEmail(token: string) {
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
+
+  const decoded = await jose.jwtVerify<{ _id: string }>(token, secret);
+
+  const UserId = decoded.payload._id;
+
+  const findUser = await UserRepository.findUserById(UserId);
+
+  if (!findUser) {
+    throw new Error("User not found");
+  }
+
+  if (findUser.isEmailVerified) {
+    throw new Error("Email already verified");
+  }
+
+  const updateVerifiedEmailUser =
+    await UserRepository.updateVerifyEmail(UserId);
+
+  return {
+    message: "Email verified successfully",
   };
 }

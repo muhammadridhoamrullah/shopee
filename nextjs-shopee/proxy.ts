@@ -16,7 +16,7 @@ const tokenCache = new Map<
 
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   try {
     const token = request.cookies.get("access_token")?.value;
     console.log(token, "token middleware");

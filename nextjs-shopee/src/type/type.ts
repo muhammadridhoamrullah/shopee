@@ -32,3 +32,12 @@ export interface User {
   updatedAt: Date;
   deletedAt?: Date;
 }
+
+export type dataNodemailerLogin = {
+  email: string;
+  username: string;
+};
+
+export type dataNodemailerVerifiactionEmail = dataNodemailerLogin & {
+  token: string;
+};
