@@ -1,3 +1,6 @@
+// Warna Oren Shopee
+// #EE4D2D
+
 export type inputLogin = {
   identifier: string;
   password: string;
