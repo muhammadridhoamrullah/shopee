@@ -44,3 +44,10 @@ export type dataNodemailerLogin = {
 export type dataNodemailerVerifiactionEmail = dataNodemailerLogin & {
   token: string;
 };
+
+export type formDataLogin = {
+  identifier: string;
+  password: string;
+};
+
+export const API_URL = process.env.NEXT_PUBLIC_BASE_URL;

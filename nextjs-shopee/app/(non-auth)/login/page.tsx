@@ -4,16 +4,58 @@ import { BsQrCode } from "react-icons/bs";
 import Link from "next/link";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeLine } from "react-icons/ri";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaFacebook } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import Footer from "@/src/components/Footer";
+import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
+import { doLogin } from "@/src/store/slice/loginSlice";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const { loadingLogin, errorLogin, dataLogin, isLogin } = useAppSelector(
+    (state) => state.login,
+  );
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const [formDataLogin, setFormDataLogin] = useState({
+    identifier: "",
+    password: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
+
+  // useEffect untuk redirect ke halaman dashboard jika login berhasil
+  useEffect(() => {
+    if (isLogin) {
+      router.push("/dashboard");
+    }
+  }, [isLogin, router]);
+
+  // useEffect untuk menampilkan error login jika ada
+  useEffect(() => {
+    if (errorLogin) {
+      alert(errorLogin);
+    }
+  }, [errorLogin]);
 
   function togglePassword() {
     setShowPassword(!showPassword);
+  }
+
+  function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+
+    setFormDataLogin({
+      ...formDataLogin,
+      [name]: value,
+    });
+  }
+
+  async function submitHandler(
+    e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>,
+  ) {
+    e.preventDefault();
+    dispatch(doLogin(formDataLogin));
   }
 
   return (
@@ -65,7 +107,10 @@ export default function Login() {
           {/* Akhir Log In & QR */}
 
           {/* Awal Form */}
-          <div className=" w-full h-fit flex flex-col gap-4 ">
+          <form
+            onSubmit={submitHandler}
+            className=" w-full h-fit flex flex-col gap-4 "
+          >
             {/* Awal No HP/Email/Username */}
             <input
               type="text"
@@ -73,8 +118,8 @@ export default function Login() {
               id="identifier"
               placeholder="No. Handphone/Username/Email"
               className="w-full h-10 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#EE4D2D] text-sm"
-              // onChange={}
-              // value={}
+              onChange={changeHandler}
+              value={formDataLogin.identifier}
             />
             {/* Akhir No HP/Email/Username */}
 
@@ -89,6 +134,8 @@ export default function Login() {
                   id="password"
                   placeholder="Password"
                   className="w-full h-fit focus:outline-none "
+                  onChange={changeHandler}
+                  value={formDataLogin.password}
                 />
                 {/* Akhir Input Password */}
 
@@ -127,7 +174,7 @@ export default function Login() {
               LOG IN
             </button>
             {/* Akhir Button Login */}
-          </div>
+          </form>
           {/* Akhir Form */}
 
           {/* Awal OAuth */}
