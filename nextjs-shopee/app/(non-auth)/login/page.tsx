@@ -11,6 +11,7 @@ import Footer from "@/src/components/Footer";
 import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
 import { doLogin } from "@/src/store/slice/loginSlice";
 import { useRouter } from "next/navigation";
+import NonAuthHeader from "@/src/components/auth/NonAuthHeader";
 
 export default function Login() {
   const { loadingLogin, errorLogin, dataLogin, isLogin } = useAppSelector(
@@ -61,23 +62,7 @@ export default function Login() {
   return (
     <div className="w-full min-h-screen bg-[#EE4D2D] flex flex-col">
       {/* Awal Navbar */}
-      <div className="w-full h-20 bg-white px-20 flex justify-between items-center">
-        {/* Awal Logo Shopee */}
-        <Link href="/" className="w-40 h-16 relative">
-          <img
-            src="/shopee1.png"
-            alt="Logo Shopee"
-            className="absolute w-full h-full object-contain"
-          />
-        </Link>
-        {/* Akhir Logo Shopee */}
-
-        {/* Awal Butuh Bantuan? */}
-        <Link href={"/help"} className="text-[#EE4D2D] text-sm font-semibold">
-          Butuh bantuan?
-        </Link>
-        {/* Akhir Butuh Bantuan? */}
-      </div>
+      <NonAuthHeader />
       {/* Akhir Navbar */}
 
       {/* Awal Form */}
@@ -237,9 +222,9 @@ export default function Login() {
 
           {/* Awal Link Register */}
           <div className=" w-full h-fit flex justify-center items-center text-sm gap-1 ">
-            <p className="font-light text-gray-500">Baru di Shopee?</p>
+            <p className="font-light text-gray-500">Don't have an account?</p>
             <Link href={"/register"} className="text-[#EE4D2D] font-semibold">
-              Daftar
+              Sign Up
             </Link>
           </div>
           {/* Akhir Link Register */}

@@ -50,4 +50,11 @@ export type formDataLogin = {
   password: string;
 };
 
+export type formDataRegister = {
+  username: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+};
+
 export const API_URL = process.env.NEXT_PUBLIC_BASE_URL;
