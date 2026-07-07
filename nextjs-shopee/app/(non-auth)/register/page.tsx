@@ -9,15 +9,15 @@ import { FaFacebook } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import Footer from "@/src/components/Footer";
 import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
-import { doLogin } from "@/src/store/slice/loginSlice";
 import { useRouter } from "next/navigation";
 import { doRegister } from "@/src/store/slice/registerSlice";
 import NonAuthHeader from "@/src/components/auth/NonAuthHeader";
+import { VscLoading } from "react-icons/vsc";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const { loadingRegister, errorRegister, dataRegister, isRegister } =
     useAppSelector((state) => state.register);
-  console.log(dataRegister, "register");
 
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -35,6 +35,7 @@ export default function Register() {
   // useEffect untuk redirect ke halaman dashboard jika register berhasil
   useEffect(() => {
     if (isRegister) {
+      toast.success("Successfully registered! Please log in.");
       router.push("/login");
     }
   }, [isRegister, router]);
@@ -42,7 +43,7 @@ export default function Register() {
   // useEffect untuk menampilkan error register jika ada
   useEffect(() => {
     if (errorRegister) {
-      alert(errorRegister);
+      toast.error(errorRegister);
     }
   }, [errorRegister]);
 
@@ -50,7 +51,7 @@ export default function Register() {
   useEffect(() => {
     const delay = setTimeout(() => {
       if (confirmPassword && formDataRegister.password !== confirmPassword) {
-        // alert("Password and Confirm Password do not match");
+        toast.error("Password and Confirm Password do not match");
         setPasswordMatchError(true);
       } else {
         setPasswordMatchError(false);
@@ -59,13 +60,6 @@ export default function Register() {
 
     return () => clearTimeout(delay);
   }, [confirmPassword, formDataRegister.password]);
-
-  // useEffect untuk pindah ke halaman login jika sudah register
-  useEffect(() => {
-    if (isRegister) {
-      router.push("/login");
-    }
-  }, [isRegister, router]);
 
   function togglePassword() {
     setShowPassword(!showPassword);
@@ -90,7 +84,7 @@ export default function Register() {
     e.preventDefault();
 
     if (formDataRegister.password !== confirmPassword) {
-      alert("Password and Confirm Password do not match");
+      toast.error("Password and Confirm Password do not match");
       return;
     }
 
@@ -226,7 +220,11 @@ export default function Register() {
               disabled={loadingRegister || passwordMatchError}
               className={`bg-[#EE4D2D] mt-4 w-full h-12 text-white font-semibold rounded-md hover:bg-[#D93A1A] ${loadingRegister || passwordMatchError ? "opacity-50 cursor-not-allowed" : ""} transition-all duration-300 ease-in-out cursor-pointer`}
             >
-              SIGN UP
+              {loadingRegister ? (
+                <VscLoading className="animate-spin mx-auto text-2xl" />
+              ) : (
+                "SIGN UP"
+              )}
             </button>
             {/* Akhir Button Login */}
           </form>

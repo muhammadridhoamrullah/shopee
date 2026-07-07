@@ -12,6 +12,8 @@ import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
 import { doLogin } from "@/src/store/slice/loginSlice";
 import { useRouter } from "next/navigation";
 import NonAuthHeader from "@/src/components/auth/NonAuthHeader";
+import { toast } from "react-toastify";
+import { VscLoading } from "react-icons/vsc";
 
 export default function Login() {
   const { loadingLogin, errorLogin, dataLogin, isLogin } = useAppSelector(
@@ -28,6 +30,7 @@ export default function Login() {
   // useEffect untuk redirect ke halaman dashboard jika login berhasil
   useEffect(() => {
     if (isLogin) {
+      toast.success("Successfully logged in!");
       router.push("/dashboard");
     }
   }, [isLogin, router]);
@@ -35,7 +38,7 @@ export default function Login() {
   // useEffect untuk menampilkan error login jika ada
   useEffect(() => {
     if (errorLogin) {
-      alert(errorLogin);
+      toast.error(errorLogin);
     }
   }, [errorLogin]);
 
@@ -154,9 +157,14 @@ export default function Login() {
             {/* Awal Button Login */}
             <button
               type="submit"
-              className="bg-[#EE4D2D] mt-4 w-full h-12 text-white font-semibold rounded-md hover:bg-[#D93A1A]"
+              disabled={loadingLogin}
+              className="bg-[#EE4D2D] mt-4 w-full h-12 text-white font-semibold rounded-md hover:bg-[#D93A1A] cursor-pointer"
             >
-              LOG IN
+              {loadingLogin ? (
+                <VscLoading className="animate-spin mx-auto text-2xl" />
+              ) : (
+                "LOG IN"
+              )}
             </button>
             {/* Akhir Button Login */}
           </form>
@@ -170,7 +178,7 @@ export default function Login() {
             {/* Akhir Garis 1 */}
 
             {/* Awal Atau */}
-            <p className="text-gray-400 text-xs">ATAU</p>
+            <p className="text-gray-400 text-xs">OR</p>
             {/* Akhir Atau */}
 
             {/* Awal Garis 2 */}
