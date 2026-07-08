@@ -1,4 +1,4 @@
-import RegisterClient from "@/src/components/auth/RegisterClient";
+import RegisterClient from "@/app/(non-auth)/register/RegisterClient";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

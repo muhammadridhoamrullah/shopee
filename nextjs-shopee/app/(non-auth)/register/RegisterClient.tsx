@@ -15,7 +15,7 @@ import NonAuthHeader from "@/src/components/auth/NonAuthHeader";
 import { VscLoading } from "react-icons/vsc";
 import { toast } from "react-toastify";
 
-export default function Register() {
+export default function RegisterClient() {
   const { loadingRegister, errorRegister, dataRegister, isRegister } =
     useAppSelector((state) => state.register);
 

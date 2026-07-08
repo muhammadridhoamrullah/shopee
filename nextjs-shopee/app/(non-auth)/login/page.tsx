@@ -1,4 +1,4 @@
-import LoginClient from "@/src/components/auth/LoginClient";
+import LoginClient from "@/app/(non-auth)/login/LoginClient";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,6 +19,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Login() {
+export default async function Login() {
   return <LoginClient />;
 }

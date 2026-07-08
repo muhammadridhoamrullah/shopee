@@ -1,4 +1,4 @@
-import VerifyEmailClient from "@/src/components/auth/VerifyEmailClient";
+import VerifyEmailClient from "@/app/(non-auth)/verify-email/VerifyEmailClient";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
