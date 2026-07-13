@@ -33,7 +33,7 @@ export async function sendNotificationLogin(data: dataNodemailerLogin) {
 export async function sendVerificationEmail(
   data: dataNodemailerVerifiactionEmail,
 ) {
-  const verificationUrl = `${process.env.BASE_URL}/verify-email?token=${data.token}`;
+  const verificationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/verify-email?token=${data.token}&email=${data.email}`;
   const mailOptions = {
     from: process.env.NODEMAILER_SMTP_USER,
     to: data.email,

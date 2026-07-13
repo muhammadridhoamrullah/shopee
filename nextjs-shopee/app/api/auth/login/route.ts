@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
 
     const access_token = await loginUser(body);
 
-    return NextResponse.json(
+    const response = NextResponse.json(
       {
         success: true,
         message: "Login Successfully",
@@ -26,6 +26,15 @@ export async function POST(request: NextRequest) {
         status: 200,
       },
     );
+
+    response.cookies.set("access_token", access_token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    });
+
+    return response;
   } catch (error) {
     console.log(error, "err");
 

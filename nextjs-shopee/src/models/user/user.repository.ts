@@ -91,6 +91,7 @@ export class UserRepository {
       },
       { returnDocument: "after" },
     );
+    console.log(update, "update verif email");
 
     return update;
   }
