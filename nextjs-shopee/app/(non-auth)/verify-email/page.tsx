@@ -1,5 +1,6 @@
 import VerifyEmailClient from "@/app/(non-auth)/verify-email/VerifyEmailClient";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Verify Email - Shopee Indonesia | Belanja Terlengkap & Terpercaya",
@@ -20,5 +21,9 @@ export const metadata: Metadata = {
 };
 
 export default function VerifyEmail() {
-  return <VerifyEmailClient />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmailClient />
+    </Suspense>
+  );
 }

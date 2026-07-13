@@ -1,0 +1,46 @@
+name: CI/CD - Shopee Next.js
+
+# Kapan workflow ini dijalankan
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  # Tahap 1 untuk Continuous Integration (CI), untuk membangun dan menguji aplikasi Next.js
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: nextjs-shopee/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./nextjs-shopee
+        run: npm ci
+
+      - name: Lint check
+        working-directory: ./nextjs-shopee
+        run: npm run lint
+
+      - name: Build Next.js application
+        working-directory: ./nextjs-shopee
+        run: npm run build
+        
+          # NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          # NEXT_PUBLIC_SHOPEE_API_URL: ${{ secrets.NEXT_PUBLIC_SHOPEE_API_URL }}
+          # NEXT_PUBLIC_SHOPEE_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_SHOPEE_CLIENT_ID }}
+          # NEXT_PUBLIC_SHOPEE_CLIENT_SECRET: ${{ secrets.NEXT_PUBLIC_SHOPEE_CLIENT_SECRET }}
+          # NEXT_PUBLIC_SHOPEE_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_SHOPEE_REDIRECT_URI }}
+
+      - name: Run tests
+        run: npm test
