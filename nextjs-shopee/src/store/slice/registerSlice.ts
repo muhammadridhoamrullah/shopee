@@ -1,6 +1,7 @@
 import { API_URL, formDataRegister } from "@/src/type/type";
 import { createSlice } from "@reduxjs/toolkit";
 import z from "zod";
+import { AppDispatch } from "../store";
 
 export const registerSlice = createSlice({
   name: "register",
@@ -32,7 +33,7 @@ export const { registerRequest, registerSuccess, registerError } =
 
 //   Thunk untuk melakukan register
 export function doRegister(formData: formDataRegister) {
-  return async (dispatch: any) => {
+  return async (dispatch: AppDispatch) => {
     try {
       dispatch(registerRequest());
 
@@ -54,7 +55,7 @@ export function doRegister(formData: formDataRegister) {
       const data = await response.json();
 
       dispatch(registerSuccess(data));
-    } catch (error) {
+    } catch (error: unknown) {
       let errMessage = "An error occurred during register.";
       if (error instanceof z.ZodError) {
         const path = error.issues[0].path[0];

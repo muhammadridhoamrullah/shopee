@@ -1,6 +1,7 @@
 import { API_URL, formDataLogin } from "@/src/type/type";
 import { createSlice } from "@reduxjs/toolkit";
 import z from "zod";
+import { AppDispatch } from "../store";
 
 export const loginSlice = createSlice({
   name: "login",
@@ -30,7 +31,7 @@ export const loginSlice = createSlice({
 export const { loginRequest, loginSuccess, loginError } = loginSlice.actions;
 
 export function doLogin(formData: formDataLogin) {
-  return async (dispatch: any) => {
+  return async (dispatch: AppDispatch) => {
     try {
       dispatch(loginRequest());
 
@@ -54,7 +55,7 @@ export function doLogin(formData: formDataLogin) {
       console.log(data, "data login slice");
 
       dispatch(loginSuccess(data.data));
-    } catch (error) {
+    } catch (error: unknown) {
       let errMessage = "An error occurred during login.";
       if (error instanceof z.ZodError) {
         const path = error.issues[0].path[0];

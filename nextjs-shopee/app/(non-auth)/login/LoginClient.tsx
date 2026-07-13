@@ -230,7 +230,9 @@ export default function LoginClient() {
 
           {/* Awal Link Register */}
           <div className=" w-full h-fit flex justify-center items-center text-sm gap-1 ">
-            <p className="font-light text-gray-500">Don't have an account?</p>
+            <p className="font-light text-gray-500">
+              Don&apos;t have an account?
+            </p>
             <Link href={"/register"} className="text-[#EE4D2D] font-semibold">
               Sign Up
             </Link>

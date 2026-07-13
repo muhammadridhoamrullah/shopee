@@ -1,5 +1,6 @@
 import { API_URL } from "@/src/type/type";
 import { createSlice } from "@reduxjs/toolkit";
+import { AppDispatch } from "../store";
 
 export const verifyEmailSlice = createSlice({
   name: "verifyEmail",
@@ -31,7 +32,7 @@ export const { verifyEmailRequest, verifyEmailSuccess, verifyEmailError } =
 
 //   Thunk untuk melakukan verifikasi email
 export function doVerifyEmail(token: string) {
-  return async (dispatch: any) => {
+  return async (dispatch: AppDispatch) => {
     try {
       dispatch(verifyEmailRequest());
 
@@ -54,7 +55,7 @@ export function doVerifyEmail(token: string) {
       const data = await response.json();
 
       dispatch(verifyEmailSuccess(data));
-    } catch (error) {
+    } catch (error: unknown) {
       let errMessage = "An error occurred during email verification.";
       if (error instanceof Error) {
         errMessage = error.message;
