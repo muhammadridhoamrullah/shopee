@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+.env
+npm-debug.log
+.env*.local
+.env.production
+.env.development
+# package-lock.json
