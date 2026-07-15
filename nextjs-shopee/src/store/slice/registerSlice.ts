@@ -25,11 +25,21 @@ export const registerSlice = createSlice({
       state.loadingRegister = false;
       state.errorRegister = action.payload;
     },
+    registerReset: (state) => {
+      state.dataRegister = null;
+      state.errorRegister = null;
+      state.loadingRegister = false;
+      state.isRegister = false;
+    },
   },
 });
 
-export const { registerRequest, registerSuccess, registerError } =
-  registerSlice.actions;
+export const {
+  registerRequest,
+  registerSuccess,
+  registerError,
+  registerReset,
+} = registerSlice.actions;
 
 //   Thunk untuk melakukan register
 export function doRegister(formData: formDataRegister) {
