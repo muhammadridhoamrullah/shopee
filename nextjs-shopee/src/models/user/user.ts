@@ -1,5 +1,4 @@
 import { comparePassword, hashPassword } from "@/src/helpers/bcrypt";
-import { getDB } from "../../db/config";
 import { inputLogin, inputRegister } from "../../type/type";
 import { UserRepository } from "./user.repository";
 import { signToken } from "@/src/helpers/jwt";
@@ -30,7 +29,7 @@ export async function loginUser(input: inputLogin) {
   }
 
   // Update last login
-  const updateLastLogin = await UserRepository.updateLastLogin(findUser._id);
+  await UserRepository.updateLastLogin(findUser._id);
 
   // Buat access_token
   const access_token = signToken({
@@ -124,8 +123,7 @@ export async function verifyEmail(token: string) {
     throw new Error("Email already verified");
   }
 
-  const updateVerifiedEmailUser =
-    await UserRepository.updateVerifyEmail(UserId);
+  await UserRepository.updateVerifyEmail(UserId);
 
   return {
     message: "Email verified successfully",
