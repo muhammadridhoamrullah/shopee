@@ -10,7 +10,7 @@ import { FcGoogle } from "react-icons/fc";
 import Footer from "@/src/components/Footer";
 import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
 import { useRouter } from "next/navigation";
-import { doRegister } from "@/src/store/slice/registerSlice";
+import { doRegister, registerReset } from "@/src/store/slice/registerSlice";
 import NonAuthHeader from "@/src/components/auth/NonAuthHeader";
 import { VscLoading } from "react-icons/vsc";
 import { toast } from "react-toastify";
@@ -36,6 +36,10 @@ export default function RegisterClient() {
   useEffect(() => {
     if (isRegister) {
       toast.success("Successfully registered! Please log in.");
+
+      // Reset State Register
+      dispatch(registerReset());
+
       router.push("/login");
     }
   }, [isRegister, router]);
