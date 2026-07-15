@@ -31,7 +31,6 @@ export async function loginUser(input: inputLogin) {
 
   // Update last login
   const updateLastLogin = await UserRepository.updateLastLogin(findUser._id);
-  console.log(updateLastLogin, "updateLastLogin");
 
   // Buat access_token
   const access_token = signToken({
