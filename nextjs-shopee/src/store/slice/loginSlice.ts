@@ -42,6 +42,7 @@ export function doLogin(formData: formDataLogin) {
         },
         body: JSON.stringify(formData),
         cache: "no-store",
+        credentials: "include", // Include cookies in the request
       });
 
       if (!response.ok) {
@@ -49,10 +50,7 @@ export function doLogin(formData: formDataLogin) {
         throw new Error(errorData.message || "Login failed");
       }
 
-      console.log(response, "response login");
-
       const data = await response.json();
-      console.log(data, "data login slice");
 
       dispatch(loginSuccess(data.data));
     } catch (error: unknown) {

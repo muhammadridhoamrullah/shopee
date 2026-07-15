@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'nextjs-shopee/**'
+      - "nextjs-shopee/**"
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
@@ -39,3 +40,20 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           build-args: |
             NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy ke EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull ghcr.io/${{ github.repository }}/nextjs-shopee:latest
+            docker stop shopee-nextjs || true
+            docker rm shopee-nextjs || true
+            docker run -d -p 3001:3000 --env-file .env.production --name shopee-nextjs ghcr.io/${{ github.repository }}/nextjs-shopee:latest
