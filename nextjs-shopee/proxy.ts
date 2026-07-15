@@ -28,6 +28,8 @@ export async function proxy(request: NextRequest) {
       reqHeaders.set("Role", payload.role);
       return NextResponse.next({ request: { headers: reqHeaders } });
     } catch (error) {
+      console.log(error, "error");
+
       const response = NextResponse.redirect(new URL("/login", request.url));
       response.cookies.delete("access_token");
       return response;
@@ -40,6 +42,7 @@ export async function proxy(request: NextRequest) {
       await verifyToken(token);
       return NextResponse.redirect(new URL("/dashboard", request.url));
     } catch (error) {
+      console.log(error, "error");
       const response = NextResponse.next();
       response.cookies.delete("access_token");
       return response;

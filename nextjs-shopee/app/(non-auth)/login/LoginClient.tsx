@@ -14,9 +14,10 @@ import { useRouter } from "next/navigation";
 import NonAuthHeader from "@/src/components/auth/NonAuthHeader";
 import { toast } from "react-toastify";
 import { VscLoading } from "react-icons/vsc";
+import Image from "next/image";
 
 export default function LoginClient() {
-  const { loadingLogin, errorLogin, dataLogin, isLogin } = useAppSelector(
+  const { loadingLogin, errorLogin, isLogin } = useAppSelector(
     (state) => state.login,
   );
   const router = useRouter();
@@ -72,7 +73,7 @@ export default function LoginClient() {
       <div className="w-full h-129.5 flex justify-around items-center px-30 py-4">
         {/* Awal Logo Shopee */}
         <div className="w-full h-full flex justify-end items-center pr-10 relative">
-          <img
+          <Image
             src={"/shopee3.png"}
             alt="Logo Shopee"
             className="absolute w-[50%] h-[50%] object-contain"

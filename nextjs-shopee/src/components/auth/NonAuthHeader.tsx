@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function NonAuthHeader() {
@@ -5,7 +6,7 @@ export default function NonAuthHeader() {
     <div className="w-full h-20 bg-white px-20 flex justify-between items-center">
       {/* Awal Logo Shopee */}
       <Link href="/" className="w-40 h-16 relative">
-        <img
+        <Image
           src="/shopee1.png"
           alt="Logo Shopee"
           className="absolute w-full h-full object-contain"
