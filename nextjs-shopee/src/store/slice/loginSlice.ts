@@ -2,6 +2,7 @@ import { API_URL, formDataLogin } from "@/src/type/type";
 import { createSlice } from "@reduxjs/toolkit";
 import z from "zod";
 import { AppDispatch } from "../store";
+import { cookies } from "next/headers";
 
 export const loginSlice = createSlice({
   name: "login",
@@ -49,10 +50,16 @@ export function doLogin(formData: formDataLogin) {
         throw new Error(errorData.message || "Login failed");
       }
 
-      console.log(response, "response login");
-
       const data = await response.json();
-      console.log(data, "data login slice");
+
+      // Simpan token ke cookie
+      (await cookies()).set("access_token", data.data.access_token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+        path: "/",
+        maxAge: 60 * 60 * 24, // 1 hari
+      });
 
       dispatch(loginSuccess(data.data));
     } catch (error: unknown) {
