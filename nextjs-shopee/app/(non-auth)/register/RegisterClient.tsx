@@ -1,6 +1,5 @@
 "use client";
 
-import { BsQrCode } from "react-icons/bs";
 import Link from "next/link";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeLine } from "react-icons/ri";
@@ -14,10 +13,12 @@ import { doRegister, registerReset } from "@/src/store/slice/registerSlice";
 import NonAuthHeader from "@/src/components/auth/NonAuthHeader";
 import { VscLoading } from "react-icons/vsc";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 export default function RegisterClient() {
-  const { loadingRegister, errorRegister, dataRegister, isRegister } =
-    useAppSelector((state) => state.register);
+  const { loadingRegister, errorRegister, isRegister } = useAppSelector(
+    (state) => state.register,
+  );
 
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -42,7 +43,7 @@ export default function RegisterClient() {
 
       router.push("/login");
     }
-  }, [isRegister, router]);
+  }, [isRegister, router, dispatch]);
 
   // useEffect untuk menampilkan error register jika ada
   useEffect(() => {
@@ -105,7 +106,7 @@ export default function RegisterClient() {
       <div className="w-full h-129.5 flex justify-around items-center px-30 py-4">
         {/* Awal Logo Shopee */}
         <div className="w-full h-full flex justify-end items-center pr-10 relative">
-          <img
+          <Image
             src={"/shopee3.png"}
             alt="Logo Shopee"
             className="absolute w-[50%] h-[50%] object-contain"

@@ -15,12 +15,8 @@ export default function VerifyEmailClient() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const {
-    loadingVerifyEmail,
-    errorVerifyEmail,
-    dataVerifyEmail,
-    isVerifyEmail,
-  } = useAppSelector((state) => state.verifyEmail);
+  const { loadingVerifyEmail, errorVerifyEmail, isVerifyEmail } =
+    useAppSelector((state) => state.verifyEmail);
 
   // useEffect untuk errorVerifyEmail
   useEffect(() => {

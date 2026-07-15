@@ -1,7 +1,7 @@
 import { schemaRegister } from "@/src/helpers/zod";
 import { registerUser } from "@/src/models/user/user";
 import { NextRequest, NextResponse } from "next/server";
-import z, { success } from "zod";
+import z from "zod";
 
 export async function POST(request: NextRequest) {
   try {
