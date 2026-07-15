@@ -7,6 +7,7 @@ const guestOnlyPaths = ["/login", "/register"];
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get("access_token")?.value;
+  console.log(token, "token middleware");
 
   const isProtected = protectedPaths.some((p) => pathname.startsWith(p));
   const isGuestOnly = guestOnlyPaths.some((p) => pathname.startsWith(p));
@@ -18,6 +19,7 @@ export async function proxy(request: NextRequest) {
     }
     try {
       const payload = await verifyToken(token);
+      console.log(payload, "payload token protect");
 
       const reqHeaders = new Headers(request.headers);
       reqHeaders.set("UserId", payload._id);
@@ -25,7 +27,7 @@ export async function proxy(request: NextRequest) {
       reqHeaders.set("Email", payload.email);
       reqHeaders.set("Role", payload.role);
       return NextResponse.next({ request: { headers: reqHeaders } });
-    } catch {
+    } catch (error) {
       const response = NextResponse.redirect(new URL("/login", request.url));
       response.cookies.delete("access_token");
       return response;
@@ -37,7 +39,7 @@ export async function proxy(request: NextRequest) {
     try {
       await verifyToken(token);
       return NextResponse.redirect(new URL("/dashboard", request.url));
-    } catch {
+    } catch (error) {
       const response = NextResponse.next();
       response.cookies.delete("access_token");
       return response;

@@ -15,6 +15,7 @@ export async function POST(request: NextRequest) {
     }
 
     const access_token = await loginUser(body);
+    console.log(access_token, "acc token API");
 
     const response = NextResponse.json(
       {
@@ -29,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     response.cookies.set("access_token", access_token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       sameSite: "lax",
       maxAge: 60 * 60 * 24 * 7, // 7 days
     });
