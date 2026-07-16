@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FaTwitter } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa6";
@@ -43,8 +44,8 @@ export default function NavbarMainPage() {
         {/* Awal Seller Center  etc */}
         <div className="w-fit h-fit flex justify-start items-center divide-x divide-gray-400 [&>*:not(:first-child)]:pl-2 [&>*:not(:last-child)]:pr-2">
           {menuLinks.map((menu, idx) => (
-            <Link className="flex gap-1" href={menu.link} key={idx}>
-              {menu.name}
+            <div className="flex gap-1" key={idx}>
+              <Link href={menu.link}>{menu.name}</Link>
               {menu.subMenu && (
                 <div className="flex gap-2 justify-start items-center ">
                   {menu.subMenu.map((subMenu, subIdx) => (
@@ -54,7 +55,7 @@ export default function NavbarMainPage() {
                   ))}
                 </div>
               )}
-            </Link>
+            </div>
           ))}
         </div>
         {/* Akhir Seller Center  etc */}
@@ -98,7 +99,25 @@ export default function NavbarMainPage() {
       {/* Akhir Link */}
 
       {/* Awal Search Bar */}
-      <div className="bg-pink-900 w-full">Search Bar</div>
+      <div className="bg-pink-900 w-full h-19 flex justify-between items-center gap-4">
+        {/* Awal Logo Shopee */}
+        <div className="bg-amber-700 w-[20%] h-full flex justify-center items-center relative">
+          <Image
+            src={"/shopee5.png"}
+            alt="Logo Shopee"
+            fill
+            className="object-contain"
+          />
+        </div>
+        {/* Akhir Logo Shopee */}
+        {/* Awal Search Input */}
+        <div className="bg-blue-400 w-full">Search</div>
+        {/* Akhir Search Input */}
+
+        {/* Awal Keranjang */}
+        <div className="bg-red-400 w-[20%]">Keranjang</div>
+        {/* Akhir Keranjang */}
+      </div>
       {/* Akhir Search Bar */}
     </nav>
   );
