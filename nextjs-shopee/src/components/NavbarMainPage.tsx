@@ -7,36 +7,38 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { IoIosGlobe } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { GrCart } from "react-icons/gr";
+import InputSearchMainPage from "./InputSearchMainPage";
+
+const menuLinks = [
+  { name: "Seller Center", link: "/seller-center" },
+  { name: "Mulai Berjualan", link: "/mulai-berjualan" },
+  { name: "Download", link: "/download" },
+  {
+    name: "Ikuti Kami",
+    link: "/ikuti-kami",
+    subMenu: [
+      { icon: <FaFacebook />, link: "https://www.facebook.com/ShopeeID/" },
+      { icon: <FaTwitter />, link: "https://twitter.com/ShopeeID" },
+      {
+        icon: <FaSquareInstagram />,
+        link: "https://www.instagram.com/shopeeid/",
+      },
+    ],
+  },
+];
+
+const notificationLinks = [
+  {
+    name: "Notifikasi",
+    link: "/notifikasi",
+    icon: <IoIosNotificationsOutline />,
+  },
+  { name: "Bantuan", link: "/bantuan", icon: <IoIosHelpCircleOutline /> },
+  { name: "Bahasa", link: "/bahasa", icon: <IoIosGlobe /> },
+];
 
 export default function NavbarMainPage() {
-  const menuLinks = [
-    { name: "Seller Center", link: "/seller-center" },
-    { name: "Mulai Berjualan", link: "/mulai-berjualan" },
-    { name: "Download", link: "/download" },
-    {
-      name: "Ikuti Kami",
-      link: "/ikuti-kami",
-      subMenu: [
-        { icon: <FaFacebook />, link: "https://www.facebook.com/ShopeeID/" },
-        { icon: <FaTwitter />, link: "https://twitter.com/ShopeeID" },
-        {
-          icon: <FaSquareInstagram />,
-          link: "https://www.instagram.com/shopeeid/",
-        },
-      ],
-    },
-  ];
-
-  const notificationLinks = [
-    {
-      name: "Notifikasi",
-      link: "/notifikasi",
-      icon: <IoIosNotificationsOutline />,
-    },
-    { name: "Bantuan", link: "/bantuan", icon: <IoIosHelpCircleOutline /> },
-    { name: "Bahasa", link: "/bahasa", icon: <IoIosGlobe /> },
-  ];
-
   return (
     <nav className="bg-[#EE4D2D] w-full h-30 py-2 px-20 flex flex-col justify-between items-center text-white text-[13px]">
       {/* Awal Link */}
@@ -99,9 +101,9 @@ export default function NavbarMainPage() {
       {/* Akhir Link */}
 
       {/* Awal Search Bar */}
-      <div className="bg-pink-900 w-full h-19 flex justify-between items-center gap-4">
+      <div className=" w-full h-19 flex justify-between items-center gap-8">
         {/* Awal Logo Shopee */}
-        <div className="bg-amber-700 w-[20%] h-full flex justify-center items-center relative">
+        <div className=" flex-none w-44 h-full flex justify-center items-center relative">
           <Image
             src={"/shopee5.png"}
             alt="Logo Shopee"
@@ -111,11 +113,13 @@ export default function NavbarMainPage() {
         </div>
         {/* Akhir Logo Shopee */}
         {/* Awal Search Input */}
-        <div className="bg-blue-400 w-full">Search</div>
+        <InputSearchMainPage />
         {/* Akhir Search Input */}
 
         {/* Awal Keranjang */}
-        <div className="bg-red-400 w-[20%]">Keranjang</div>
+        <div className="bg-red-400 flex-none w-16 h-fit flex justify-center items-center ">
+          <GrCart className="text-2xl cursor-pointer" />
+        </div>
         {/* Akhir Keranjang */}
       </div>
       {/* Akhir Search Bar */}
