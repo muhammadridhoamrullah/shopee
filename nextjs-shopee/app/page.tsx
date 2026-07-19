@@ -1,6 +1,6 @@
 import Banner from "@/src/components/MainPage/Banner";
+import KategoriToRekomendasi from "@/src/components/MainPage/KategoriToRekomendasi";
 import NavbarMainPage from "@/src/components/MainPage/NavbarMainPage";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -11,8 +11,10 @@ export default function Home() {
       {/* Awal Banner dan Beberapa Menu */}
       <Banner />
       {/* Akhir Banner dan Beberapa Menu */}
-      <h1>Halo</h1>
-      <h1>Halo</h1>
+
+      {/* Awal Kategori to Rekomendasi */}
+      <KategoriToRekomendasi />
+      {/* Akhir Kategori to Rekomendasi */}
     </div>
   );
 }

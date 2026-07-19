@@ -184,3 +184,136 @@ export const imageBannerKecil = [
     image: "/images/mainpage/bannerDanMenu/shopee-barokah-banner.webp",
   },
 ];
+
+export const kategoriMenuLists = [
+  {
+    name: "Elektronik",
+    link: "/kategori/elektronik",
+    image: "/images/mainpage/kategori/elektronik.webp",
+  },
+  {
+    name: "Komputer & Aksesoris",
+    link: "/kategori/komputer-dan-aksesoris",
+    image: "/images/mainpage/kategori/komputerDanAksesoris.webp",
+  },
+  {
+    name: "Handphone & Aksesoris",
+    link: "/kategori/handphone-dan-aksesoris",
+    image: "/images/mainpage/kategori/handphoneDanAksesoris.webp",
+  },
+  {
+    name: "Pakaian Pria",
+    link: "/kategori/pakaian-pria",
+    image: "/images/mainpage/kategori/pakaianPria.webp",
+  },
+  {
+    name: "Sepatu Pria",
+    link: "/kategori/sepatu-pria",
+    image: "/images/mainpage/kategori/sepatuPria.webp",
+  },
+  {
+    name: "Tas Pria",
+    link: "/kategori/tas-pria",
+    image: "/images/mainpage/kategori/tasPria.webp",
+  },
+  {
+    name: "Aksesoris Fashion",
+    link: "/kategori/aksesoris-fashion",
+    image: "/images/mainpage/kategori/aksesorisFashion.webp",
+  },
+  {
+    name: "Jam Tangan",
+    link: "/kategori/jam-tangan",
+    image: "/images/mainpage/kategori/jamTangan.webp",
+  },
+  {
+    name: "Kesehatan",
+    link: "/kategori/kesehatan",
+    image: "/images/mainpage/kategori/kesehatan.webp",
+  },
+  {
+    name: "Hobi & Koleksi",
+    link: "/kategori/hobi-dan-koleksi",
+    image: "/images/mainpage/kategori/hobiDanKoleksi.webp",
+  },
+  {
+    name: "Olahraga & Outdoor",
+    link: "/kategori/olahraga-dan-outdoor",
+    image: "/images/mainpage/kategori/olahragaDanOutdoor.webp",
+  },
+  {
+    name: "Souvenir & Perlengkapan",
+    link: "/kategori/souvenir-dan-perlengkapan",
+    image: "/images/mainpage/kategori/souvenirDanPerlengkapan.webp",
+  },
+  {
+    name: "Voucher",
+    link: "/kategori/voucher",
+    image: "/images/mainpage/kategori/voucher.webp",
+  },
+  {
+    name: "Makanan & Minuman",
+    link: "/kategori/makanan-dan-minuman",
+    image: "/images/mainpage/kategori/makananDanMinuman.webp",
+  },
+  {
+    name: "Perawatan & Kecantikan",
+    link: "/kategori/perawatan-dan-kecantikan",
+    image: "/images/mainpage/kategori/perawatanDanKecantikan.webp",
+  },
+  {
+    name: "Perlengkapan Rumah",
+    link: "/kategori/perlengkapan-rumah",
+    image: "/images/mainpage/kategori/perlengkapanRumah.webp",
+  },
+  {
+    name: "Pakaian Wanita",
+    link: "/kategori/pakaian-wanita",
+    image: "/images/mainpage/kategori/pakaianWanita.webp",
+  },
+  {
+    name: "Fashion Muslim",
+    link: "/kategori/fashion-muslim",
+    image: "/images/mainpage/kategori/fashionMuslim.webp",
+  },
+  {
+    name: "Fashion Bayi & Anak",
+    link: "/kategori/fashion-bayi-dan-anak",
+    image: "/images/mainpage/kategori/fashionBayiDanAnak.webp",
+  },
+  {
+    name: "Ibu & Bayi",
+    link: "/kategori/ibu-dan-bayi",
+    image: "/images/mainpage/kategori/ibuDanBayi.webp",
+  },
+  {
+    name: "Sepatu Wanita",
+    link: "/kategori/sepatu-wanita",
+    image: "/images/mainpage/kategori/sepatuWanita.webp",
+  },
+  {
+    name: "Tas Wanita",
+    link: "/kategori/tas-wanita",
+    image: "/images/mainpage/kategori/tasWanita.webp",
+  },
+  {
+    name: "Otomotif",
+    link: "/kategori/otomotif",
+    image: "/images/mainpage/kategori/otomotif.webp",
+  },
+  {
+    name: "Buku & Alat Tulis",
+    link: "/kategori/buku-dan-alat-tulis",
+    image: "/images/mainpage/kategori/bukuDanAlatTulis.webp",
+  },
+  {
+    name: "Fotografi",
+    link: "/kategori/fotografi",
+    image: "/images/mainpage/kategori/fotografi.webp",
+  },
+  {
+    name: "Deals Sekitarmu",
+    link: "/kategori/deals-sekitarmu",
+    image: "/images/mainpage/kategori/dealsSekitarmu.webp",
+  },
+];
