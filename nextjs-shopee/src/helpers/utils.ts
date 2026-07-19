@@ -112,3 +112,75 @@ export function getItemRandomly(arr: string[], count: number): string[] {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 }
+
+export const bannerMenuLinks = [
+  {
+    name: "Shopee Pilh Lokal",
+    link: "/shopee-pilih-lokal",
+    image: "/images/mainpage/bannerDanMenu/shopee-pilih-lokal.webp",
+  },
+  {
+    name: "Shopee Mall",
+    link: "/shopee-mall",
+    image: "/images/mainpage/bannerDanMenu/shopee-mall.webp",
+  },
+  {
+    name: "Pulsa & Tagihan",
+    link: "/pulsa-dan-tagihan",
+    image: "/images/mainpage/bannerDanMenu/pulsa-dan-tagihan.webp",
+  },
+  {
+    name: "Flash Sale",
+    link: "/flash-sale",
+    image: "/images/mainpage/bannerDanMenu/flash-sale.webp",
+  },
+  {
+    name: "Shopee Supermarket",
+    link: "/shopee-supermarket",
+    image: "/images/mainpage/bannerDanMenu/shopee-supermarket.webp",
+  },
+  {
+    name: "Dikelola Shopee",
+    link: "/dikelola-shopee",
+    image: "/images/mainpage/bannerDanMenu/dikelola-shopee.webp",
+  },
+  {
+    name: "Fitcheck Diskon 25%",
+    link: "/fitcheck-diskon-25",
+    image: "/images/mainpage/bannerDanMenu/fitcheck-diskon-25.webp",
+  },
+  {
+    name: "Gratis Ongkir dan Voucher",
+    link: "/gratis-ongkir-dan-voucher",
+    image: "/images/mainpage/bannerDanMenu/gratis-ongkir-dan-voucher.webp",
+  },
+  {
+    name: "Shopee Barokah",
+    link: "/shopee-barokah",
+    image: "/images/mainpage/bannerDanMenu/shopee-barokah.webp",
+  },
+  {
+    name: "Semua Promo",
+    link: "/semua-promo",
+    image: "/images/mainpage/bannerDanMenu/semua-promo.webp",
+  },
+];
+
+export const imageBannerBesar = {
+  name: "Shopee Pilih Lokal",
+  link: "/shopee-pilih-lokal-banner",
+  image: "/images/mainpage/bannerDanMenu/shopee-pilih-lokal-banner.webp",
+};
+
+export const imageBannerKecil = [
+  {
+    name: "Shopee Mall 100% ORI",
+    link: "/shopee-mall-100-ori-banner",
+    image: "/images/mainpage/bannerDanMenu/shopee-mall-100-ori-banner.webp",
+  },
+  {
+    name: "Shopee Barokah",
+    link: "/shopee-barokah-banner",
+    image: "/images/mainpage/bannerDanMenu/shopee-barokah-banner.webp",
+  },
+];
