@@ -57,3 +57,29 @@ export type formDataRegister = {
   phoneNumber: string;
 };
 
+export type menuLinks = {
+  name: string;
+  link: string;
+  image: string;
+};
+
+export interface FlashSaleItem {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  originalPrice: number;
+  discountPercent: number;
+  isMall: boolean;
+  isOri: boolean;
+  stockSold: number; // jumlah unit terjual
+  stockTotal: number; // total stok flash sale
+  link: string;
+}
+
+export interface TimeLeftFlashSale {
+  hours: number;
+  minutes: number;
+  seconds: number;
+  isExpired: boolean;
+}

@@ -1,3 +1,5 @@
+import { FlashSaleItem, menuLinks, TimeLeftFlashSale } from "../type/type";
+
 export const API_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const searchRecommendations = [
@@ -108,12 +110,7 @@ export const searchRecommendations = [
   "Sepatu Lari Running Pria",
 ];
 
-export function getItemRandomly(arr: string[], count: number): string[] {
-  const shuffled = [...arr].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
-}
-
-export const bannerMenuLinks = [
+export const bannerMenuLinks: menuLinks[] = [
   {
     name: "Shopee Pilh Lokal",
     link: "/shopee-pilih-lokal",
@@ -166,13 +163,13 @@ export const bannerMenuLinks = [
   },
 ];
 
-export const imageBannerBesar = {
+export const imageBannerBesar: menuLinks = {
   name: "Shopee Pilih Lokal",
   link: "/shopee-pilih-lokal-banner",
   image: "/images/mainpage/bannerDanMenu/shopee-pilih-lokal-banner.webp",
 };
 
-export const imageBannerKecil = [
+export const imageBannerKecil: menuLinks[] = [
   {
     name: "Shopee Mall 100% ORI",
     link: "/shopee-mall-100-ori-banner",
@@ -185,7 +182,7 @@ export const imageBannerKecil = [
   },
 ];
 
-export const kategoriMenuLists = [
+export const kategoriMenuLists: menuLinks[] = [
   {
     name: "Elektronik",
     link: "/kategori/elektronik",
@@ -317,3 +314,240 @@ export const kategoriMenuLists = [
     image: "/images/mainpage/kategori/dealsSekitarmu.webp",
   },
 ];
+
+export const flashSaleEndTime = new Date("2026-07-23T23:59:59"); // Set the end time for the flash sale
+
+export const flashSaleLists: FlashSaleItem[] = [
+  {
+    id: "fs-001",
+    name: "EON Cahaya Putih 12 Watt Lampu LED Hemat Energi",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-822wu-mooy98tuku8bd9@resize_w450_nl.webp",
+    price: 108500,
+    originalPrice: 175000,
+    discountPercent: 38,
+    isMall: true,
+    isOri: true,
+    stockSold: 187,
+    stockTotal: 250,
+    link: "/produk/eon-lampu-led-12w",
+  },
+  {
+    id: "fs-002",
+    name: "ISKU S2 Kunci L 9 Pcs ABS Material Box Brand Choice",
+    image:
+      "https://down-id.img.susercontent.com/file/id-11134207-822wu-mooy98tuku8bd9@resize_w450_nl.webp",
+    price: 67100,
+    originalPrice: 98700,
+    discountPercent: 32,
+    isMall: true,
+    isOri: true,
+    stockSold: 342,
+    stockTotal: 400,
+    link: "/produk/isku-kunci-l-set",
+  },
+  {
+    id: "fs-003",
+    name: "EON Pure 15 Watt Lampu LED Cahaya Putih",
+    image: "/images/products/lampu-eon-pure-15w.png",
+    price: 102000,
+    originalPrice: 188900,
+    discountPercent: 46,
+    isMall: false,
+    isOri: true,
+    stockSold: 95,
+    stockTotal: 300,
+    link: "/produk/eon-pure-lampu-led-15w",
+  },
+  {
+    id: "fs-004",
+    name: "Kunci Sock Set 121 PC 72 Gigi Perkakas Bengkel Lengkap",
+    image: "/images/products/kunci-sock-set-121pc.png",
+    price: 647900,
+    originalPrice: 696700,
+    discountPercent: 7,
+    isMall: true,
+    isOri: true,
+    stockSold: 41,
+    stockTotal: 150,
+    link: "/produk/kunci-sock-set-121pc",
+  },
+  {
+    id: "fs-005",
+    name: "Mesin Gerinda Tangan Isku Daya Super Kuat Garansi 1 Tahun",
+    image: "/images/products/gerinda-isku.png",
+    price: 240900,
+    originalPrice: 501900,
+    discountPercent: 52,
+    isMall: true,
+    isOri: false,
+    stockSold: 278,
+    stockTotal: 300,
+    link: "/produk/mesin-gerinda-isku",
+  },
+  {
+    id: "fs-006",
+    name: "Semprotan Cat Elektrik 1000ML Atomisasi Tinggi",
+    image: "/images/products/semprotan-cat-elektrik.png",
+    price: 314500,
+    originalPrice: 669200,
+    discountPercent: 53,
+    isMall: false,
+    isOri: true,
+    stockSold: 133,
+    stockTotal: 200,
+    link: "/produk/semprotan-cat-elektrik",
+  },
+  {
+    id: "fs-007",
+    name: "Serum Wajah Niacinamide 10% + Zinc Brightening 30ml",
+    image: "/images/products/serum-niacinamide.png",
+    price: 45900,
+    originalPrice: 89000,
+    discountPercent: 48,
+    isMall: true,
+    isOri: true,
+    stockSold: 512,
+    stockTotal: 600,
+    link: "/produk/serum-niacinamide-zinc",
+  },
+  {
+    id: "fs-008",
+    name: "Kaos Polos Oversize Cotton Combed 30s Unisex",
+    image: "/images/products/kaos-oversize-polos.png",
+    price: 39000,
+    originalPrice: 65000,
+    discountPercent: 40,
+    isMall: false,
+    isOri: true,
+    stockSold: 89,
+    stockTotal: 500,
+    link: "/produk/kaos-oversize-cotton-combed",
+  },
+  {
+    id: "fs-009",
+    name: "Power Bank 20000mAh Fast Charging 22.5W Dual USB",
+    image: "/images/products/powerbank-20000mah.png",
+    price: 129000,
+    originalPrice: 259000,
+    discountPercent: 50,
+    isMall: true,
+    isOri: true,
+    stockSold: 421,
+    stockTotal: 450,
+    link: "/produk/powerbank-20000mah-fast-charging",
+  },
+  {
+    id: "fs-010",
+    name: "Rak Sepatu Lipat 3 Susun Plastik Anti Debu",
+    image: "/images/products/rak-sepatu-lipat.png",
+    price: 55000,
+    originalPrice: 95000,
+    discountPercent: 42,
+    isMall: false,
+    isOri: false,
+    stockSold: 67,
+    stockTotal: 200,
+    link: "/produk/rak-sepatu-lipat-3-susun",
+  },
+  {
+    id: "fs-011",
+    name: "Botol Minum Tumbler Stainless Steel 1 Liter Tahan Panas Dingin",
+    image: "/images/products/tumbler-stainless-1l.png",
+    price: 48500,
+    originalPrice: 110000,
+    discountPercent: 56,
+    isMall: true,
+    isOri: true,
+    stockSold: 298,
+    stockTotal: 350,
+    link: "/produk/tumbler-stainless-1-liter",
+  },
+  {
+    id: "fs-012",
+    name: "Mainan Edukasi Anak Puzzle Kayu Balok Angka Huruf",
+    image: "/images/products/puzzle-kayu-edukasi.png",
+    price: 32000,
+    originalPrice: 60000,
+    discountPercent: 47,
+    isMall: false,
+    isOri: true,
+    stockSold: 154,
+    stockTotal: 250,
+    link: "/produk/puzzle-kayu-edukasi-anak",
+  },
+  {
+    id: "fs-013",
+    name: "Karpet Rumah Tangga Bulu Rasfur Anti Slip 80x120cm",
+    image: "/images/products/karpet-bulu-rasfur.png",
+    price: 75000,
+    originalPrice: 149000,
+    discountPercent: 50,
+    isMall: true,
+    isOri: true,
+    stockSold: 203,
+    stockTotal: 220,
+    link: "/produk/karpet-bulu-rasfur-anti-slip",
+  },
+  {
+    id: "fs-014",
+    name: "Helm Half Face SNI Double Visor Anti UV",
+    image: "/images/products/helm-half-face-sni.png",
+    price: 185000,
+    originalPrice: 320000,
+    discountPercent: 42,
+    isMall: true,
+    isOri: true,
+    stockSold: 76,
+    stockTotal: 180,
+    link: "/produk/helm-half-face-sni-double-visor",
+  },
+  {
+    id: "fs-015",
+    name: "Celana Perempuan Kekinian High Waist Bahan Katun Stretch",
+    image: "/images/products/celana-highwaist-katun.png",
+    price: 58000,
+    originalPrice: 110000,
+    discountPercent: 47,
+    isMall: false,
+    isOri: true,
+    stockSold: 312,
+    stockTotal: 400,
+    link: "/produk/celana-highwaist-katun-stretch",
+  },
+];
+
+export function calculateTimeLeft(endTime: Date): TimeLeftFlashSale {
+  let difference = endTime.getTime() - new Date().getTime();
+
+  if (difference <= 0) {
+    return {
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      isExpired: true,
+    };
+  }
+
+  let hours = Math.floor(difference / (1000 * 60 * 60));
+  let minutes = Math.floor((difference / (1000 * 60)) % 60);
+  let seconds = Math.floor((difference / 1000) % 60);
+
+  return {
+    hours,
+    minutes,
+    seconds,
+    isExpired: false,
+  };
+}
+
+export function pad(num: number) {
+  return String(num).padStart(2, "0");
+}
+
+export function formatRupiah(amount: number): string {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  }).format(amount);
+}
