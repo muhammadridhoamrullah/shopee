@@ -11,7 +11,7 @@ export default function InputSearchMainPage() {
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
 
-  let randomRecommendations = useMemo(
+  const randomRecommendations = useMemo(
     () => getItemRandomly(searchRecommendations, 7),
     [],
   );

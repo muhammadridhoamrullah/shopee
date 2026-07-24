@@ -518,7 +518,7 @@ export const flashSaleLists: FlashSaleItem[] = [
 ];
 
 export function calculateTimeLeft(endTime: Date): TimeLeftFlashSale {
-  let difference = endTime.getTime() - new Date().getTime();
+  const difference = endTime.getTime() - new Date().getTime();
 
   if (difference <= 0) {
     return {
@@ -529,9 +529,9 @@ export function calculateTimeLeft(endTime: Date): TimeLeftFlashSale {
     };
   }
 
-  let hours = Math.floor(difference / (1000 * 60 * 60));
-  let minutes = Math.floor((difference / (1000 * 60)) % 60);
-  let seconds = Math.floor((difference / 1000) % 60);
+  const hours = Math.floor(difference / (1000 * 60 * 60));
+  const minutes = Math.floor((difference / (1000 * 60)) % 60);
+  const seconds = Math.floor((difference / 1000) % 60);
 
   return {
     hours,

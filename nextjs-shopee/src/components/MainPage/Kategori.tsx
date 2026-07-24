@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
-import { toast } from "react-toastify";
 
 export default function Kategori() {
   const scrollRef = useRef<HTMLDivElement>(null);
