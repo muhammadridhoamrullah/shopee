@@ -55,6 +55,6 @@ jobs:
           script: |
             docker login ${{ env.REGISTRY }} -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            cd ~/frontend-shopee
+            cd ~/shopee/frontend-shopee
             docker compose down
             docker compose up -d
