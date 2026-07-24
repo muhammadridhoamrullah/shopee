@@ -1,18 +1,14 @@
 services:
-  frontend:
+  frontend-shopee:
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    container_name: frontend-shopee
-    restart: unless-stopped
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://localhost:3002
     ports:
-      - "5173:5173"
-    volumes:
-      - .:/app
-      - /app/node_modules
+      - "5174:80"
     networks:
-      - shopee-network
+      - frontend-shopee-network
 
 networks:
-  shopee-network:
-    external: true
+  frontend-shopee-network:
