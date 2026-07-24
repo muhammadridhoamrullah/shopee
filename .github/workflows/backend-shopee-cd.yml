@@ -1,0 +1,58 @@
+name: CD - Build and Push Docker Image (Backend Shopee)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend-shopee/**"
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: muhammadridhoamrullah/shopee/shopee-backend
+
+defaults:
+  run:
+    working-directory: backend-shopee
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Login ke GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build dan push image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend-shopee
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy ke EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST_SHOPEE_BACKEND_FRONTEND }}
+          username: ${{ secrets.EC2_USERNAME_SHOPEE_BACKEND_FRONTEND }}
+          key: ${{ secrets.EC2_SSH_KEY_SHOPEE_BACKEND_FRONTEND }}
+          script: |
+            docker login ${{ env.REGISTRY }} -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            cd ~/backend-shopee
+            docker compose down
+            docker compose up -d
