@@ -1,0 +1,36 @@
+name: CI - Lint and Build Check (Backend Shopee)
+
+on:
+  push:
+    branches: [develop, main]
+    paths:
+      - "backend-shopee/**"
+  pull_request:
+    branches: [develop, main]
+    paths:
+      - "backend-shopee/**"
+
+defaults:
+  run:
+    working-directory: backend-shopee
+
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: backend-shopee/package-lock.json
+
+      - name: Install dependency
+        run: npm ci
+
+      - name: Cek syntax entry point
+        run: node -c app.js
