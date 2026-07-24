@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
     return config;
   },
   output: "standalone",
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
