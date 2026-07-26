@@ -1,4 +1,9 @@
-import { FlashSaleItem, menuLinks, TimeLeftFlashSale } from "../type/type";
+import {
+  FlashSaleItem,
+  menuLinks,
+  Product,
+  TimeLeftFlashSale,
+} from "../type/type";
 
 export const API_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -315,7 +320,7 @@ export const kategoriMenuLists: menuLinks[] = [
   },
 ];
 
-export const flashSaleEndTime = new Date("2026-07-23T23:59:59"); // Set the end time for the flash sale
+export const flashSaleEndTime = new Date("2026-07-29T23:59:59"); // Set the end time for the flash sale
 
 export const flashSaleLists: FlashSaleItem[] = [
   {
@@ -550,4 +555,129 @@ export function formatRupiah(amount: number): string {
     style: "currency",
     currency: "IDR",
   }).format(amount);
+}
+
+const categories = [
+  { name: "Juice Detox Segar", price: [15000, 60000] },
+  { name: "Face Wash Pemutih Wajah", price: [15000, 80000] },
+  { name: "Lampu LED Bulb Hemat Energi", price: [20000, 150000] },
+  { name: "Smartphone Flagship Terbaru", price: [3000000, 25000000] },
+  { name: "Sepeda Motor Matic Injeksi", price: [15000000, 35000000] },
+  { name: "Lemari Plastik Susun Serbaguna", price: [80000, 300000] },
+  { name: "Bor Listrik Mesin Industri", price: [200000, 900000] },
+  { name: "Rice Cooker Digital Multifungsi", price: [150000, 600000] },
+  { name: "Sepeda Lipat Portable", price: [800000, 3000000] },
+  { name: "Terpal Kolam Ikan Anti Bocor", price: [50000, 250000] },
+  { name: "Cincin Emas Lapis Perhiasan", price: [30000, 120000] },
+  { name: "Jaket Hoodie Oversize Unisex", price: [60000, 200000] },
+  { name: "Kipas Angin Tangan Portable", price: [15000, 70000] },
+  { name: "Celana Panjang Skena Wanita", price: [40000, 150000] },
+  { name: "Atasan Wanita Kekinian", price: [35000, 120000] },
+  { name: "Skincare Serum Wajah Glowing", price: [25000, 180000] },
+  { name: "Headset Bluetooth TWS", price: [50000, 400000] },
+  { name: "Power Bank Fast Charging", price: [80000, 350000] },
+];
+
+const brands = [
+  "Hada Labo",
+  "Philips",
+  "Membumi",
+  "Star+",
+  "Xiaomi",
+  "Honda",
+  "Samsung",
+  "Scarlett",
+  "Erha",
+  "Elde",
+  "Miyako",
+  "Polygon",
+  "Anker",
+  "JBL",
+  "Uniqlo",
+];
+
+const locations = [
+  "Jakarta Barat",
+  "Jakarta Selatan",
+  "Bandung",
+  "Surabaya",
+  "Pekanbaru",
+  "Tangerang",
+  "Bekasi",
+  "Semarang",
+  "Medan",
+  "Yogyakarta",
+  "Depok",
+  "Makassar",
+];
+
+const badges: (Product["badge"] | undefined)[] = [
+  "mall",
+  "star",
+  "starPlus",
+  undefined,
+  undefined,
+];
+
+function slugify(text: string, id: number) {
+  return `${text.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${id}`;
+}
+
+function randomFrom<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function randomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generateProduct(index: number): Product {
+  const category = randomFrom(categories);
+  const brand = randomFrom(brands);
+  const id = index + 1;
+
+  const price = randomInt(category.price[0], category.price[1]);
+  const discountPercent = randomInt(5, 70); // semua produk pasti ada diskon
+  const originalPrice = Math.round(price / (1 - discountPercent / 100));
+
+  const badge = randomFrom(badges);
+
+  return {
+    id,
+    name: `${brand} ${category.name}`,
+    slug: slugify(`${brand} ${category.name}`, id),
+    image: `https://picsum.photos/400/400?random=${id}`,
+    price,
+    originalPrice,
+    discountPercent,
+    sold: randomInt(1, 20000),
+    rating:
+      Math.random() < 0.85
+        ? Number((3.5 + Math.random() * 1.5).toFixed(1))
+        : undefined,
+    location: randomFrom(locations),
+    badge,
+    isOfficialStore: badge === "mall",
+    hasFreeItem: Math.random() < 0.05,
+    installment:
+      Math.random() < 0.3
+        ? { available: true, label: "Cicilan 0%" }
+        : { available: false, label: "" },
+    isFlashSale: Math.random() < 0.35,
+    freeShipping: Math.random() < 0.5,
+    isCOD: Math.random() < 0.4,
+  };
+}
+
+export const dummyProducts: Product[] = Array.from({ length: 48 }, (_, i) =>
+  generateProduct(i),
+);
+
+export function formatSoldProductCount(sold: number): string {
+  if (sold >= 1000) {
+    return `${(sold / 1000).toFixed(1)}rb terjual`;
+  } else if (sold >= 1000000) {
+    return `${(sold / 1000000).toFixed(1)}jt terjual`;
+  }
+  return `${sold} terjual`;
 }

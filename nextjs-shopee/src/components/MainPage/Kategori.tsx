@@ -73,6 +73,7 @@ export default function Kategori() {
                   alt={kategori.name}
                   layout="fill"
                   objectFit="contain"
+                  sizes="112px"
                 />
               </div>
               {/* Akhir Foto */}
