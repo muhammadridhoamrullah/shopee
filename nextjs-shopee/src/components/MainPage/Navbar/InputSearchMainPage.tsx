@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useMemo, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
-import { searchRecommendations } from "../../helpers/utils";
+import { searchRecommendations } from "../../../helpers/utils";
 import { getItemRandomly } from "@/src/helpers/hooks";
 
 export default function InputSearchMainPage() {

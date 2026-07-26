@@ -5,6 +5,7 @@ import StoreProvider from "@/src/store/StoreProvider";
 import ToastProvider from "@/src/components/ToastProvider";
 import ScrollToTopButton from "@/src/components/ScrollToTopButton";
 import NextTopLoader from "nextjs-toploader";
+import Footer from "@/src/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,6 +58,7 @@ export default function RootLayout({
             speed={200}
           />
           {children}
+          <Footer />
           <ToastProvider />
           <ScrollToTopButton />
         </StoreProvider>

@@ -1,6 +1,6 @@
-import Banner from "@/src/components/MainPage/Banner";
+import Banner from "@/src/components/MainPage/Banner/Banner";
 import KategoriToRekomendasi from "@/src/components/MainPage/KategoriToRekomendasi";
-import NavbarMainPage from "@/src/components/MainPage/NavbarMainPage";
+import NavbarMainPage from "@/src/components/MainPage/Navbar/NavbarMainPage";
 
 export default function Home() {
   return (
