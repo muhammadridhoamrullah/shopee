@@ -59,7 +59,7 @@ export function doBeliSekarang(productId: string, quantity: number) {
       const data = await response.json();
 
       if (!response.ok) {
-        let errMessage = "An error occurred while processing the purchase.";
+        const errMessage = "An error occurred while processing the purchase.";
         throw new Error(data.message || errMessage);
       }
 
