@@ -15,7 +15,7 @@ export default function KategoriToRekomendasi() {
       {/* Akhir Flash Sale */}
 
       {/* Awal Produk Terlaris */}
-      <ProdukTerlaris />
+      {/* <ProdukTerlaris /> */}
       {/* Akhir Produk Terlaris */}
 
       {/* Awal Rekomendasi */}

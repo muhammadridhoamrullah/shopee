@@ -1,3 +1,4 @@
+import { ProdukDokumen, ProdukResponse } from "../type/produk";
 import {
   FlashSaleItem,
   menuLinks,
@@ -335,7 +336,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 187,
     stockTotal: 250,
-    link: "/produk/eon-lampu-led-12w",
+    link: "eon-lampu-led-12w",
   },
   {
     id: "fs-002",
@@ -349,7 +350,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 342,
     stockTotal: 400,
-    link: "/produk/isku-kunci-l-set",
+    link: "isku-kunci-l-set",
   },
   {
     id: "fs-003",
@@ -362,7 +363,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 95,
     stockTotal: 300,
-    link: "/produk/eon-pure-lampu-led-15w",
+    link: "eon-pure-lampu-led-15w",
   },
   {
     id: "fs-004",
@@ -375,7 +376,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 41,
     stockTotal: 150,
-    link: "/produk/kunci-sock-set-121pc",
+    link: "kunci-sock-set-121pc",
   },
   {
     id: "fs-005",
@@ -388,7 +389,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: false,
     stockSold: 278,
     stockTotal: 300,
-    link: "/produk/mesin-gerinda-isku",
+    link: "mesin-gerinda-isku",
   },
   {
     id: "fs-006",
@@ -401,7 +402,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 133,
     stockTotal: 200,
-    link: "/produk/semprotan-cat-elektrik",
+    link: "semprotan-cat-elektrik",
   },
   {
     id: "fs-007",
@@ -414,7 +415,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 512,
     stockTotal: 600,
-    link: "/produk/serum-niacinamide-zinc",
+    link: "serum-niacinamide-zinc",
   },
   {
     id: "fs-008",
@@ -427,7 +428,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 89,
     stockTotal: 500,
-    link: "/produk/kaos-oversize-cotton-combed",
+    link: "kaos-oversize-cotton-combed",
   },
   {
     id: "fs-009",
@@ -440,7 +441,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 421,
     stockTotal: 450,
-    link: "/produk/powerbank-20000mah-fast-charging",
+    link: "powerbank-20000mah-fast-charging",
   },
   {
     id: "fs-010",
@@ -453,7 +454,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: false,
     stockSold: 67,
     stockTotal: 200,
-    link: "/produk/rak-sepatu-lipat-3-susun",
+    link: "rak-sepatu-lipat-3-susun",
   },
   {
     id: "fs-011",
@@ -466,7 +467,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 298,
     stockTotal: 350,
-    link: "/produk/tumbler-stainless-1-liter",
+    link: "tumbler-stainless-1-liter",
   },
   {
     id: "fs-012",
@@ -479,7 +480,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 154,
     stockTotal: 250,
-    link: "/produk/puzzle-kayu-edukasi-anak",
+    link: "puzzle-kayu-edukasi-anak",
   },
   {
     id: "fs-013",
@@ -492,7 +493,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 203,
     stockTotal: 220,
-    link: "/produk/karpet-bulu-rasfur-anti-slip",
+    link: "karpet-bulu-rasfur-anti-slip",
   },
   {
     id: "fs-014",
@@ -505,7 +506,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 76,
     stockTotal: 180,
-    link: "/produk/helm-half-face-sni-double-visor",
+    link: "helm-half-face-sni-double-visor",
   },
   {
     id: "fs-015",
@@ -518,7 +519,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 312,
     stockTotal: 400,
-    link: "/produk/celana-highwaist-katun-stretch",
+    link: "celana-highwaist-katun-stretch",
   },
 ];
 
@@ -680,4 +681,8 @@ export function formatSoldProductCount(sold: number): string {
     return `${(sold / 1000000).toFixed(1)}jt terjual`;
   }
   return `${sold} terjual`;
+}
+
+export function toProdukResponse(doc: ProdukDokumen): ProdukResponse {
+  return { ...doc, _id: doc._id.toString() };
 }

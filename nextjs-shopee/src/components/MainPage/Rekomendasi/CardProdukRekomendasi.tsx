@@ -1,16 +1,17 @@
 import { formatRupiah, formatSoldProductCount } from "@/src/helpers/utils";
+import { ProdukResponse } from "@/src/type/produk";
 import { Product } from "@/src/type/type";
 import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-  product: Product;
+  product: ProdukResponse;
 }
 
 export default function CardProductRekomendasi({ product }: Props) {
   return (
     <Link
-      href={`/product/${product.slug}`}
+      href={`/${product.slug}`}
       className="w-full rounded-md overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out h-70 flex flex-col justify-between items-start"
     >
       {/* Awal Foto Produk */}

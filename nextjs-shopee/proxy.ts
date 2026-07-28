@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "./src/components/VerifyToken";
 
-const protectedPaths = ["/dashboard"];
+const protectedPaths = ["/dashboard", "/api/cart", "/api/order"];
 const guestOnlyPaths = ["/login", "/register"];
 
 export async function proxy(request: NextRequest) {
@@ -15,6 +15,12 @@ export async function proxy(request: NextRequest) {
   // Halaman butuh login (dashboard dll)
   if (isProtected) {
     if (!token) {
+      if (pathname.startsWith("/api")) {
+        return NextResponse.json(
+          { message: "Unauthorized", success: false, data: null },
+          { status: 401 },
+        );
+      }
       return NextResponse.redirect(new URL("/login", request.url));
     }
     try {
@@ -29,6 +35,14 @@ export async function proxy(request: NextRequest) {
       return NextResponse.next({ request: { headers: reqHeaders } });
     } catch (error) {
       console.log(error, "error");
+      if (pathname.startsWith("/api")) {
+        const response = NextResponse.json(
+          { message: "Unauthorized", success: false, data: null },
+          { status: 401 },
+        );
+        response.cookies.delete("access_token");
+        return response;
+      }
 
       const response = NextResponse.redirect(new URL("/login", request.url));
       response.cookies.delete("access_token");
@@ -53,5 +67,11 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login", "/register"],
+  matcher: [
+    "/dashboard/:path*",
+    "/login",
+    "/register",
+    "/api/cart/:path*",
+    "/api/order/:path*",
+  ],
 };
