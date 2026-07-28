@@ -25,12 +25,36 @@ export default async function ProdukDetailPage({ params }: Props) {
   };
 
   return (
-    <div className="bg-pink-400 w-full min-h-screen flex flex-col gap-3">
-      <div className="bg-green-500 px-20">Produk {product.name}</div>
-      <span className="bg-red-400 px-20">{formatRupiah(product.price)}</span>
+    <div className="bg-[#F5F5F5] w-full h-fit flex flex-col gap-2 px-20">
+      {/* Awal Kategori */}
+      <div className="bg-green-300 w-full">Category</div>
+      {/* Akhir Kategori */}
 
-      <TambahKeranjang data={data} />
-      <BeliSekarang data={data} />
+      {/* Awal Detail Produk */}
+      <div className="bg-pink-300 w-full">Produk Cuy</div>
+      {/* Akhir Detail Produk */}
+
+      {/* Awal Toko Penjual */}
+      <div className="bg-blue-600 w-full">Toko Penjual Cuy</div>
+      {/* Akhir Toko Penjual */}
+
+      {/* Awal Spesifikasi dan Deskripsi Produk */}
+      <div className="bg-yellow-300 w-full">
+        Spesifikasi dan Deskripsi Produk
+      </div>
+      {/* Akhir Spesifikasi dan Deskripsi Produk */}
+
+      {/* Awal Penilaian Produk */}
+      <div className="bg-purple-300 w-full">Penilaian Produk</div>
+      {/* Akhir Penilaian Produk */}
+
+      {/* Awal Produk Lain Dari Toko Ini */}
+      <div className="bg-gray-300 w-full">Produk Lain Dari Toko Ini</div>
+      {/* Akhir Produk Lain Dari Toko Ini */}
+
+      {/* Awal Kamu Mungkin Juga Suka */}
+      <div className="bg-gray-300 w-full">Kamu Mungkin Juga Suka</div>
+      {/* Akhir Kamu Mungkin Juga Suka */}
     </div>
   );
 }

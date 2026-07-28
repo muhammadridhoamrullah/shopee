@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getProductBySlug } from "@/src/models/product/product";
 import { formatRupiah } from "@/src/helpers/utils";
+import NavbarMainPage from "@/src/components/MainPage/Navbar/NavbarMainPage";
 
 interface Props {
   params: Promise<{
@@ -43,5 +44,9 @@ export async function generateMetadata({
 }
 
 export default function ProdukDetailLayout({ children }: Props) {
-  return <>{children}</>;
+  return (
+    <>
+  <NavbarMainPage />
+  {children}</>
+  );
 }
