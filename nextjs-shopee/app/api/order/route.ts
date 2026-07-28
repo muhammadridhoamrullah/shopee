@@ -1,5 +1,5 @@
 import { schemaAddToCartDanBeliSekarang } from "@/src/helpers/zod";
-import { addToCart } from "@/src/models/cart/cart";
+import { beliSekarang } from "@/src/models/order/order";
 import { NextRequest, NextResponse } from "next/server";
 import z, { success } from "zod";
 
@@ -19,8 +19,7 @@ export async function POST(request: NextRequest) {
       throw new Error("Unauthorized: UserId header is missing");
     }
 
-    // Panggil fungsi addToCart dari model cart
-    await addToCart(
+    const orderId = await beliSekarang(
       userId,
       validationSchema.data.productId,
       validationSchema.data.quantity,
@@ -29,8 +28,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: "Item added to cart successfully",
-        data: null,
+        message: "Order created successfully",
+        data: { orderId },
       },
       {
         status: 201,

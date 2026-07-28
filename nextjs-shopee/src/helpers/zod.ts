@@ -20,7 +20,7 @@ export const schemaRegister = z.object({
     .regex(/^\d{10,15}$/, { message: "Invalid phone number" }),
 });
 
-export const schemaAddToCart = z.object({
+export const schemaAddToCartDanBeliSekarang = z.object({
   productId: z.string().min(1, { message: "Product ID is required" }),
   quantity: z.number().int().min(1, { message: "Quantity must be at least 1" }),
 });
