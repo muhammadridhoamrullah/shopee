@@ -111,7 +111,7 @@ export default function Footer() {
   ];
 
   return (
-    <div className="bg-[#eeecec] w-full h-fit px-20 flex justify-between items-start gap-1 text-xs py-10">
+    <div className="bg-[#F5F5F5] w-full h-fit px-20 flex justify-between items-start gap-1 text-xs py-10">
       {/* Awal Layanan Pelanggan */}
       <div className="w-full h-fit flex flex-col gap-4">
         {/* Awal Text Layanan Pelanggan */}

@@ -76,7 +76,9 @@ export default function LoginClient() {
           <Image
             src={"/shopee3.png"}
             alt="Logo Shopee"
-            className="absolute w-[50%] h-[50%] object-contain"
+            fill
+            objectFit="contain"
+            sizes="(max-width: 768px) 50vw, 25vw"
           />
         </div>
         {/* Akhir Logo Shopee */}

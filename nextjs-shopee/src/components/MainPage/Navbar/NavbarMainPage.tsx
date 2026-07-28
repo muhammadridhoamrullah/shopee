@@ -86,7 +86,7 @@ export default function NavbarMainPage() {
           {/* Akhir Notifikasi, Bantuan, Bahasa */}
 
           {/* Awal Daftar Login */}
-          <div className="bg-red-500 w-fit h-fit flex justify-start items-center divide-x divide-gray-400 [&>*:not(:first-child)]:pl-2 [&>*:not(:last-child)]:pr-2 font-semibold">
+          <div className=" w-fit h-fit flex justify-start items-center divide-x divide-gray-400 [&>*:not(:first-child)]:pl-2 [&>*:not(:last-child)]:pr-2 font-semibold">
             {/* Awal Link Daftar */}
             <Link href={"/register"}>Daftar</Link>
             {/* Akhir Link Daftar */}
@@ -117,7 +117,7 @@ export default function NavbarMainPage() {
         {/* Akhir Search Input */}
 
         {/* Awal Keranjang */}
-        <div className="bg-red-400 flex-none w-16 h-fit flex justify-center items-center ">
+        <div className=" flex-none w-16 h-fit flex justify-center items-center ">
           <GrCart className="text-2xl cursor-pointer" />
         </div>
         {/* Akhir Keranjang */}

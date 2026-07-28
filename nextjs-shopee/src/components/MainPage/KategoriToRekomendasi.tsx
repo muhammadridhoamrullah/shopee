@@ -1,7 +1,8 @@
-import FlashSale from "./FlashSale";
-import Kategori from "./Kategori";
-import ProdukTerlaris from "./ProdukTerlaris";
-import Rekomendasi from "./Rekomendasi";
+import Footer from "../Footer";
+import FlashSale from "./FlashSale/FlashSale";
+import Kategori from "./Kategori/Kategori";
+import ProdukTerlaris from "./ProdukTerlaris/ProdukTerlaris";
+import Rekomendasi from "./Rekomendasi/Rekomendasi";
 
 export default function KategoriToRekomendasi() {
   return (
@@ -14,12 +15,16 @@ export default function KategoriToRekomendasi() {
       {/* Akhir Flash Sale */}
 
       {/* Awal Produk Terlaris */}
-      <ProdukTerlaris />
+      {/* <ProdukTerlaris /> */}
       {/* Akhir Produk Terlaris */}
 
       {/* Awal Rekomendasi */}
       <Rekomendasi />
       {/* Akhir Rekomendasi */}
+
+      {/* Awal Footer */}
+      {/* <Footer /> */}
+      {/* Akhir Footer */}
     </div>
   );
 }

@@ -1,6 +1,8 @@
 // Warna Oren Shopee
 // #EE4D2D
 
+import { ObjectId } from "mongodb";
+
 export type inputLogin = {
   identifier: string;
   password: string;
@@ -82,4 +84,27 @@ export interface TimeLeftFlashSale {
   minutes: number;
   seconds: number;
   isExpired: boolean;
+}
+
+export interface Product {
+  id: number;
+  name: string;
+  slug: string;
+  image: string;
+  price: number; // harga setelah diskon (yang ditampilkan besar)
+  originalPrice?: number; // harga sebelum diskon (dicoret), optional
+  discountPercent?: number; // dihitung dari originalPrice vs price
+  sold: number; // jumlah terjual, misal 494 -> ditampilkan "494 terjual"
+  rating?: number; // 0 - 5, optional (tidak semua card di screenshot nampilin rating)
+  location: string; // kota pengiriman
+  badge?: "mall" | "star" | "starPlus"; // label kiri atas: Mall|ORI, Star, Star+
+  isOfficialStore?: boolean; // dipakai bareng badge "mall" untuk teks "ORI"
+  hasFreeItem?: boolean; // contoh: "FREE - Philips Lampu..."
+  installment?: {
+    available: boolean;
+    label: string; // contoh: "Cicilan 0%"
+  };
+  isFlashSale?: boolean; // badge kuning "PROMO XTRA" / label -50% dsb
+  freeShipping?: boolean;
+  isCOD?: boolean;
 }
