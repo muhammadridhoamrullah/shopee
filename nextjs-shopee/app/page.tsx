@@ -2,6 +2,8 @@ import Banner from "@/src/components/MainPage/Banner/Banner";
 import KategoriToRekomendasi from "@/src/components/MainPage/KategoriToRekomendasi";
 import NavbarMainPage from "@/src/components/MainPage/Navbar/NavbarMainPage";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <div className="bg-[#F5F5F5] w-full min-h-screen flex flex-col  justify-start items-center">
