@@ -16,11 +16,15 @@ export default function TambahKeranjang({ data }: Props) {
     useAppSelector((state) => state.tambahKeranjang);
   const dispatch = useAppDispatch();
 
-//   Dispatch action untuk menambahkan item ke keranjang
+  //   Dispatch action untuk menambahkan item ke keranjang
 
-async function handleTambahKeranjang() {
-  dispatch(doTambahKeranjang(data.productId, data.quantity));
-}
+  async function handleTambahKeranjang() {
+    dispatch(doTambahKeranjang(data.productId, data.quantity));
+  }
 
-  return <button onClick={handleTambahKeranjang}>Masukkan Keranjang</button>;
+  return (
+    <button className="bg-[#F5F5F5] p-2 w-fit" onClick={handleTambahKeranjang}>
+      Masukkan Keranjang
+    </button>
+  );
 }

@@ -1,3 +1,4 @@
+import BeliSekarang from "@/src/components/DetailPage/BeliSekarang";
 import TambahKeranjang from "@/src/components/DetailPage/TambahKeranjang";
 import { formatRupiah } from "@/src/helpers/utils";
 import { getProductBySlug } from "@/src/models/product/product";
@@ -29,6 +30,7 @@ export default async function ProdukDetailPage({ params }: Props) {
       <span className="bg-red-400 px-20">{formatRupiah(product.price)}</span>
 
       <TambahKeranjang data={data} />
+      <BeliSekarang data={data} />
     </div>
   );
 }

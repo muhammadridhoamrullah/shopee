@@ -3,6 +3,7 @@ import loginReducer from "./slice/loginSlice";
 import registerReducer from "./slice/registerSlice";
 import verifyEmailReducer from "./slice/verifyEmailSlice";
 import tambahKeranjangReducer from "./slice/detailPage/tambahKeranjangSlice";
+import beliSekarangReducer from "./slice/detailPage/beliSekarangSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     register: registerReducer,
     verifyEmail: verifyEmailReducer,
     tambahKeranjang: tambahKeranjangReducer,
+    beliSekarang: beliSekarangReducer,
   },
 });
 
