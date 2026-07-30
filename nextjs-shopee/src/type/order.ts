@@ -7,6 +7,7 @@ export interface Order {
   totalPrice: number;
   status: "pending" | "paid" | "shipped" | "delivered" | "cancelled";
   orderId: string;
+  snapToken?: string;
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;

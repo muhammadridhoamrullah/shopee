@@ -110,6 +110,7 @@ export default function RegisterClient() {
             src={"/shopee3.png"}
             alt="Logo Shopee"
             className="absolute w-[50%] h-[50%] object-contain"
+            sizes="160px"
           />
         </div>
         {/* Akhir Logo Shopee */}

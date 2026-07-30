@@ -1,8 +1,6 @@
 // Warna Oren Shopee
 // #EE4D2D
 
-import { ObjectId } from "mongodb";
-
 export type inputLogin = {
   identifier: string;
   password: string;

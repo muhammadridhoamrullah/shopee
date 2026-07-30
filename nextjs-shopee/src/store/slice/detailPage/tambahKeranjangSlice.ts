@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppDispatch } from "../../store";
 import z from "zod";
-import { API_URL } from "@/src/helpers/utils";
 
 export const tambahKeranjangSlice = createSlice({
   name: "tambahKeranjang",
