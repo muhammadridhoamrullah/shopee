@@ -1,4 +1,11 @@
-import { FlashSaleItem, menuLinks, TimeLeftFlashSale } from "../type/type";
+import { ProdukDokumen, ProdukResponse } from "../type/produk";
+import { StoreDokumen, StoreResponse } from "../type/store";
+import {
+  FlashSaleItem,
+  menuLinks,
+  Product,
+  TimeLeftFlashSale,
+} from "../type/type";
 
 export const API_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -315,7 +322,7 @@ export const kategoriMenuLists: menuLinks[] = [
   },
 ];
 
-export const flashSaleEndTime = new Date("2026-07-23T23:59:59"); // Set the end time for the flash sale
+export const flashSaleEndTime = new Date("2026-07-29T23:59:59"); // Set the end time for the flash sale
 
 export const flashSaleLists: FlashSaleItem[] = [
   {
@@ -330,7 +337,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 187,
     stockTotal: 250,
-    link: "/produk/eon-lampu-led-12w",
+    link: "eon-lampu-led-12w",
   },
   {
     id: "fs-002",
@@ -344,7 +351,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 342,
     stockTotal: 400,
-    link: "/produk/isku-kunci-l-set",
+    link: "isku-kunci-l-set",
   },
   {
     id: "fs-003",
@@ -357,7 +364,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 95,
     stockTotal: 300,
-    link: "/produk/eon-pure-lampu-led-15w",
+    link: "eon-pure-lampu-led-15w",
   },
   {
     id: "fs-004",
@@ -370,7 +377,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 41,
     stockTotal: 150,
-    link: "/produk/kunci-sock-set-121pc",
+    link: "kunci-sock-set-121pc",
   },
   {
     id: "fs-005",
@@ -383,7 +390,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: false,
     stockSold: 278,
     stockTotal: 300,
-    link: "/produk/mesin-gerinda-isku",
+    link: "mesin-gerinda-isku",
   },
   {
     id: "fs-006",
@@ -396,7 +403,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 133,
     stockTotal: 200,
-    link: "/produk/semprotan-cat-elektrik",
+    link: "semprotan-cat-elektrik",
   },
   {
     id: "fs-007",
@@ -409,7 +416,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 512,
     stockTotal: 600,
-    link: "/produk/serum-niacinamide-zinc",
+    link: "serum-niacinamide-zinc",
   },
   {
     id: "fs-008",
@@ -422,7 +429,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 89,
     stockTotal: 500,
-    link: "/produk/kaos-oversize-cotton-combed",
+    link: "kaos-oversize-cotton-combed",
   },
   {
     id: "fs-009",
@@ -435,7 +442,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 421,
     stockTotal: 450,
-    link: "/produk/powerbank-20000mah-fast-charging",
+    link: "powerbank-20000mah-fast-charging",
   },
   {
     id: "fs-010",
@@ -448,7 +455,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: false,
     stockSold: 67,
     stockTotal: 200,
-    link: "/produk/rak-sepatu-lipat-3-susun",
+    link: "rak-sepatu-lipat-3-susun",
   },
   {
     id: "fs-011",
@@ -461,7 +468,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 298,
     stockTotal: 350,
-    link: "/produk/tumbler-stainless-1-liter",
+    link: "tumbler-stainless-1-liter",
   },
   {
     id: "fs-012",
@@ -474,7 +481,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 154,
     stockTotal: 250,
-    link: "/produk/puzzle-kayu-edukasi-anak",
+    link: "puzzle-kayu-edukasi-anak",
   },
   {
     id: "fs-013",
@@ -487,7 +494,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 203,
     stockTotal: 220,
-    link: "/produk/karpet-bulu-rasfur-anti-slip",
+    link: "karpet-bulu-rasfur-anti-slip",
   },
   {
     id: "fs-014",
@@ -500,7 +507,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 76,
     stockTotal: 180,
-    link: "/produk/helm-half-face-sni-double-visor",
+    link: "helm-half-face-sni-double-visor",
   },
   {
     id: "fs-015",
@@ -513,7 +520,7 @@ export const flashSaleLists: FlashSaleItem[] = [
     isOri: true,
     stockSold: 312,
     stockTotal: 400,
-    link: "/produk/celana-highwaist-katun-stretch",
+    link: "celana-highwaist-katun-stretch",
   },
 ];
 
@@ -550,4 +557,137 @@ export function formatRupiah(amount: number): string {
     style: "currency",
     currency: "IDR",
   }).format(amount);
+}
+
+const categories = [
+  { name: "Juice Detox Segar", price: [15000, 60000] },
+  { name: "Face Wash Pemutih Wajah", price: [15000, 80000] },
+  { name: "Lampu LED Bulb Hemat Energi", price: [20000, 150000] },
+  { name: "Smartphone Flagship Terbaru", price: [3000000, 25000000] },
+  { name: "Sepeda Motor Matic Injeksi", price: [15000000, 35000000] },
+  { name: "Lemari Plastik Susun Serbaguna", price: [80000, 300000] },
+  { name: "Bor Listrik Mesin Industri", price: [200000, 900000] },
+  { name: "Rice Cooker Digital Multifungsi", price: [150000, 600000] },
+  { name: "Sepeda Lipat Portable", price: [800000, 3000000] },
+  { name: "Terpal Kolam Ikan Anti Bocor", price: [50000, 250000] },
+  { name: "Cincin Emas Lapis Perhiasan", price: [30000, 120000] },
+  { name: "Jaket Hoodie Oversize Unisex", price: [60000, 200000] },
+  { name: "Kipas Angin Tangan Portable", price: [15000, 70000] },
+  { name: "Celana Panjang Skena Wanita", price: [40000, 150000] },
+  { name: "Atasan Wanita Kekinian", price: [35000, 120000] },
+  { name: "Skincare Serum Wajah Glowing", price: [25000, 180000] },
+  { name: "Headset Bluetooth TWS", price: [50000, 400000] },
+  { name: "Power Bank Fast Charging", price: [80000, 350000] },
+];
+
+const brands = [
+  "Hada Labo",
+  "Philips",
+  "Membumi",
+  "Star+",
+  "Xiaomi",
+  "Honda",
+  "Samsung",
+  "Scarlett",
+  "Erha",
+  "Elde",
+  "Miyako",
+  "Polygon",
+  "Anker",
+  "JBL",
+  "Uniqlo",
+];
+
+const locations = [
+  "Jakarta Barat",
+  "Jakarta Selatan",
+  "Bandung",
+  "Surabaya",
+  "Pekanbaru",
+  "Tangerang",
+  "Bekasi",
+  "Semarang",
+  "Medan",
+  "Yogyakarta",
+  "Depok",
+  "Makassar",
+];
+
+const badges: (Product["badge"] | undefined)[] = [
+  "mall",
+  "star",
+  "starPlus",
+  undefined,
+  undefined,
+];
+
+function slugify(text: string, id: number) {
+  return `${text.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${id}`;
+}
+
+function randomFrom<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function randomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generateProduct(index: number): Product {
+  const category = randomFrom(categories);
+  const brand = randomFrom(brands);
+  const id = index + 1;
+
+  const price = randomInt(category.price[0], category.price[1]);
+  const discountPercent = randomInt(5, 70); // semua produk pasti ada diskon
+  const originalPrice = Math.round(price / (1 - discountPercent / 100));
+
+  const badge = randomFrom(badges);
+
+  return {
+    id,
+    name: `${brand} ${category.name}`,
+    slug: slugify(`${brand} ${category.name}`, id),
+    image: `https://picsum.photos/400/400?random=${id}`,
+    price,
+    originalPrice,
+    discountPercent,
+    sold: randomInt(1, 20000),
+    rating:
+      Math.random() < 0.85
+        ? Number((3.5 + Math.random() * 1.5).toFixed(1))
+        : undefined,
+    location: randomFrom(locations),
+    badge,
+    isOfficialStore: badge === "mall",
+    hasFreeItem: Math.random() < 0.05,
+    installment:
+      Math.random() < 0.3
+        ? { available: true, label: "Cicilan 0%" }
+        : { available: false, label: "" },
+    isFlashSale: Math.random() < 0.35,
+    freeShipping: Math.random() < 0.5,
+    isCOD: Math.random() < 0.4,
+  };
+}
+
+export const dummyProducts: Product[] = Array.from({ length: 48 }, (_, i) =>
+  generateProduct(i),
+);
+
+export function formatSoldProductCount(sold: number): string {
+  if (sold >= 1000) {
+    return `${(sold / 1000).toFixed(1)}rb terjual`;
+  } else if (sold >= 1000000) {
+    return `${(sold / 1000000).toFixed(1)}jt terjual`;
+  }
+  return `${sold} terjual`;
+}
+
+export function toProdukResponse(doc: ProdukDokumen): ProdukResponse {
+  return { ...doc, _id: doc._id.toString(), storeId: doc.storeId.toString() };
+}
+
+export function toStoreResponse(doc: StoreDokumen): StoreResponse {
+  return { ...doc, _id: doc._id.toString(), userId: doc.userId.toString() };
 }

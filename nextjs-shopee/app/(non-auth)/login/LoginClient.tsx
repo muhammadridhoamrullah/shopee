@@ -27,6 +27,14 @@ export default function LoginClient() {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  console.log(isMounted, "isMounted");
+
+  // useEffect untuk memastikan komponen sudah ter-mount sebelum melakukan redirect
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- perlu di-set lewat effect, satu-satunya cara mendeteksi komponen sudah mount di client
+    setIsMounted(true);
+  }, []);
 
   // useEffect untuk redirect ke halaman dashboard jika login berhasil
   useEffect(() => {
@@ -76,7 +84,9 @@ export default function LoginClient() {
           <Image
             src={"/shopee3.png"}
             alt="Logo Shopee"
-            className="absolute w-[50%] h-[50%] object-contain"
+            fill
+            objectFit="contain"
+            sizes="(max-width: 768px) 50vw, 25vw"
           />
         </div>
         {/* Akhir Logo Shopee */}
@@ -97,6 +107,7 @@ export default function LoginClient() {
 
           {/* Awal Form */}
           <form
+            method="post"
             onSubmit={submitHandler}
             className=" w-full h-fit flex flex-col gap-4 "
           >
@@ -158,8 +169,8 @@ export default function LoginClient() {
             {/* Awal Button Login */}
             <button
               type="submit"
-              disabled={loadingLogin}
-              className="bg-[#EE4D2D] mt-4 w-full h-12 text-white font-semibold rounded-md hover:bg-[#D93A1A] cursor-pointer"
+              disabled={loadingLogin || !isMounted}
+              className={`${loadingLogin || !isMounted ? "bg-gray-400 cursor-not-allowed" : "bg-[#EE4D2D] cursor-pointer"} mt-4 w-full h-12 text-white font-semibold rounded-md hover:bg-[#D93A1A] transition-all duration-300`}
             >
               {loadingLogin ? (
                 <VscLoading className="animate-spin mx-auto text-2xl" />

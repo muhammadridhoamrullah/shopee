@@ -22,8 +22,18 @@ async function getMongoClientInstance(): Promise<MongoClient> {
 
 // Buat async function untuk mendapatkan database
 export async function getDB() {
-  const client = await getMongoClientInstance();
-  return client.db(DB_NAME);
+  try {
+    const client = await getMongoClientInstance();
+    await client.db(DB_NAME).command({ ping: 1 }); // Cek koneksi ke database
+    return client.db(DB_NAME);
+  } catch (error) {
+    if (error instanceof Error && error.name === "MongoTopologyClosedError") {
+      client = undefined as unknown as MongoClient; // Reset client to undefined
+      const newClient = await getMongoClientInstance();
+      return newClient.db(DB_NAME);
+    }
+    throw error; // Rethrow the error if it's not a MongoTopologyClosedError
+  }
 }
 
 // Buat async function untuk menutup koneksi MongoDB

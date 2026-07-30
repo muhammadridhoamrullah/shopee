@@ -37,7 +37,7 @@ export function doVerifyEmail(token: string) {
       dispatch(verifyEmailRequest());
 
       const response = await fetch(
-        `${API_URL}/api/auth/verify-email?token=${token}`,
+        `/api/auth/verify-email?token=${token}`,
         {
           method: "POST",
           headers: {

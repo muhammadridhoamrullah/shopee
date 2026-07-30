@@ -40,6 +40,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           build-args: |
             NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}
+            NEXT_PUBLIC_MIDTRANS_CLIENT_KEY=${{ secrets.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY }}
 
   deploy:
     needs: build-and-push
