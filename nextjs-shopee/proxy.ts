@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "./src/components/VerifyToken";
 
-const protectedPaths = ["/dashboard", "/api/cart", "/api/order"];
+const protectedPaths = ["/dashboard", "/api/cart", "/api/order", "/cart"];
 const guestOnlyPaths = ["/login", "/register"];
 
 export async function proxy(request: NextRequest) {
@@ -73,5 +73,6 @@ export const config = {
     "/register",
     "/api/cart/:path*",
     "/api/order/:path*",
+    "/cart/:path*",
   ],
 };

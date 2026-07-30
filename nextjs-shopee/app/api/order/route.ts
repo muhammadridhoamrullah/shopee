@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
           message: error.message,
         },
         {
-          status: 500,
+          status: 400,
         },
       );
     } else {

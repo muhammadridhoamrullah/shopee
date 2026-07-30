@@ -42,4 +42,21 @@ export class CartRepository {
       },
     );
   }
+
+  static async findByUserId(userId: ObjectId) {
+    const db = await getDB();
+    return db.collection<Cart>("carts").findOne({ userId });
+  }
+
+  static async clearCart(userId: ObjectId) {
+    const db = await getDB();
+    await db.collection<Cart>("carts").updateOne(
+      {
+        userId,
+      },
+      {
+        $set: { items: [], updatedAt: new Date() },
+      },
+    );
+  }
 }
