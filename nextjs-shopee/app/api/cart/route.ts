@@ -1,7 +1,7 @@
 import { schemaAddToCartDanBeliSekarang } from "@/src/helpers/zod";
 import { addToCart } from "@/src/models/cart/cart";
 import { NextRequest, NextResponse } from "next/server";
-import z, { success } from "zod";
+import z from "zod";
 
 export async function POST(request: NextRequest) {
   try {

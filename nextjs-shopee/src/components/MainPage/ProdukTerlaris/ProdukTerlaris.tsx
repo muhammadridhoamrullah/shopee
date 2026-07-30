@@ -1,8 +1,6 @@
 import { IoIosArrowForward } from "react-icons/io";
-import FlashSale from "../FlashSale/FlashSale";
 import ProdukFlashSale from "../FlashSale/ProdukFlashSale";
 import Link from "next/link";
-import TimerFlashSale from "../FlashSale/TimerFlashSale";
 
 export default function ProdukTerlaris() {
   return (

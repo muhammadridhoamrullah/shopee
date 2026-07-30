@@ -1,5 +1,4 @@
 import { closeMongoClient, getDB } from "@/src/db/config";
-import { ProdukDokumen } from "@/src/type/produk";
 import { produkSeedData } from "../data/product";
 
 async function seedProducts() {

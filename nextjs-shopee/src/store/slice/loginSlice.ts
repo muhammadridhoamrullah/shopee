@@ -2,7 +2,6 @@ import {  formDataLogin } from "@/src/type/type";
 import { createSlice } from "@reduxjs/toolkit";
 import z from "zod";
 import { AppDispatch } from "../store";
-import { API_URL } from "@/src/helpers/utils";
 
 export const loginSlice = createSlice({
   name: "login",

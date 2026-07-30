@@ -109,6 +109,7 @@ export default function NavbarMainPage() {
             alt="Logo Shopee"
             fill
             className="object-contain"
+            sizes="176px"
           />
         </div>
         {/* Akhir Logo Shopee */}

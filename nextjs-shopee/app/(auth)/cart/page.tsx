@@ -17,7 +17,13 @@ export default async function CartPage() {
 
       <div>{formatRupiah(totalPrice)}</div>
 
-      <ButtonCheckoutCart  />
+      {items.map((item) => (
+        <div key={item.productId}>
+          {item.name} x {item.quantity}
+        </div>
+      ))}
+
+      <ButtonCheckoutCart />
     </div>
   );
 }
