@@ -32,6 +32,7 @@ export default function LoginClient() {
 
   // useEffect untuk memastikan komponen sudah ter-mount sebelum melakukan redirect
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- perlu di-set lewat effect, satu-satunya cara mendeteksi komponen sudah mount di client
     setIsMounted(true);
   }, []);
 
