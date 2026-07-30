@@ -27,9 +27,27 @@ export default function ButtonCheckoutCart() {
 
   useEffect(() => {
     if (dataCheckoutKeranjang) {
-      toast.success("Checkout berhasil");
-      dispatch(resetCheckoutKeranjang());
-      router.push(`/order/${dataCheckoutKeranjang}`);
+      window.snap.pay(dataCheckoutKeranjang.token, {
+        onSuccess: () => {
+          toast.success("Pembayaran berhasil");
+          router.push(`/order/${dataCheckoutKeranjang.orderId}`);
+          dispatch(resetCheckoutKeranjang());
+        },
+
+        onPending: () => {
+          toast.info("Menunggu pembayaran");
+          router.push(`/order/${dataCheckoutKeranjang.orderId}`);
+          dispatch(resetCheckoutKeranjang());
+        },
+        onError: () => {
+          toast.error("Pembayaran gagal, silahkan coba lagi");
+          dispatch(resetCheckoutKeranjang());
+        },
+        onClose: () => {
+          toast.info("Anda menutup popup pembayaran");
+          dispatch(resetCheckoutKeranjang());
+        },
+      });
     }
   }, [dataCheckoutKeranjang, dispatch, router]);
 

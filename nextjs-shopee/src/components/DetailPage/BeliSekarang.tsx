@@ -31,9 +31,26 @@ export default function BeliSekarang({ data }: Props) {
 
   useEffect(() => {
     if (dataBeliSekarang) {
-      toast.success("Pembelian berhasil! Silakan cek halaman pesanan Anda.");
-      router.push("/my-orders");
-      dispatch(resetBeliSekarang());
+      window.snap.pay(dataBeliSekarang.token, {
+        onSuccess: () => {
+          toast.success("Pembayaran berhasil");
+          router.push(`/order/${dataBeliSekarang.orderId}`);
+          dispatch(resetBeliSekarang());
+        },
+        onPending: () => {
+          toast.info("Menunggu pembayaran");
+          router.push(`/order/${dataBeliSekarang.orderId}`);
+          dispatch(resetBeliSekarang());
+        },
+        onError: () => {
+          toast.error("Pembayaran gagal, silahkan coba lagi");
+          dispatch(resetBeliSekarang());
+        },
+        onClose: () => {
+          toast.info("Anda menutup popup pembayaran");
+          dispatch(resetBeliSekarang());
+        },
+      });
     }
   }, [dataBeliSekarang, dispatch, router]);
 

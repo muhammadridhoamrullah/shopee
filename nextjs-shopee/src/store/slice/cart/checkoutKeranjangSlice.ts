@@ -1,24 +1,35 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "../../store";
 import { API_URL } from "@/src/helpers/utils";
 
+interface CheckoutKeranjangState {
+  dataCheckoutKeranjang: { orderId: string; token: string } | null;
+  errorCheckoutKeranjang: string | null;
+  loadingCheckoutKeranjang: boolean;
+}
+
+const initialState: CheckoutKeranjangState = {
+  dataCheckoutKeranjang: null,
+  errorCheckoutKeranjang: null,
+  loadingCheckoutKeranjang: false,
+};
+
 export const checkoutKeranjangSlice = createSlice({
   name: "checkoutKeranjang",
-  initialState: {
-    dataCheckoutKeranjang: null,
-    errorCheckoutKeranjang: null,
-    loadingCheckoutKeranjang: false,
-  },
+  initialState,
   reducers: {
     checkoutKeranjangReq: (state) => {
       state.loadingCheckoutKeranjang = true;
       state.errorCheckoutKeranjang = null;
     },
-    checkoutKeranjangSuccess: (state, action) => {
+    checkoutKeranjangSuccess: (
+      state,
+      action: PayloadAction<{ orderId: string; token: string }>,
+    ) => {
       state.loadingCheckoutKeranjang = false;
       state.dataCheckoutKeranjang = action.payload;
     },
-    checkoutKeranjangError: (state, action) => {
+    checkoutKeranjangError: (state, action: PayloadAction<string>) => {
       state.dataCheckoutKeranjang = null;
       state.loadingCheckoutKeranjang = false;
       state.errorCheckoutKeranjang = action.payload;
@@ -45,7 +56,7 @@ export function doCheckoutKeranjang() {
       dispatch(checkoutKeranjangReq());
 
       // HIT API untuk checkout keranjang
-      const response = await fetch(`${API_URL}/api/order/checkoutKeranjang`, {
+      const response = await fetch(`/api/order/checkoutKeranjang`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

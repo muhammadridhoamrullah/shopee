@@ -27,6 +27,13 @@ export default function LoginClient() {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  console.log(isMounted, "isMounted");
+
+  // useEffect untuk memastikan komponen sudah ter-mount sebelum melakukan redirect
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // useEffect untuk redirect ke halaman dashboard jika login berhasil
   useEffect(() => {
@@ -99,6 +106,7 @@ export default function LoginClient() {
 
           {/* Awal Form */}
           <form
+            method="post"
             onSubmit={submitHandler}
             className=" w-full h-fit flex flex-col gap-4 "
           >
@@ -160,8 +168,8 @@ export default function LoginClient() {
             {/* Awal Button Login */}
             <button
               type="submit"
-              disabled={loadingLogin}
-              className="bg-[#EE4D2D] mt-4 w-full h-12 text-white font-semibold rounded-md hover:bg-[#D93A1A] cursor-pointer"
+              disabled={loadingLogin || !isMounted}
+              className={`${loadingLogin || !isMounted ? "bg-gray-400 cursor-not-allowed" : "bg-[#EE4D2D] cursor-pointer"} mt-4 w-full h-12 text-white font-semibold rounded-md hover:bg-[#D93A1A] transition-all duration-300`}
             >
               {loadingLogin ? (
                 <VscLoading className="animate-spin mx-auto text-2xl" />

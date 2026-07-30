@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["*.ngrok-free.app"],
   webpack(config, { dev }) {
     if (dev) {
       config.watchOptions = {

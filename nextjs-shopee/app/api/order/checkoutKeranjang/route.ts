@@ -9,14 +9,15 @@ export async function POST(request: NextRequest) {
       throw new Error("UserId header is required");
     }
 
-    const orderId = await checkoutKeranjang(userId);
+    const { orderId, token } = await checkoutKeranjang(userId);
 
     return NextResponse.json(
       {
         success: true,
-        message: "Checkout berhasil",
+        message: "Checkout berhasil, silahkan lakukan pembayaran",
         data: {
           orderId: orderId,
+          token: token,
         },
       },
       {

@@ -46,7 +46,7 @@ export function doTambahKeranjang(productId: string, quantity: number) {
       dispatch(tambahKeranjangReq());
 
       //   HIT API untuk menambahkan item ke keranjang
-      const response = await fetch(`${API_URL}/api/cart`, {
+      const response = await fetch(`/api/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
