@@ -29,7 +29,7 @@ export async function beliSekarang(
   const orderId = `SHOPEEBUYNOW${datePart}${hourMinuteSecond}${string4Randoms}${last5Digits}`;
 
   // Lakukan logika pembelian
-  const result = await OrderRepository.createOrder({
+  await OrderRepository.createOrder({
     userId: new ObjectId(userId),
     items: [
       {
@@ -62,6 +62,8 @@ export async function beliSekarang(
       },
     ],
   });
+
+  await OrderRepository.updateSnapToken(orderId, transaction.token);
 
   return { orderId, token: transaction.token };
 }
@@ -102,7 +104,7 @@ export async function checkoutKeranjang(userId: string) {
   const string4Randoms = crypto.randomUUID().slice(0, 8);
   const orderId = `SHOPEECART${datePart}${hourMinuteSecond}${string4Randoms}${last5Digits}`;
 
-  const result = await OrderRepository.createOrder({
+  await OrderRepository.createOrder({
     userId: new ObjectId(userId),
     items: orderItems,
     totalPrice,
@@ -125,6 +127,8 @@ export async function checkoutKeranjang(userId: string) {
       name: item.name.slice(0, 50),
     })),
   });
+
+  await OrderRepository.updateSnapToken(orderId, transaction.token);
 
   await CartRepository.clearCart(new ObjectId(userId));
 

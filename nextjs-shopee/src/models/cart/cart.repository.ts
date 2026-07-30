@@ -28,7 +28,7 @@ export class CartRepository {
     }
 
     // Percobaan 2: Produk belum ada di cart, tambahkan item baru
-    const addNewItemToCart = await collection.updateOne(
+    await collection.updateOne(
       {
         userId,
       },

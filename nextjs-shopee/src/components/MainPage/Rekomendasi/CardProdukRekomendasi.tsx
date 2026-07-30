@@ -1,6 +1,5 @@
 import { formatRupiah, formatSoldProductCount } from "@/src/helpers/utils";
 import { ProdukResponse } from "@/src/type/produk";
-import { Product } from "@/src/type/type";
 import Image from "next/image";
 import Link from "next/link";
 

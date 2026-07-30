@@ -1,4 +1,3 @@
-import { StoreDokumen } from "@/src/type/store";
 import { StoreRepository } from "./store.repository";
 import { ObjectId } from "mongodb";
 import { toStoreResponse } from "@/src/helpers/utils";

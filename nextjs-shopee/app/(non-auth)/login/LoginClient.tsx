@@ -78,21 +78,22 @@ export default function LoginClient() {
       {/* Akhir Navbar */}
 
       {/* Awal Form */}
-      <div className="w-full h-129.5 flex justify-around items-center px-30 py-4">
+      <div className="w-full h-129.5 flex justify-start items-center px-30 py-4 gap-4">
         {/* Awal Logo Shopee */}
-        <div className="w-full h-full flex justify-end items-center pr-10 relative">
-          <Image
-            src={"/shopee3.png"}
-            alt="Logo Shopee"
-            fill
-            objectFit="contain"
-            sizes="(max-width: 768px) 50vw, 25vw"
-          />
+        <div className=" px-20 flex-1 h-30 flex justify-center items-center ">
+          <div className=" relative w-90 h-full">
+            <Image
+              src={"/shopee6.png"}
+              alt="Logo Shopee"
+              fill
+              objectFit="object-cover"
+            />
+          </div>
         </div>
         {/* Akhir Logo Shopee */}
 
         {/* Awal Form Login */}
-        <div className="bg-white rounded-xl w-175 h-full overflow-hidden px-6 py-5 flex flex-col  justify-between">
+        <div className="bg-white rounded-xl w-100 h-full overflow-hidden px-6 py-5 flex flex-col  justify-between">
           {/* Awal Log In & QR */}
           <div className="w-full h-15 flex justify-between items-center">
             {/* Awal Log In */}

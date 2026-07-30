@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppDispatch } from "../store";
-import { API_URL } from "@/src/helpers/utils";
 
 export const verifyEmailSlice = createSlice({
   name: "verifyEmail",

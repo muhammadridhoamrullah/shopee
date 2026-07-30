@@ -1,7 +1,5 @@
-import Footer from "../Footer";
 import FlashSale from "./FlashSale/FlashSale";
 import Kategori from "./Kategori/Kategori";
-import ProdukTerlaris from "./ProdukTerlaris/ProdukTerlaris";
 import Rekomendasi from "./Rekomendasi/Rekomendasi";
 
 export default function KategoriToRekomendasi() {

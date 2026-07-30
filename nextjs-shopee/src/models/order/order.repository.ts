@@ -33,4 +33,18 @@ export class OrderRepository {
       },
     );
   }
+
+  static async updateSnapToken(orderId: string, snapToken: string) {
+    const db = await getDB();
+    const collection = db.collection<Order>(COLLECTION_NAME);
+
+    await collection.updateOne(
+      {
+        orderId,
+      },
+      {
+        $set: { snapToken, updatedAt: new Date() },
+      },
+    );
+  }
 }

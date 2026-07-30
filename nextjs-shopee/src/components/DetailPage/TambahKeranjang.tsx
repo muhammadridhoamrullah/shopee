@@ -34,7 +34,7 @@ export default function TambahKeranjang({ data }: Props) {
       toast.success("Berhasil menambahkan produk ke keranjang");
       dispatch(resetTambahKeranjang());
     }
-  }, [dataTambahKeranjang, router]);
+  }, [dataTambahKeranjang, router, dispatch]);
 
   //   Dispatch action untuk menambahkan item ke keranjang
 

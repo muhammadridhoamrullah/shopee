@@ -53,7 +53,7 @@ export default function Banner() {
                 src={menu.image}
                 alt={menu.name}
                 fill
-                className="rounded-md object-cover"
+                className="rounded-md object-cover"git s
               />
             </div>
             {/* Akhir Image Menu */}

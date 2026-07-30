@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "../../store";
 import z from "zod";
-import { API_URL } from "@/src/helpers/utils";
 
 interface BeliSekarangState {
   dataBeliSekarang: { orderId: string; token: string } | null;
