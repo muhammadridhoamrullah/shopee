@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
       throw new Error("Unauthorized: UserId header is missing");
     }
 
-    const orderId = await beliSekarang(
+    const { orderId, token } = await beliSekarang(
       userId,
       validationSchema.data.productId,
       validationSchema.data.quantity,
@@ -28,8 +28,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: "Order created successfully",
-        data: { orderId },
+        message: "Order berhasil dibuat, silahkan lakukan pembayaran",
+        data: { orderId, token },
       },
       {
         status: 201,
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
           message: error.message,
         },
         {
-          status: 500,
+          status: 400,
         },
       );
     } else {

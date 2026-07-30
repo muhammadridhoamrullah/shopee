@@ -5,6 +5,7 @@ import {
   doBeliSekarang,
   resetBeliSekarang,
 } from "@/src/store/slice/detailPage/beliSekarangSlice";
+
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
@@ -30,9 +31,26 @@ export default function BeliSekarang({ data }: Props) {
 
   useEffect(() => {
     if (dataBeliSekarang) {
-      toast.success("Pembelian berhasil! Silakan cek halaman pesanan Anda.");
-      router.push("/my-orders");
-      dispatch(resetBeliSekarang());
+      window.snap.pay(dataBeliSekarang.token, {
+        onSuccess: () => {
+          toast.success("Pembayaran berhasil");
+          router.push(`/order/${dataBeliSekarang.orderId}`);
+          dispatch(resetBeliSekarang());
+        },
+        onPending: () => {
+          toast.info("Menunggu pembayaran");
+          router.push(`/order/${dataBeliSekarang.orderId}`);
+          dispatch(resetBeliSekarang());
+        },
+        onError: () => {
+          toast.error("Pembayaran gagal, silahkan coba lagi");
+          dispatch(resetBeliSekarang());
+        },
+        onClose: () => {
+          toast.info("Anda menutup popup pembayaran");
+          dispatch(resetBeliSekarang());
+        },
+      });
     }
   }, [dataBeliSekarang, dispatch, router]);
 
@@ -41,8 +59,12 @@ export default function BeliSekarang({ data }: Props) {
   }
 
   return (
-    <button className="bg-[#EE4D2D] w-fit p-2" onClick={handleBeliSekarang}>
-      Beli Sekarang
+    <button
+      disabled={loadingBeliSekarang}
+      className="bg-[#EE4D2D] w-fit px-4 py-2 font-medium cursor-pointer text-white"
+      onClick={handleBeliSekarang}
+    >
+      {loadingBeliSekarang ? "Loading..." : "Beli Sekarang"}
     </button>
   );
 }

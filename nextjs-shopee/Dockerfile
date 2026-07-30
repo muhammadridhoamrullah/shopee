@@ -15,6 +15,8 @@ ENV MONGODB_URI="mongodb://placeholder-for-build-only"
 # NEXT_PUBLIC_* wajib nilai ASLI saat build, karena di-inline ke bundle client
 ARG NEXT_PUBLIC_BASE_URL
 ENV NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
+ARG NEXT_PUBLIC_MIDTRANS_CLIENT_KEY
+ENV NEXT_PUBLIC_MIDTRANS_CLIENT_KEY=$NEXT_PUBLIC_MIDTRANS_CLIENT_KEY
 RUN npm run build
 
 # Stage 3 Run the application

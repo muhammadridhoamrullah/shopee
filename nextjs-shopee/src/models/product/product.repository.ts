@@ -37,4 +37,22 @@ export class ProductRepository {
       });
     return findProductById;
   }
+
+  static async decreaseAndIncreaseSold(productId: ObjectId, quantity: number) {
+    const db = await getDB();
+    await db.collection<ProdukDokumen>(COLLECTION_NAME).updateOne(
+      {
+        _id: productId,
+      },
+      {
+        $inc: {
+          quantity: -quantity,
+          sold: quantity,
+        },
+        $set: {
+          updatedAt: new Date(),
+        },
+      },
+    );
+  }
 }

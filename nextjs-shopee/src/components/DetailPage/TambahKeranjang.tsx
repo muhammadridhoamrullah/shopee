@@ -1,7 +1,13 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/src/store/hooks";
-import { doTambahKeranjang } from "@/src/store/slice/detailPage/tambahKeranjangSlice";
+import {
+  doTambahKeranjang,
+  resetTambahKeranjang,
+} from "@/src/store/slice/detailPage/tambahKeranjangSlice";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 interface Props {
@@ -15,6 +21,20 @@ export default function TambahKeranjang({ data }: Props) {
   const { loadingTambahKeranjang, dataTambahKeranjang, errorTambahKeranjang } =
     useAppSelector((state) => state.tambahKeranjang);
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (errorTambahKeranjang) {
+      toast.error(errorTambahKeranjang);
+    }
+  }, [errorTambahKeranjang]);
+
+  useEffect(() => {
+    if (dataTambahKeranjang) {
+      toast.success("Berhasil menambahkan produk ke keranjang");
+      dispatch(resetTambahKeranjang());
+    }
+  }, [dataTambahKeranjang, router]);
 
   //   Dispatch action untuk menambahkan item ke keranjang
 
@@ -23,8 +43,12 @@ export default function TambahKeranjang({ data }: Props) {
   }
 
   return (
-    <button className="bg-[#F5F5F5] p-2 w-fit" onClick={handleTambahKeranjang}>
-      Masukkan Keranjang
+    <button
+      disabled={loadingTambahKeranjang}
+      className="bg-[#F5F5F5] px-5 py-2 w-fit font-medium cursor-pointer"
+      onClick={handleTambahKeranjang}
+    >
+      {loadingTambahKeranjang ? "Loading..." : "Masuk Keranjang"}
     </button>
   );
 }

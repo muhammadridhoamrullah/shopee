@@ -8,13 +8,15 @@
     "start": "next start",
     "lint": "eslint",
     "seed:products": "tsx --env-file=.env src/scripts/seed/seed-product.ts",
-    "setup:cart-index": "tsx --env-file=.env src/scripts/setup/setup-cart-index.ts"
+    "setup:cart-index": "tsx --env-file=.env src/scripts/setup/setup-cart-index.ts",
+    "seed:stores": "tsx --env-file=.env src/scripts/seed/seed-store.ts"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",
     "bcryptjs": "^3.0.3",
     "jose": "^6.2.3",
     "jsonwebtoken": "^9.0.3",
+    "midtrans-client": "^1.4.3",
     "mongodb": "^7.4.0",
     "next": "^16.2.9",
     "nextjs-toploader": "^3.9.17",
@@ -29,6 +31,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/midtrans-client": "^1.4.0",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.1",
     "@types/react": "^19",

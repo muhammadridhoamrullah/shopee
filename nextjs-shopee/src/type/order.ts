@@ -6,6 +6,7 @@ export interface Order {
   items: OrderItem[];
   totalPrice: number;
   status: "pending" | "paid" | "shipped" | "delivered" | "cancelled";
+  orderId: string;
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;

@@ -1,7 +1,6 @@
-import BeliSekarang from "@/src/components/DetailPage/BeliSekarang";
-import TambahKeranjang from "@/src/components/DetailPage/TambahKeranjang";
-import { formatRupiah } from "@/src/helpers/utils";
+import CardDetailProduk from "@/src/components/DetailPage/CardDetailProduk";
 import { getProductBySlug } from "@/src/models/product/product";
+import { getStoreById } from "@/src/models/store/store";
 import { notFound } from "next/navigation";
 
 interface Props {
@@ -19,23 +18,20 @@ export default async function ProdukDetailPage({ params }: Props) {
   }
   console.log(product, "product");
 
-  const data = {
-    productId: product._id,
-    quantity: 1,
-  };
+  const store = await getStoreById(product.storeId);
 
   return (
-    <div className="bg-[#F5F5F5] w-full h-fit flex flex-col gap-2 px-20">
+    <div className="bg-[#F5F5F5] w-full h-fit flex flex-col gap-2 px-20 py-4 border-b-4 border-[#EE4D2D]">
       {/* Awal Kategori */}
       <div className="bg-green-300 w-full">Category</div>
       {/* Akhir Kategori */}
 
       {/* Awal Detail Produk */}
-      <div className="bg-pink-300 w-full">Produk Cuy</div>
+      <CardDetailProduk product={product} />
       {/* Akhir Detail Produk */}
 
       {/* Awal Toko Penjual */}
-      <div className="bg-blue-600 w-full">Toko Penjual Cuy</div>
+      <div className="bg-blue-600 w-full">{store?.name}</div>
       {/* Akhir Toko Penjual */}
 
       {/* Awal Spesifikasi dan Deskripsi Produk */}

@@ -11,4 +11,26 @@ export class OrderRepository {
     const result = await collection.insertOne(order);
     return result;
   }
+
+  static async findByOrderId(orderId: string) {
+    const db = await getDB();
+    const collection = db.collection<Order>(COLLECTION_NAME);
+
+    const order = await collection.findOne({ orderId });
+    return order;
+  }
+
+  static async updateOrderStatus(orderId: string, status: Order["status"]) {
+    const db = await getDB();
+    const collection = db.collection<Order>(COLLECTION_NAME);
+
+    await collection.updateOne(
+      {
+        orderId,
+      },
+      {
+        $set: { status, updatedAt: new Date() },
+      },
+    );
+  }
 }

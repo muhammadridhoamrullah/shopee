@@ -1,4 +1,5 @@
 import { ProdukDokumen, ProdukResponse } from "../type/produk";
+import { StoreDokumen, StoreResponse } from "../type/store";
 import {
   FlashSaleItem,
   menuLinks,
@@ -684,5 +685,9 @@ export function formatSoldProductCount(sold: number): string {
 }
 
 export function toProdukResponse(doc: ProdukDokumen): ProdukResponse {
-  return { ...doc, _id: doc._id.toString() };
+  return { ...doc, _id: doc._id.toString(), storeId: doc.storeId.toString() };
+}
+
+export function toStoreResponse(doc: StoreDokumen): StoreResponse {
+  return { ...doc, _id: doc._id.toString(), userId: doc.userId.toString() };
 }
