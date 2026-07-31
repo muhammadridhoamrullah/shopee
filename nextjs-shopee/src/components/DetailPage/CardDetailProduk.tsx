@@ -7,6 +7,7 @@ import TambahKeranjang from "./TambahKeranjang";
 import BeliSekarang from "./BeliSekarang";
 import { toast } from "react-toastify";
 import StarRating from "./StarRating";
+import FotoProduk from "./FotoProduk";
 
 interface Props {
   product: ProdukResponse;
@@ -37,7 +38,7 @@ export default function CardDetailProduk({ product }: Props) {
   return (
     <div className="bg-white w-full min-h-0 flex justify-start items-start p-4 gap-4 shadow-md ">
       {/* Awal Foto Produk */}
-      <div className="bg-green-600 w-120 h-150">Foto Produk</div>
+      <FotoProduk data={product.images} />
       {/* Akhir Foto Produk */}
 
       {/* Awal Informasi Produk */}

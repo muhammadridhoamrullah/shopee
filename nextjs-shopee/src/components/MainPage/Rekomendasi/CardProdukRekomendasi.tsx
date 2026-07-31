@@ -17,7 +17,7 @@ export default function CardProductRekomendasi({ product }: Props) {
       <div className="relative w-full  h-45">
         {/* Awal Foto */}
         <Image
-          src={product.image}
+          src={product.images[0]}
           alt={product.name}
           fill
           objectFit="cover"
