@@ -1,4 +1,5 @@
 import CardDetailProduk from "@/src/components/DetailPage/CardDetailProduk";
+import Store from "@/src/components/DetailPage/Store";
 import { getProductBySlug } from "@/src/models/product/product";
 import { getStoreById } from "@/src/models/store/store";
 import { notFound } from "next/navigation";
@@ -20,6 +21,9 @@ export default async function ProdukDetailPage({ params }: Props) {
 
   const store = await getStoreById(product.storeId);
 
+  if(!store) {
+    notFound();
+  }
   return (
     <div className="bg-[#F5F5F5] w-full h-fit flex flex-col gap-2 px-20 py-4 border-b-4 border-[#EE4D2D]">
       {/* Awal Kategori */}
@@ -31,7 +35,7 @@ export default async function ProdukDetailPage({ params }: Props) {
       {/* Akhir Detail Produk */}
 
       {/* Awal Toko Penjual */}
-      <div className="bg-blue-600 w-full">{store?.name}</div>
+      <Store store={store} />
       {/* Akhir Toko Penjual */}
 
       {/* Awal Spesifikasi dan Deskripsi Produk */}

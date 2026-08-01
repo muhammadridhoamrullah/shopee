@@ -21,6 +21,7 @@ export async function generateMetadata({
       title: "Produk Tidak Ditemukan | Shopee Indonesia",
     };
   }
+  console.log(product, "product layout slug");
 
   const description = `Beli ${product.name} seharga ${formatRupiah(
     product.price,
@@ -34,7 +35,7 @@ export async function generateMetadata({
       description,
       images: [
         {
-          url: product.image,
+          url: product.images[0],
           width: 800,
           height: 800,
         },
@@ -46,7 +47,8 @@ export async function generateMetadata({
 export default function ProdukDetailLayout({ children }: Props) {
   return (
     <>
-  <NavbarMainPage />
-  {children}</>
+      <NavbarMainPage />
+      {children}
+    </>
   );
 }

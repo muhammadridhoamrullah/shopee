@@ -45,7 +45,7 @@ export async function getCartByUserId(userId: string) {
       name: product.name,
       price: product.price,
       quantity: item.quantity,
-      image: product.image,
+      image: product.images[0],
       subtotal: subTotal,
     });
   }

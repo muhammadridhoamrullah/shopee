@@ -34,9 +34,9 @@ export const metadata: Metadata = {
       "Shopee Indonesia adalah platform belanja online yang menawarkan berbagai produk dari berbagai kategori, mulai dari fashion, elektronik, hingga kebutuhan rumah tangga. Dengan pengalaman belanja yang mudah dan aman, Shopee Indonesia menjadi pilihan utama bagi para konsumen untuk memenuhi kebutuhan sehari-hari mereka.",
     images: [
       {
-        url: "/shopee4.png",
-        width: 1200,
-        height: 630,
+        url: "/shopee2.png",
+        width: 800,
+        height: 600,
       },
     ],
   },
