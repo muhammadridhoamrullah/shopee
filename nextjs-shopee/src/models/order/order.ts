@@ -35,7 +35,7 @@ export async function beliSekarang(
       {
         productId: new ObjectId(productId),
         name: findProductById.name,
-        image: findProductById.image,
+        image: findProductById.images[0],
         price: findProductById.price,
         quantity: quantity,
       },
@@ -86,7 +86,7 @@ export async function checkoutKeranjang(userId: string) {
     orderItems.push({
       productId: item.productId,
       name: produk.name,
-      image: produk.image,
+      image: produk.images[0],
       price: produk.price,
       quantity: item.quantity,
     });

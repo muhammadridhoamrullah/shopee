@@ -17,7 +17,7 @@ export default function CardProductRekomendasi({ product }: Props) {
       <div className="relative w-full  h-45">
         {/* Awal Foto */}
         <Image
-          src={product.image}
+          src={product.images[0]}
           alt={product.name}
           fill
           objectFit="cover"
@@ -54,7 +54,7 @@ export default function CardProductRekomendasi({ product }: Props) {
 
           {/* Awal Jumlah Terjual */}
           <span className="  text-xs font-medium">
-            {formatSoldProductCount(product.sold)}
+            {formatSoldProductCount(product.sold)} terjual
           </span>
           {/* Akhir Jumlah Terjual */}
         </div>

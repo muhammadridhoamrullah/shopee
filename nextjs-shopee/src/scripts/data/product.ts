@@ -1,12 +1,19 @@
 import { ProdukDokumen } from "@/src/type/produk";
 import { ObjectId } from "mongodb";
 
+function buildImages(baseId: number): string[] {
+  return Array.from(
+    { length: 6 },
+    (_, i) => `https://picsum.photos/600/600?random=${baseId + i * 50}`,
+  );
+}
+
 // Data statis (bukan random) supaya hasil seed selalu sama tiap script dijalankan ulang
 export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Sepatu Nike Air Force 1 White",
     slug: "sepatu-nike-air-force-1-white",
-    image: "https://picsum.photos/400/400?random=1",
+    images: buildImages(1),
     price: 899000,
     originalPrice: 1299000,
     discountPercent: 31,
@@ -19,7 +26,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Sepatu Vans Old Skool Black",
     slug: "sepatu-vans-old-skool-black",
-    image: "https://picsum.photos/400/400?random=2",
+    images: buildImages(2),
     price: 459000,
     originalPrice: 650000,
     discountPercent: 29,
@@ -32,7 +39,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Sepatu Adidas Samba OG",
     slug: "sepatu-adidas-samba-og",
-    image: "https://picsum.photos/400/400?random=3",
+    images: buildImages(3),
     price: 1099000,
     originalPrice: 1450000,
     discountPercent: 24,
@@ -45,7 +52,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Sepatu Sneakers Compass Original",
     slug: "sepatu-sneakers-compass-original",
-    image: "https://picsum.photos/400/400?random=4",
+    images: buildImages(4),
     price: 375000,
     quantity: 120,
     sold: 1800,
@@ -56,7 +63,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Sandal Jepit Swallow Original",
     slug: "sandal-jepit-swallow-original",
-    image: "https://picsum.photos/400/400?random=5",
+    images: buildImages(5),
     price: 25000,
     quantity: 500,
     sold: 15400,
@@ -67,7 +74,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Sandal Gunung Eiger Trekking",
     slug: "sandal-gunung-eiger-trekking",
-    image: "https://picsum.photos/400/400?random=6",
+    images: buildImages(6),
     price: 285000,
     originalPrice: 350000,
     discountPercent: 19,
@@ -80,7 +87,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Jaket Bomber Pria Distro",
     slug: "jaket-bomber-pria-distro",
-    image: "https://picsum.photos/400/400?random=7",
+    images: buildImages(7),
     price: 165000,
     originalPrice: 250000,
     discountPercent: 34,
@@ -93,7 +100,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Jaket Parka Winter Tebal",
     slug: "jaket-parka-winter-tebal",
-    image: "https://picsum.photos/400/400?random=8",
+    images: buildImages(8),
     price: 320000,
     originalPrice: 480000,
     discountPercent: 33,
@@ -106,7 +113,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Hoodie Oversize Unisex Cotton Fleece",
     slug: "hoodie-oversize-unisex-cotton-fleece",
-    image: "https://picsum.photos/400/400?random=9",
+    images: buildImages(9),
     price: 145000,
     originalPrice: 210000,
     discountPercent: 31,
@@ -119,7 +126,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Kaos Polos Cotton Combed 30s",
     slug: "kaos-polos-cotton-combed-30s",
-    image: "https://picsum.photos/400/400?random=10",
+    images: buildImages(10),
     price: 45000,
     quantity: 500,
     sold: 22000,
@@ -130,7 +137,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Celana Chino Pria Slim Fit",
     slug: "celana-chino-pria-slim-fit",
-    image: "https://picsum.photos/400/400?random=11",
+    images: buildImages(11),
     price: 129000,
     originalPrice: 189000,
     discountPercent: 32,
@@ -143,7 +150,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Kemeja Flanel Pria Kotak",
     slug: "kemeja-flanel-pria-kotak",
-    image: "https://picsum.photos/400/400?random=12",
+    images: buildImages(12),
     price: 89000,
     originalPrice: 135000,
     discountPercent: 34,
@@ -156,7 +163,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Kemeja Batik Pria Lengan Panjang",
     slug: "kemeja-batik-pria-lengan-panjang",
-    image: "https://picsum.photos/400/400?random=13",
+    images: buildImages(13),
     price: 175000,
     quantity: 50,
     sold: 890,
@@ -167,7 +174,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Kaos Kaki Bundling 5 Pasang",
     slug: "kaos-kaki-bundling-5-pasang",
-    image: "https://picsum.photos/400/400?random=14",
+    images: buildImages(14),
     price: 35000,
     quantity: 300,
     sold: 9800,
@@ -178,7 +185,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Topi Baseball Cap Polos",
     slug: "topi-baseball-cap-polos",
-    image: "https://picsum.photos/400/400?random=15",
+    images: buildImages(15),
     price: 39000,
     originalPrice: 59000,
     discountPercent: 34,
@@ -191,7 +198,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Kacamata Hitam Pria Wanita UV Protection",
     slug: "kacamata-hitam-pria-wanita-uv-protection",
-    image: "https://picsum.photos/400/400?random=16",
+    images: buildImages(16),
     price: 79000,
     originalPrice: 120000,
     discountPercent: 34,
@@ -204,7 +211,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Jam Tangan Digital Casio Original",
     slug: "jam-tangan-digital-casio-original",
-    image: "https://picsum.photos/400/400?random=17",
+    images: buildImages(17),
     price: 425000,
     originalPrice: 550000,
     discountPercent: 23,
@@ -217,7 +224,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Jam Tangan Fossil Chronograph",
     slug: "jam-tangan-fossil-chronograph",
-    image: "https://picsum.photos/400/400?random=18",
+    images: buildImages(18),
     price: 1250000,
     originalPrice: 1650000,
     discountPercent: 24,
@@ -230,7 +237,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Tas Ransel Anti Air Laptop 15 Inch",
     slug: "tas-ransel-anti-air-laptop-15-inch",
-    image: "https://picsum.photos/400/400?random=19",
+    images: buildImages(19),
     price: 189000,
     originalPrice: 275000,
     discountPercent: 31,
@@ -243,7 +250,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Tas Selempang Pria Eiger Casual",
     slug: "tas-selempang-pria-eiger-casual",
-    image: "https://picsum.photos/400/400?random=20",
+    images: buildImages(20),
     price: 220000,
     quantity: 70,
     sold: 1500,
@@ -254,7 +261,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Tas Wanita Charles Keith Mini",
     slug: "tas-wanita-charles-keith-mini",
-    image: "https://picsum.photos/400/400?random=21",
+    images: buildImages(21),
     price: 899000,
     originalPrice: 1200000,
     discountPercent: 25,
@@ -267,7 +274,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Dompet Kulit Pria Asli",
     slug: "dompet-kulit-pria-asli",
-    image: "https://picsum.photos/400/400?random=22",
+    images: buildImages(22),
     price: 95000,
     originalPrice: 145000,
     discountPercent: 34,
@@ -280,7 +287,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Jersey Argentina Home 2026",
     slug: "jersey-argentina-home-2026",
-    image: "https://picsum.photos/400/400?random=23",
+    images: buildImages(23),
     price: 285000,
     originalPrice: 399000,
     discountPercent: 29,
@@ -293,7 +300,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Jersey Manchester United Home 25/26",
     slug: "jersey-manchester-united-home-25-26",
-    image: "https://picsum.photos/400/400?random=24",
+    images: buildImages(24),
     price: 299000,
     originalPrice: 420000,
     discountPercent: 29,
@@ -306,7 +313,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Parfum YSL Black Opium EDP",
     slug: "parfum-ysl-black-opium-edp",
-    image: "https://picsum.photos/400/400?random=25",
+    images: buildImages(25),
     price: 1850000,
     originalPrice: 2300000,
     discountPercent: 20,
@@ -319,7 +326,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Parfum Zara Man Vibrant Leather",
     slug: "parfum-zara-man-vibrant-leather",
-    image: "https://picsum.photos/400/400?random=26",
+    images: buildImages(26),
     price: 165000,
     quantity: 200,
     sold: 6700,
@@ -330,7 +337,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Parfum Dior Sauvage EDT",
     slug: "parfum-dior-sauvage-edt",
-    image: "https://picsum.photos/400/400?random=27",
+    images: buildImages(27),
     price: 2100000,
     originalPrice: 2600000,
     discountPercent: 19,
@@ -343,7 +350,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Serum Niacinamide Wardah Brightening",
     slug: "serum-niacinamide-wardah-brightening",
-    image: "https://picsum.photos/400/400?random=28",
+    images: buildImages(28),
     price: 32000,
     originalPrice: 45000,
     discountPercent: 29,
@@ -356,7 +363,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Sunscreen Skintific SPF 50 PA++++",
     slug: "sunscreen-skintific-spf-50-pa",
-    image: "https://picsum.photos/400/400?random=29",
+    images: buildImages(29),
     price: 55000,
     originalPrice: 75000,
     discountPercent: 27,
@@ -369,7 +376,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Skincare Set Somethinc Glowing",
     slug: "skincare-set-somethinc-glowing",
-    image: "https://picsum.photos/400/400?random=30",
+    images: buildImages(30),
     price: 145000,
     originalPrice: 210000,
     discountPercent: 31,
@@ -382,7 +389,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "La Roche Posay Effaclar Duo",
     slug: "la-roche-posay-effaclar-duo",
-    image: "https://picsum.photos/400/400?random=31",
+    images: buildImages(31),
     price: 189000,
     quantity: 150,
     sold: 3100,
@@ -393,7 +400,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Amaterasun Serum Sunscreen SPF 50",
     slug: "amaterasun-serum-sunscreen-spf-50",
-    image: "https://picsum.photos/400/400?random=32",
+    images: buildImages(32),
     price: 62000,
     originalPrice: 89000,
     discountPercent: 30,
@@ -406,7 +413,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Powerbank 20000mAh Fast Charging",
     slug: "powerbank-20000mah-fast-charging",
-    image: "https://picsum.photos/400/400?random=33",
+    images: buildImages(33),
     price: 175000,
     originalPrice: 250000,
     discountPercent: 30,
@@ -419,7 +426,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Kabel Data USB Type C 1 Meter",
     slug: "kabel-data-usb-type-c-1-meter",
-    image: "https://picsum.photos/400/400?random=34",
+    images: buildImages(34),
     price: 25000,
     quantity: 500,
     sold: 15600,
@@ -430,7 +437,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Earphone Bluetooth TWS Wireless",
     slug: "earphone-bluetooth-tws-wireless",
-    image: "https://picsum.photos/400/400?random=35",
+    images: buildImages(35),
     price: 89000,
     originalPrice: 150000,
     discountPercent: 41,
@@ -443,7 +450,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Headset Gaming JBL Quantum",
     slug: "headset-gaming-jbl-quantum",
-    image: "https://picsum.photos/400/400?random=36",
+    images: buildImages(36),
     price: 599000,
     originalPrice: 799000,
     discountPercent: 25,
@@ -456,7 +463,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Charger iPhone Original 20W",
     slug: "charger-iphone-original-20w",
-    image: "https://picsum.photos/400/400?random=37",
+    images: buildImages(37),
     price: 145000,
     quantity: 210,
     sold: 6400,
@@ -467,7 +474,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Case iPhone 15 Pro Max Clear",
     slug: "case-iphone-15-pro-max-clear",
-    image: "https://picsum.photos/400/400?random=38",
+    images: buildImages(38),
     price: 45000,
     originalPrice: 75000,
     discountPercent: 40,
@@ -480,7 +487,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Tempered Glass Samsung S24 Anti Gores",
     slug: "tempered-glass-samsung-s24-anti-gores",
-    image: "https://picsum.photos/400/400?random=39",
+    images: buildImages(39),
     price: 25000,
     quantity: 400,
     sold: 11200,
@@ -491,7 +498,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Ring Light Tripod HP 10 Inch",
     slug: "ring-light-tripod-hp-10-inch",
-    image: "https://picsum.photos/400/400?random=40",
+    images: buildImages(40),
     price: 65000,
     originalPrice: 99000,
     discountPercent: 34,
@@ -504,7 +511,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Mouse Wireless Logitech M170",
     slug: "mouse-wireless-logitech-m170",
-    image: "https://picsum.photos/400/400?random=41",
+    images: buildImages(41),
     price: 99000,
     quantity: 190,
     sold: 5600,
@@ -515,7 +522,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Keyboard Mechanical Gaming RGB",
     slug: "keyboard-mechanical-gaming-rgb",
-    image: "https://picsum.photos/400/400?random=42",
+    images: buildImages(42),
     price: 349000,
     originalPrice: 499000,
     discountPercent: 30,
@@ -528,7 +535,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Flashdisk 64GB Sandisk Original",
     slug: "flashdisk-64gb-sandisk-original",
-    image: "https://picsum.photos/400/400?random=43",
+    images: buildImages(43),
     price: 65000,
     quantity: 300,
     sold: 9700,
@@ -539,7 +546,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Hardisk Eksternal 1TB Seagate",
     slug: "hardisk-eksternal-1tb-seagate",
-    image: "https://picsum.photos/400/400?random=44",
+    images: buildImages(44),
     price: 549000,
     originalPrice: 650000,
     discountPercent: 16,
@@ -552,7 +559,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Kabel HDMI 2 Meter 4K",
     slug: "kabel-hdmi-2-meter-4k",
-    image: "https://picsum.photos/400/400?random=45",
+    images: buildImages(45),
     price: 39000,
     quantity: 220,
     sold: 6800,
@@ -563,7 +570,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Blender Portable USB Rechargeable",
     slug: "blender-portable-usb-rechargeable",
-    image: "https://picsum.photos/400/400?random=46",
+    images: buildImages(46),
     price: 89000,
     originalPrice: 129000,
     discountPercent: 31,
@@ -576,7 +583,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Tumbler Tahan Panas dan Dingin 500ml",
     slug: "tumbler-tahan-panas-dan-dingin-500ml",
-    image: "https://picsum.photos/400/400?random=47",
+    images: buildImages(47),
     price: 45000,
     originalPrice: 69000,
     discountPercent: 35,
@@ -589,7 +596,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Rice Cooker Mini 1.8 Liter",
     slug: "rice-cooker-mini-1-8-liter",
-    image: "https://picsum.photos/400/400?random=48",
+    images: buildImages(48),
     price: 279000,
     originalPrice: 350000,
     discountPercent: 20,
@@ -602,7 +609,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Setrika Uap Portable Travel",
     slug: "setrika-uap-portable-travel",
-    image: "https://picsum.photos/400/400?random=49",
+    images: buildImages(49),
     price: 129000,
     quantity: 110,
     sold: 2900,
@@ -613,7 +620,7 @@ export const produkSeedData: Omit<ProdukDokumen, "_id">[] = [
   {
     name: "Vacuum Cleaner Mini Genggam",
     slug: "vacuum-cleaner-mini-genggam",
-    image: "https://picsum.photos/400/400?random=50",
+    images: buildImages(50),
     price: 159000,
     originalPrice: 220000,
     discountPercent: 28,

@@ -677,11 +677,20 @@ export const dummyProducts: Product[] = Array.from({ length: 48 }, (_, i) =>
 
 export function formatSoldProductCount(sold: number): string {
   if (sold >= 1000) {
-    return `${(sold / 1000).toFixed(1)}rb terjual`;
+    return `${(sold / 1000).toFixed(1)}rb`;
   } else if (sold >= 1000000) {
-    return `${(sold / 1000000).toFixed(1)}jt terjual`;
+    return `${(sold / 1000000).toFixed(1)}jt`;
   }
-  return `${sold} terjual`;
+  return `${sold}`;
+}
+
+export function formatAngka(angka: number): string {
+  if (angka >= 1000) {
+    return `${(angka / 1000).toFixed(1)} rb`;
+  } else if (angka >= 1000000) {
+    return `${(angka / 1000000).toFixed(1)} jt`;
+  }
+  return `${angka}`;
 }
 
 export function toProdukResponse(doc: ProdukDokumen): ProdukResponse {

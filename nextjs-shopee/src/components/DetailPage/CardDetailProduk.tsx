@@ -5,6 +5,9 @@ import { ProdukResponse } from "@/src/type/produk";
 import { useState } from "react";
 import TambahKeranjang from "./TambahKeranjang";
 import BeliSekarang from "./BeliSekarang";
+import { toast } from "react-toastify";
+import StarRating from "./StarRating";
+import FotoProduk from "./FotoProduk";
 
 interface Props {
   product: ProdukResponse;
@@ -28,10 +31,14 @@ export default function CardDetailProduk({ product }: Props) {
     quantity: quantity,
   };
 
+  const rating = 4.5;
+  const totalPenilaian = 100;
+  const totalTerjual = 50;
+
   return (
     <div className="bg-white w-full min-h-0 flex justify-start items-start p-4 gap-4 shadow-md ">
       {/* Awal Foto Produk */}
-      <div className="bg-green-600 w-120 h-150">Foto Produk</div>
+      <FotoProduk data={product.images} />
       {/* Akhir Foto Produk */}
 
       {/* Awal Informasi Produk */}
@@ -45,8 +52,58 @@ export default function CardDetailProduk({ product }: Props) {
           {/* Akhir Nama Produk */}
 
           {/* Awal Rating, Penilaianm Terjual, dan Laporkan */}
-          <div className="bg-purple-900 w-full py-2">
-            Rating, Penilaian, Terjual, dan Laporkan
+          <div className="bg-purple-900 w-full h-7 flex justify-between items-center text-sm  ">
+            {/* Awal Rating, Penilaian, Terjual */}
+            <div className="bg-green-800 w-full h-full  flex justify-start items-center divide-x divide-gray-400 [&>*:not(:first-child)]:pl-1 [&>*:not(:last-child)]:pr-1">
+              {/* Awal Rating */}
+              <div className="bg-amber-800 flex h-full items-center gap-1.5 ">
+                {/* Awal Text Rating */}
+                <span className="font-semibold text-md border-b border-b-black">
+                  {rating.toFixed(1)}
+                </span>
+                {/* Akhir Text Rating */}
+
+                {/* Awal Icon Rating */}
+                <StarRating rating={rating} />
+                {/* Akhir Icon Rating */}
+              </div>
+              {/* Akhir Rating */}
+              {/* Awal Penilaian */}
+              <div className="bg-pink-400 flex h-full items-center gap-1.5">
+                {/* Awal Nilai */}
+                <span className="font-semibold text-md border-b border-b-black">
+                  {totalPenilaian}
+                </span>
+                {/* Akhir Nilai */}
+
+                {/* Awal Text Penilaian */}
+                <span className="">Penilaian</span>
+                {/* Akhir Text Penilaian */}
+              </div>
+              {/* Akhir Penilaian */}
+              {/* Awal Terjual */}
+              <div className="bg-blue-500 flex h-full items-center gap-1.5">
+                {/* Awal Terjual */}
+                <span className="font-semibold text-md border-b border-b-black">
+                  {totalTerjual}
+                </span>
+                {/* Akhir Terjual */}
+
+                {/* Awal Text Terjual */}
+                <span className="">Terjual</span>
+                {/* Akhir Text Terjual */}
+              </div>
+              {/* Akhir Terjual */}
+            </div>
+            {/* Awal Rating, Penilaian, Terjual */}
+            {/* Awal Laporkan */}
+            <button
+              className="text-gray-300 cursor-pointer hover:text-red-500 transition-colors duration-300 ease-in-out"
+              onClick={() => toast.warning("Gweh laporkan lu ye!")}
+            >
+              Laporkan
+            </button>
+            {/* Akhir Laporkan */}
           </div>
           {/* Akhir Rating, Penilaianm Terjual, dan Laporkan */}
         </div>
