@@ -61,7 +61,7 @@ export default function BeliSekarang({ data }: Props) {
   return (
     <button
       disabled={loadingBeliSekarang}
-      className="bg-[#EE4D2D] w-fit px-4 py-2 font-medium cursor-pointer text-white"
+      className="bg-red-800 hover:bg-red-700 w-fit px-8 py-3 font-medium cursor-pointer text-white"
       onClick={handleBeliSekarang}
     >
       {loadingBeliSekarang ? "Loading..." : "Beli Sekarang"}

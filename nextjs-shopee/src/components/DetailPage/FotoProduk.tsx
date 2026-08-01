@@ -12,8 +12,14 @@ import {
 import "yet-another-react-lightbox/styles.css";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
-
-
+import { FaFacebookMessenger } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaSquareInstagram } from "react-icons/fa6";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaRegHeart } from "react-icons/fa";
+import Link from "next/link";
+import { formatAngka } from "@/src/helpers/utils";
+import { toast } from "react-toastify";
 interface Props {
   data: string[];
 }
@@ -55,16 +61,16 @@ export default function FotoProduk({ data }: Props) {
   }
 
   return (
-    <div className="bg-green-600 w-120 h-150 flex flex-col justify-between items-center gap-2">
+    <div className=" w-120 h-150 flex flex-col justify-between items-center gap-2">
       {/* Awal Foto */}
-      <div className="bg-red-400 flex-1 w-full flex flex-col gap-1 justify-between items-center">
+      <div className=" flex-1 w-full flex flex-col gap-1 justify-between items-center">
         {/* Awal Foto Utama */}
         <div
           onClick={() => {
             setOpen(true);
             setIndex(0);
           }}
-          className="bg-gray-600 flex-1 w-full relative cursor-pointer"
+          className="bg-gray-400 flex-1 w-full relative cursor-pointer"
         >
           <Image
             src={data[0]}
@@ -92,7 +98,7 @@ export default function FotoProduk({ data }: Props) {
           <div
             onScroll={updateScrollState}
             ref={scrollRef}
-            className="bg-purple-400 w-full h-full flex scrollbar-none  gap-1  overflow-x-auto scroll-smooth"
+            className=" w-full h-full flex scrollbar-none  gap-1  overflow-x-auto scroll-smooth"
           >
             {/* Awal Mapping Foto */}
             {data.slice(1).map((image, idx) => (
@@ -133,13 +139,76 @@ export default function FotoProduk({ data }: Props) {
       {/* Akhir Foto */}
 
       {/* Awal Share dan Favorit */}
-      <div className="bg-pink-600 w-full h-15 flex justify-between items-center divide-x divide-gray-300">
+      <div className=" w-full h-15 flex justify-between items-center divide-x-2 divide-gray-200 [&>*:not(:first-child)]:pl-2 [&>*:not(:last-child)]:pr-2 px-4 py-2 ">
         {/* Awal Share */}
-        <div>Share</div>
+        <div className=" w-full h-full flex justify-center items-center gap-1">
+          {/* Awal Text Share */}
+          <span className="text-sm font-semibold">Share:</span>
+          {/* Akhir Text Share */}
+
+          {/* Awal Icon-Icon Share */}
+          <div className=" w-fit gap-2  flex justify-center items-center ">
+            {/* Awal Icon Messenger */}
+            <Link
+              href="https://www.messenger.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebookMessenger className="w-7 h-7 text-[#006AFF]" />
+            </Link>
+            {/* Akhir Icon Messenger */}
+
+            {/* Awal Icon Facebook */}
+            <Link
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebook className="w-7 h-7 text-[#C13584]" />
+            </Link>
+            {/* Akhir Icon Facebook */}
+            {/* Awal Icon Instagram */}
+            <Link
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaSquareInstagram className="w-7 h-7 text-[#C13584]" />
+            </Link>
+            {/* Akhir Icon Instagram */}
+
+            {/* Awal Icon Twitter */}
+            <Link
+              href="https://www.twitter.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaSquareXTwitter className="w-7 h-7 text-[#14171A]" />
+            </Link>
+            {/* Akhir Icon Twitter */}
+          </div>
+          {/* Akhir Icon-Icon Share */}
+        </div>
         {/* Akhir Share */}
 
         {/* Awal Favorit */}
-        <div>Favorit</div>
+        <button
+          type="button"
+          className="w-full h-full flex justify-center items-center gap-2"
+        >
+          {/* Awal Icon Favorit */}
+          <FaRegHeart
+            onClick={() => toast.success("Berhasil menambahkan ke favorit")}
+            className="w-7 h-7 text-red-400"
+          />
+          {/* Akhir Icon Favorit */}
+
+          {/* Awal Text Favorit */}
+          <span className="text-sm font-semibold">
+            Favorit ({formatAngka(3824)})
+          </span>
+          {/* Akhir Text Favorit */}
+        </button>
         {/* Akhir Favorit */}
       </div>
       {/* Akhir Share dan Favorit */}

@@ -8,6 +8,12 @@ import BeliSekarang from "./BeliSekarang";
 import { toast } from "react-toastify";
 import StarRating from "./StarRating";
 import FotoProduk from "./FotoProduk";
+import Link from "next/link";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { FaShippingFast } from "react-icons/fa";
+import { IoShieldCheckmarkOutline } from "react-icons/io5";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import Image from "next/image";
 
 interface Props {
   product: ProdukResponse;
@@ -15,7 +21,7 @@ interface Props {
 
 export default function CardDetailProduk({ product }: Props) {
   const [quantity, setQuantity] = useState<number>(1);
-  console.log(quantity, "quantity");
+  console.log(product, "product di CardDetailProduct");
 
   const handleDecrease = () => {
     setQuantity((prev) => Math.max(1, prev - 1));
@@ -23,7 +29,6 @@ export default function CardDetailProduk({ product }: Props) {
 
   const handleIncrease = () => {
     setQuantity((prev) => Math.min(product.quantity, prev + 1));
-    // Ingatkan saya ubah ini nanti
   };
 
   const data = {
@@ -35,6 +40,34 @@ export default function CardDetailProduk({ product }: Props) {
   const totalPenilaian = 100;
   const totalTerjual = 50;
 
+  const warna = [
+    "Merah",
+    "Biru",
+    "Hijau",
+    "Kuning",
+    "Hitam",
+    "Putih",
+    "Ungu",
+    "Coklat",
+    "Abu-abu",
+    "Oranye",
+  ];
+  const size = [
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+  ];
+
   return (
     <div className="bg-white w-full min-h-0 flex justify-start items-start p-4 gap-4 shadow-md ">
       {/* Awal Foto Produk */}
@@ -42,21 +75,39 @@ export default function CardDetailProduk({ product }: Props) {
       {/* Akhir Foto Produk */}
 
       {/* Awal Informasi Produk */}
-      <div className="bg-purple-950/20 flex-1 h-full flex flex-col gap-2 justify-start items-start">
+      <div className=" flex-1 h-full flex flex-col gap-2 justify-start items-start">
         {/* Awal Nama Produk dan Rating, Penilaian, Terjual, dan Laporkan */}
-        <div className="bg-olive-700 w-full h-ft flex flex-col gap-2 justify-start items-start">
+        <div className=" w-full h-fit flex flex-col gap-2 justify-start items-start">
           {/* Awal Nama Produk */}
-          <p className="bg-green-400 font-semibold text-xl line-clamp-2">
-            {product.name}
-          </p>
+
+          <div className=" w-full h-fit flex justify-start items-start gap-1 ">
+            {/* Awal Logo Mall Ori */}
+            <div className=" w-20 h-7 relative">
+              <Image
+                src={"/MallOriRemoveBg.png"}
+                alt="Mall Ori"
+                fill
+                objectFit="contain"
+              />
+            </div>
+            {/* Akhir Logo Mall Ori */}
+
+            {/* Awal Nama Produk */}
+            <p className=" w-full font-semibold text-xl line-clamp-2">
+              {product.name} Lorem ipsum dolor sit amet consectetur adipisicing
+              elit. Quo officia reiciendis quisquam deleniti molestiae nostrum
+              laboriosam quam modi repellat voluptatum?
+            </p>
+            {/* Akhir Nama Produk */}
+          </div>
           {/* Akhir Nama Produk */}
 
-          {/* Awal Rating, Penilaianm Terjual, dan Laporkan */}
-          <div className="bg-purple-900 w-full h-7 flex justify-between items-center text-sm  ">
+          {/* Awal Rating, Penilaian Terjual, dan Laporkan */}
+          <div className=" w-full h-7 flex justify-between items-center text-sm  ">
             {/* Awal Rating, Penilaian, Terjual */}
-            <div className="bg-green-800 w-full h-full  flex justify-start items-center divide-x divide-gray-400 [&>*:not(:first-child)]:pl-1 [&>*:not(:last-child)]:pr-1">
+            <div className=" w-full h-full  flex justify-start items-center divide-x divide-gray-400 [&>*:not(:first-child)]:pl-3 [&>*:not(:last-child)]:pr-3">
               {/* Awal Rating */}
-              <div className="bg-amber-800 flex h-full items-center gap-1.5 ">
+              <div className=" flex h-full items-center gap-1.5 ">
                 {/* Awal Text Rating */}
                 <span className="font-semibold text-md border-b border-b-black">
                   {rating.toFixed(1)}
@@ -69,7 +120,7 @@ export default function CardDetailProduk({ product }: Props) {
               </div>
               {/* Akhir Rating */}
               {/* Awal Penilaian */}
-              <div className="bg-pink-400 flex h-full items-center gap-1.5">
+              <div className=" flex h-full items-center gap-1.5">
                 {/* Awal Nilai */}
                 <span className="font-semibold text-md border-b border-b-black">
                   {totalPenilaian}
@@ -82,7 +133,7 @@ export default function CardDetailProduk({ product }: Props) {
               </div>
               {/* Akhir Penilaian */}
               {/* Awal Terjual */}
-              <div className="bg-blue-500 flex h-full items-center gap-1.5">
+              <div className=" flex h-full items-center gap-1.5">
                 {/* Awal Terjual */}
                 <span className="font-semibold text-md border-b border-b-black">
                   {totalTerjual}
@@ -105,12 +156,12 @@ export default function CardDetailProduk({ product }: Props) {
             </button>
             {/* Akhir Laporkan */}
           </div>
-          {/* Akhir Rating, Penilaianm Terjual, dan Laporkan */}
+          {/* Akhir Rating, Penilaian Terjual, dan Laporkan */}
         </div>
         {/* Akhir Nama Produk dan Rating, Penilaian, Terjual, dan Laporkan */}
 
         {/* Awal Harga Produk, Voucher, Pengiriman, Jaminan Shopee, Warna, Kuantitas, Tombol Masuk Keranjang dan Beli Sekarang */}
-        <div className="bg-blue-900 w-full h-full flex flex-col gap-4 px-4 text-sm">
+        <div className=" w-full h-full flex flex-col gap-4 px-4 text-sm">
           {/* Awal Harga Produk */}
           <div className="bg-[#F5F5F5] w-full h-fit flex justify-start items-center gap-2 p-2 ">
             {/* Awal Harga Setelah Diskon */}
@@ -138,11 +189,9 @@ export default function CardDetailProduk({ product }: Props) {
           {/* Akhir Harga Produk */}
 
           {/* Awal Voucher */}
-          <div className="bg-green-900 w-full flex justify-start items-center gap-4 ">
+          <div className=" w-full flex justify-start items-start gap-4 ">
             {/* Awal Text Voucher */}
-            <span className="text-gray-500 bg-red-500 w-25 line-clamp-2">
-              Voucher
-            </span>
+            <span className="text-gray-500  w-25 line-clamp-2">Voucher</span>
             {/* Akhir Text Voucher */}
 
             {/* Awal List Voucher */}
@@ -154,42 +203,183 @@ export default function CardDetailProduk({ product }: Props) {
           </div>
           {/* Akhir Voucher */}
 
+          {/* Awal Cicilan */}
+          <div className=" w-full flex justify-start items-start gap-4">
+            {/* Awal Text Cicilan */}
+            <span className="text-gray-500  w-25 line-clamp-2">Cicilan</span>
+            {/* Akhir Text Cicilan */}
+
+            {/* Awal Cicilan */}
+            <div className="w-full h-fit flex justify-start items-center gap-2 text-black">
+              {/* Awal Cicilan */}
+              <span>24x Rp39.583 (Bunga 0%)</span>
+              {/* Akhir Cicilan */}
+
+              {/* Awal Link Cicilan */}
+              <div className=" text-gray-500 flex items-center ">
+                {/* Awal Link Cicilan */}
+                <Link href={"/cicilan"}>Cicilan</Link>
+                {/* Akhir Link Cicilan */}
+
+                {/* Awal Icon > */}
+                <MdKeyboardArrowRight className="w-3 h-3" />
+                {/* Akhir Icon > */}
+              </div>
+              {/* Akhir Link Cicilan */}
+            </div>
+            {/* Akhir Cicilan */}
+          </div>
+          {/* Akhir Cicilan */}
+
           {/* Awal Pengiriman */}
-          <div className="bg-purple-500">Pengiriman</div>
+          <div className=" w-full flex justify-start items-start gap-4">
+            {/* Awal Text Pengiriman */}
+            <span className="text-gray-500  w-25 line-clamp-2">Pengiriman</span>
+            {/* Akhir Text Pengiriman */}
+
+            {/* Awal Info Pengiriman */}
+            <div className="w-full h-fit flex flex-col gap-2 justify-start items-start text-gray-500">
+              {/* Awal Icon dan Estimasi */}
+              <div className="flex items-center gap-2">
+                {/* Awal Icon */}
+                <FaShippingFast className="w-5 h-5" />
+                {/* Akhir Icon */}
+
+                {/* Awal Estimasi */}
+                <button
+                  onClick={() => toast.warn("Estimasi Sampai")}
+                  className="flex items-center"
+                >
+                  {/* Awal Estimasi Waktu */}
+                  <span className="font-semibold">6-10 Ags</span>
+                  {/* Akhir Estimasi Waktu */}
+
+                  {/* Awal Icon */}
+                  <MdKeyboardArrowRight className="w-4 h-4" />
+                  {/* Akhir Icon */}
+                </button>
+                {/* Akhir Estimasi */}
+              </div>
+              {/* Akhir Icon dan Estimasi */}
+
+              {/* Awal Info Pengiriman */}
+              <span className="text-xs">
+                Dapatkan Voucher s/d Rp10.000 jika pesanan terlambat.
+              </span>
+              {/* Akhir Info Pengiriman */}
+            </div>
+            {/* Akhir Info Pengiriman */}
+          </div>
           {/* Akhir Pengiriman */}
 
           {/* Awal Jaminan Shopee */}
-          <div className="bg-orange-700">Jaminan Shopee</div>
+          <div className=" w-full flex justify-start items-start gap-4">
+            {/* Awal Text Jaminan Shopee */}
+            <span className="text-gray-500  w-25 line-clamp-2">
+              Jaminan Shopee
+            </span>
+            {/* Akhir Text Jaminan Shopee */}
+
+            {/* Awal Info Jaminan Shopee */}
+            <div className=" w-full h-fit flex justify-start items-start gap-1">
+              {/* Awal Icon Jaminan Shopee */}
+              <IoShieldCheckmarkOutline className="w-5 h-5" />
+              {/* Akhir Icon Jaminan Shopee */}
+
+              {/* Awal Info Jaminan Shopee */}
+              <span className="w-full line-clamp-1">
+                15 Hari Pengembalian • 100% Original • COD-Cek Dulu • Proteksi
+                Kerusakan dan lain alin
+              </span>
+              {/* Akhir Info Jaminan Shopee */}
+
+              {/* Awal Icon Drop Down */}
+              <MdKeyboardArrowDown className="w-5 h-5" />
+              {/* Akhir Icon Drop Down */}
+            </div>
+            {/* Akhir Info Jaminan Shopee */}
+          </div>
           {/* Akhir Jaminan Shopee */}
 
           {/* Awal Warna */}
-          <div className="bg-blue-700">Warna</div>
+          <div className=" w-full flex justify-start items-start gap-4">
+            {/* Awal Text Warna */}
+            <span className="text-gray-500 w-25 line-clamp-2">Warna</span>
+            {/* Akhir Text Warna */}
+
+            {/* Awal List Warna */}
+            <div className=" w-full h-fit grid grid-cols-5 gap-2  text-black">
+              {warna.map((warna, idx) => (
+                <button
+                  className="border border-gray-400 py-2 px-4 text-center hover:border-black transition-colors duration-300 ease-in-out cursor-pointer"
+                  key={idx}
+                >
+                  {warna}
+                </button>
+              ))}
+            </div>
+            {/* Akhir List Warna */}
+          </div>
           {/* Akhir Warna */}
+
+          {/* Awal Size */}
+          <div className=" w-full flex justify-start items-start gap-4">
+            {/* Awal Text Size */}
+            <span className="text-gray-500  w-25 line-clamp-2">Size</span>
+            {/* Akhir Text Size */}
+
+            {/* Awal List Size */}
+            <div className=" w-full h-fit grid grid-cols-5 gap-2  text-black">
+              {size.map((size, idx) => (
+                <button
+                  className="border border-gray-400 py-2 px-4 text-center hover:border-black transition-colors duration-300 ease-in-out cursor-pointer"
+                  key={idx}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+            {/* Akhir List Size */}
+          </div>
+          {/* Akhir Size */}
+
+          {/* Awal Tabel Ukuran */}
+          <button
+            onClick={() => toast.info("Size Chart Cuy")}
+            className=" w-fit h-fit flex justify-start items-center cursor-pointer text-[#EE4D2D]"
+          >
+            {/* Awal Text Tabel Ukuran */}
+            <span className=" ">Tabel Ukuran</span>
+            {/* Akhir Text Tabel Ukuran */}
+
+            {/* Awal Icon Right Arrow */}
+            <MdKeyboardArrowRight className="w-5 h-5" />
+            {/* Akhir Icon Right Arrow */}
+          </button>
+          {/* Akhir Tabel Ukuran */}
 
           {/* Awal Kuantitas */}
           <div className="bg-white w-full h-fit flex justify-start items-center gap-4 ">
             {/* Awal Text Kuantitas */}
-            <span className="text-gray-500 bg-red-500 w-25 line-clamp-2">
-              Kuantitas
-            </span>
+            <span className="text-gray-500  w-25 line-clamp-2">Kuantitas</span>
             {/* Akhir Text Kuantitas */}
 
             {/* Awal Input Kuantitas */}
             <div className="w-full h-fit flex justify-start items-center gap-2">
               {/* Awal Input Kuantitas */}
-              <div className="bg-amber-700/40 w-30 h-fit flex justify-start items-center border border-gray-300 divide-x divide-gray-300 ">
+              <div className="w-30 h-fit flex justify-start items-center border border-gray-300 divide-x divide-gray-300 ">
                 {/* Awal Button Decrease */}
                 <button
                   type="button"
                   onClick={handleDecrease}
                   disabled={quantity <= 1}
-                  className="bg-amber-300 w-8 h-fit p-2 text-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-8 h-fit py-1 px-3 text-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   -
                 </button>
                 {/* Akhir Button Decrease */}
                 {/* Awal Nilai Input Sekarang */}
-                <span className="bg-purple-300 flex-1 text-center p-2 text-lg">
+                <span className=" flex-1 text-center py-1 px-3 text-lg">
                   {quantity}
                 </span>
                 {/* Akhir Nilai Input Sekarang */}
@@ -198,7 +388,7 @@ export default function CardDetailProduk({ product }: Props) {
                   type="button"
                   onClick={handleIncrease}
                   disabled={quantity >= product.quantity}
-                  className="bg-red-400 w-8 h-fit p-2 text-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-8 h-fit py-1 px-3 text-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   +
                 </button>
@@ -217,7 +407,7 @@ export default function CardDetailProduk({ product }: Props) {
           {/* Akhir Kuantitas */}
 
           {/* Awal Tombol Masuk Keranjang dan Beli Sekarang */}
-          <div className="bg-red-600 w-full h-fit flex justify-start items-center gap-2">
+          <div className=" w-full h-fit flex justify-start items-center gap-2">
             {/* Awal Tombol Masuk Keranjang */}
             <TambahKeranjang data={data} />
             {/* Akhir Tombol Masuk Keranjang */}
@@ -234,3 +424,25 @@ export default function CardDetailProduk({ product }: Props) {
     </div>
   );
 }
+
+// {
+//     "_id": "6a6cabe713638b32153f08a9",
+//     "name": "Sepatu Vans Old Skool Black",
+//     "slug": "sepatu-vans-old-skool-black",
+//     "images": [
+//         "https://picsum.photos/600/600?random=2",
+//         "https://picsum.photos/600/600?random=52",
+//         "https://picsum.photos/600/600?random=102",
+//         "https://picsum.photos/600/600?random=152",
+//         "https://picsum.photos/600/600?random=202",
+//         "https://picsum.photos/600/600?random=252"
+//     ],
+//     "price": 459000,
+//     "originalPrice": 650000,
+//     "discountPercent": 29,
+//     "quantity": 200,
+//     "sold": 5400,
+//     "createdAt": "2026-07-31T14:06:29.879Z",
+//     "updatedAt": "2026-07-31T14:06:29.879Z",
+//     "storeId": "6a69f12930ce0d2e3f516bf8"
+// }
