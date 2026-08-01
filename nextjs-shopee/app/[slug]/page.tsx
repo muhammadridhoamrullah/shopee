@@ -21,9 +21,10 @@ export default async function ProdukDetailPage({ params }: Props) {
 
   const store = await getStoreById(product.storeId);
 
-  if(!store) {
+  if (!store) {
     notFound();
   }
+
   return (
     <div className="bg-[#F5F5F5] w-full h-fit flex flex-col gap-2 px-20 py-4 border-b-4 border-[#EE4D2D]">
       {/* Awal Kategori */}
@@ -31,7 +32,7 @@ export default async function ProdukDetailPage({ params }: Props) {
       {/* Akhir Kategori */}
 
       {/* Awal Detail Produk */}
-      <CardDetailProduk product={product} />
+      <CardDetailProduk product={product}  />
       {/* Akhir Detail Produk */}
 
       {/* Awal Toko Penjual */}
