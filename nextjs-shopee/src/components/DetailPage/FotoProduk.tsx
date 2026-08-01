@@ -4,16 +4,15 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import {
-  Counter,
   Download,
   Fullscreen,
   Slideshow,
-  Thumbnails,
   Zoom,
 } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/styles.css";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
+
 
 interface Props {
   data: string[];
@@ -131,11 +130,18 @@ export default function FotoProduk({ data }: Props) {
           {/* Akhir Scroll Right */}
         </div>
       </div>
-
       {/* Akhir Foto */}
 
       {/* Awal Share dan Favorit */}
-      <div className="bg-pink-600 w-full h-15">Favorit dan Share</div>
+      <div className="bg-pink-600 w-full h-15 flex justify-between items-center divide-x divide-gray-300">
+        {/* Awal Share */}
+        <div>Share</div>
+        {/* Akhir Share */}
+
+        {/* Awal Favorit */}
+        <div>Favorit</div>
+        {/* Akhir Favorit */}
+      </div>
       {/* Akhir Share dan Favorit */}
 
       {/* Awal Lightbox */}

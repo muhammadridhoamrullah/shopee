@@ -54,7 +54,7 @@ export default function CardProductRekomendasi({ product }: Props) {
 
           {/* Awal Jumlah Terjual */}
           <span className="  text-xs font-medium">
-            {formatSoldProductCount(product.sold)}
+            {formatSoldProductCount(product.sold)} terjual
           </span>
           {/* Akhir Jumlah Terjual */}
         </div>
