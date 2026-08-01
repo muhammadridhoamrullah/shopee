@@ -3,7 +3,14 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
-import { Fullscreen, Zoom } from "yet-another-react-lightbox/plugins";
+import {
+  Counter,
+  Download,
+  Fullscreen,
+  Slideshow,
+  Thumbnails,
+  Zoom,
+} from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/styles.css";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
@@ -137,7 +144,7 @@ export default function FotoProduk({ data }: Props) {
         index={index}
         close={() => setOpen(false)}
         slides={data.map((image) => ({ src: image }))}
-        plugins={[Zoom, Fullscreen]}
+        plugins={[Zoom, Fullscreen, Download, Slideshow]}
       />
       {/* Akhir Lightbox */}
     </div>

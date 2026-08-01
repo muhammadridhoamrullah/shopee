@@ -1,4 +1,4 @@
-import { getStarFills } from "@/src/utils/rating";
+import { getStarFills } from "@/src/utils/rating/rating";
 import { FaStar } from "react-icons/fa";
 
 interface Props {
