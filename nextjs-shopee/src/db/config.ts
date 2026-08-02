@@ -9,15 +9,27 @@ if (!CONNECTION_STRING) {
   );
 }
 
-let client: MongoClient;
+// Client disimpan di globalThis, BUKAN di variabel module-scope biasa.
+// Alasannya: saat hot-reload di dev, modul dievaluasi ulang dan variabel
+// module-scope ikut ter-reset -- akibatnya MongoClient baru dibuat terus
+// sementara yang lama koneksinya tidak pernah ditutup (connection leak).
+// globalThis tidak ikut ter-reset saat hot-reload, jadi client-nya bertahan.
+
+const globalForMongo = globalThis as unknown as {
+  mongoClient: MongoClient | undefined;
+};
 
 // Buat async function untuk mendapatkan instance MongoClient
 async function getMongoClientInstance(): Promise<MongoClient> {
-  if (!client) {
-    client = new MongoClient(CONNECTION_STRING);
-    await client.connect();
+  if (!globalForMongo.mongoClient) {
+    globalForMongo.mongoClient = new MongoClient(CONNECTION_STRING, {
+      // Default-nya 100 per client -- terlalu besar untuk cluster M0
+      // yang batasnya cuma 500 koneksi
+      maxPoolSize: 10,
+    });
+    await globalForMongo.mongoClient.connect();
   }
-  return client;
+  return globalForMongo.mongoClient;
 }
 
 // Buat async function untuk mendapatkan database
@@ -28,7 +40,7 @@ export async function getDB() {
     return client.db(DB_NAME);
   } catch (error) {
     if (error instanceof Error && error.name === "MongoTopologyClosedError") {
-      client = undefined as unknown as MongoClient; // Reset client to undefined
+      globalForMongo.mongoClient = undefined;
       const newClient = await getMongoClientInstance();
       return newClient.db(DB_NAME);
     }
@@ -38,8 +50,8 @@ export async function getDB() {
 
 // Buat async function untuk menutup koneksi MongoDB
 export async function closeMongoClient() {
-  if (client) {
-    await client.close();
-    client = undefined as unknown as MongoClient; // Reset client to undefined
+  if (globalForMongo.mongoClient) {
+    await globalForMongo.mongoClient.close();
+    globalForMongo.mongoClient = undefined; // Reset client to undefined
   }
 }
