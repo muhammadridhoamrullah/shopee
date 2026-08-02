@@ -4,6 +4,7 @@ export interface ProdukDokumen {
   _id: ObjectId;
   name: string;
   slug: string;
+  categoryId: ObjectId;
   images: string[];
   price: number;
   originalPrice?: number;
@@ -20,6 +21,7 @@ export interface ProdukResponse {
   _id: string;
   name: string;
   slug: string;
+  categoryId: string;
   images: string[];
   price: number;
   originalPrice?: number;

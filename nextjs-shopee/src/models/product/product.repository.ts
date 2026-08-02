@@ -55,4 +55,13 @@ export class ProductRepository {
       },
     );
   }
+
+  static async findByCategoryIds(categoryIds: ObjectId[]) {
+    const db = await getDB();
+
+    return db
+      .collection<ProdukDokumen>(COLLECTION_NAME)
+      .find({ categoryId: { $in: categoryIds } })
+      .toArray();
+  }
 }

@@ -1,5 +1,7 @@
+import BreadCrumbsCategory from "@/src/components/DetailPage/BreadCrumbsCategory";
 import CardDetailProduk from "@/src/components/DetailPage/CardDetailProduk";
 import Store from "@/src/components/DetailPage/Store";
+import { getBreadCrumb } from "@/src/models/category/category";
 import { getProductBySlug } from "@/src/models/product/product";
 import { getStoreById } from "@/src/models/store/store";
 import { notFound } from "next/navigation";
@@ -25,14 +27,17 @@ export default async function ProdukDetailPage({ params }: Props) {
     notFound();
   }
 
+  const breadCrumbsCategory = await getBreadCrumb(product.categoryId);
+  
+
   return (
     <div className="bg-[#F5F5F5] w-full h-fit flex flex-col gap-2 px-20 py-4 border-b-4 border-[#EE4D2D]">
       {/* Awal Kategori */}
-      <div className="bg-green-300 w-full">Category</div>
+      <BreadCrumbsCategory category={breadCrumbsCategory} productName={product.name} />
       {/* Akhir Kategori */}
 
       {/* Awal Detail Produk */}
-      <CardDetailProduk product={product}  />
+      <CardDetailProduk product={product} />
       {/* Akhir Detail Produk */}
 
       {/* Awal Toko Penjual */}
@@ -59,14 +64,3 @@ export default async function ProdukDetailPage({ params }: Props) {
     </div>
   );
 }
-
-// {
-//   _id: '6a670a23a1bf20f75eced6aa',
-//   name: 'Parfum Zara Man Vibrant Leather',
-//   slug: 'parfum-zara-man-vibrant-leather',
-//   image: 'https://picsum.photos/400/400?random=26',
-//   price: 165000,
-//   sold: 6700,
-//   createdAt: 2026-07-27T07:34:56.905Z,
-//   updatedAt: 2026-07-27T07:34:56.905Z
-// } product
