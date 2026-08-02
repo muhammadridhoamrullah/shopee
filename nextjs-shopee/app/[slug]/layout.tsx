@@ -21,7 +21,6 @@ export async function generateMetadata({
       title: "Produk Tidak Ditemukan | Shopee Indonesia",
     };
   }
-  console.log(product, "product layout slug");
 
   const description = `Beli ${product.name} seharga ${formatRupiah(
     product.price,

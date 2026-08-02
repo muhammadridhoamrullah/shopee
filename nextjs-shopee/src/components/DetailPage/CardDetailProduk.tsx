@@ -21,7 +21,6 @@ interface Props {
 
 export default function CardDetailProduk({ product }: Props) {
   const [quantity, setQuantity] = useState<number>(1);
-  console.log(product, "product di CardDetailProduct");
 
   const handleDecrease = () => {
     setQuantity((prev) => Math.max(1, prev - 1));
@@ -68,6 +67,8 @@ export default function CardDetailProduk({ product }: Props) {
     "48",
   ];
 
+  const mallOri = true;
+
   return (
     <div className="bg-white w-full min-h-0 flex justify-start items-start p-4 gap-4 shadow-md ">
       {/* Awal Foto Produk */}
@@ -79,25 +80,22 @@ export default function CardDetailProduk({ product }: Props) {
         {/* Awal Nama Produk dan Rating, Penilaian, Terjual, dan Laporkan */}
         <div className=" w-full h-fit flex flex-col gap-2 justify-start items-start">
           {/* Awal Nama Produk */}
-
-          <div className=" w-full h-fit flex justify-start items-start gap-1 ">
+          <div className="w-full h-fit flex flex-col justify-start items-start ">
             {/* Awal Logo Mall Ori */}
-            <div className=" w-20 h-7 relative">
+            {mallOri && (
               <Image
                 src={"/MallOriRemoveBg.png"}
                 alt="Mall Ori"
-                fill
-                objectFit="contain"
+                width={70}
+                height={50}
               />
-            </div>
+            )}
             {/* Akhir Logo Mall Ori */}
 
             {/* Awal Nama Produk */}
-            <p className=" w-full font-semibold text-xl line-clamp-2">
-              {product.name} Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Quo officia reiciendis quisquam deleniti molestiae nostrum
-              laboriosam quam modi repellat voluptatum?
-            </p>
+            <span className="w-full  font-semibold text-lg line-clamp-2 text-justify">
+              {product.name}
+            </span>
             {/* Akhir Nama Produk */}
           </div>
           {/* Akhir Nama Produk */}
@@ -149,7 +147,7 @@ export default function CardDetailProduk({ product }: Props) {
             {/* Awal Rating, Penilaian, Terjual */}
             {/* Awal Laporkan */}
             <button
-              className="text-gray-300 cursor-pointer hover:text-red-500 transition-colors duration-300 ease-in-out"
+              className="text-gray-500 cursor-pointer hover:text-red-500 transition-colors duration-300 ease-in-out"
               onClick={() => toast.warning("Gweh laporkan lu ye!")}
             >
               Laporkan
@@ -424,25 +422,3 @@ export default function CardDetailProduk({ product }: Props) {
     </div>
   );
 }
-
-// {
-//     "_id": "6a6cabe713638b32153f08a9",
-//     "name": "Sepatu Vans Old Skool Black",
-//     "slug": "sepatu-vans-old-skool-black",
-//     "images": [
-//         "https://picsum.photos/600/600?random=2",
-//         "https://picsum.photos/600/600?random=52",
-//         "https://picsum.photos/600/600?random=102",
-//         "https://picsum.photos/600/600?random=152",
-//         "https://picsum.photos/600/600?random=202",
-//         "https://picsum.photos/600/600?random=252"
-//     ],
-//     "price": 459000,
-//     "originalPrice": 650000,
-//     "discountPercent": 29,
-//     "quantity": 200,
-//     "sold": 5400,
-//     "createdAt": "2026-07-31T14:06:29.879Z",
-//     "updatedAt": "2026-07-31T14:06:29.879Z",
-//     "storeId": "6a69f12930ce0d2e3f516bf8"
-// }
