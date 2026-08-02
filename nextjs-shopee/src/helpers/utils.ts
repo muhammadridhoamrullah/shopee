@@ -1,3 +1,4 @@
+import { KategoriDokumen, KategoriResponse } from "../type/category";
 import { ProdukDokumen, ProdukResponse } from "../type/produk";
 import { StoreDokumen, StoreResponse } from "../type/store";
 import {
@@ -694,9 +695,18 @@ export function formatAngka(angka: number): string {
 }
 
 export function toProdukResponse(doc: ProdukDokumen): ProdukResponse {
-  return { ...doc, _id: doc._id.toString(), storeId: doc.storeId.toString() };
+  return {
+    ...doc,
+    _id: doc._id.toString(),
+    storeId: doc.storeId.toString(),
+    categoryId: doc.categoryId.toString(),
+  };
 }
 
 export function toStoreResponse(doc: StoreDokumen): StoreResponse {
   return { ...doc, _id: doc._id.toString(), userId: doc.userId.toString() };
+}
+
+export function toKategoriResponse(doc: KategoriDokumen): KategoriResponse {
+  return { ...doc, _id: doc._id.toString(), ancestorsId: doc.ancestorsId.map((id) => id.toString()) };
 }
