@@ -1,85 +1,39 @@
-import { KategoriResponse } from "@/src/type/category";
 import Link from "next/link";
-import { log } from "node:console";
-import { Fragment } from "react";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import { IoIosArrowForward } from "react-icons/io";
+import { KategoriResponse } from "@/src/type/category";
 
 interface Props {
   category: KategoriResponse[];
+  productName: string;
 }
 
-export default function BreadCrumbsCategory({ category }: Props) {
-  const tes = category.map((cat) => cat.name).join(" > ");
-  console.log(tes, "Tes");
-
-  log(category, "category Bread");
+export default function BreadCrumbsCategory({ category, productName }: Props) {
   return (
-    <div className=" w-full line-clamp-1 h-fit flex justify-start items-center gap-1 text-sm">
-      {category.map((cat, index) => (
-        <Fragment key={cat._id}>
-          {/* separator cuma dirender di antara item, jadi item pertama tidak diawali ">" */}
-          {index > 0 && <MdKeyboardArrowRight className="text-[#EE4D2D]" />}
-          <Link className="text-[#EE4D2D] " href={`/category/${cat.slug}`}>
-            {cat.name}
+    <div className="w-full flex flex-wrap items-center gap-1 text-xs text-gray-500">
+      {/* Awal Link Beranda */}
+      <Link href="/" className="hover:text-[#EE4D2D]">
+        Shopee
+      </Link>
+      {/* Akhir Link Beranda */}
+
+      {/* Awal Mapping Kategori */}
+      {category.map((kategori) => (
+        <div key={kategori._id} className="flex items-center gap-1">
+          <IoIosArrowForward className="text-[10px]" />
+          <Link
+            href={`/category/${kategori.slug}`}
+            className="hover:text-[#EE4D2D]"
+          >
+            {kategori.name}
           </Link>
-        </Fragment>
+        </div>
       ))}
+      {/* Akhir Mapping Kategori */}
+
+      {/* Awal Nama Produk -- halaman saat ini, jadi teks biasa bukan link */}
+      <IoIosArrowForward className="text-[10px]" />
+      <span className="text-gray-700 line-clamp-1">{productName}</span>
+      {/* Akhir Nama Produk */}
     </div>
   );
 }
-
-// Olahraga & Outdoor > Pakaian Olahraga Pria > Jersey Tes
-
-// [
-//   {
-//     _id: '6a7000000000000000000001',
-//     name: 'Olahraga & Outdoor',
-//     slug: 'olahraga-dan-outdoor',
-//     ancestorsId: [],
-//     createdAt: 2026-08-02T06:35:38.839Z,
-//     updatedAt: 2026-08-02T06:35:38.839Z
-//   },
-//   {
-//     _id: '6a7000000000000000000002',
-//     name: 'Pakaian Olahraga Pria',
-//     slug: 'pakaian-olahraga-pria',
-//     ancestorsId: [ '6a7000000000000000000001' ],
-//     createdAt: 2026-08-02T06:35:38.839Z,
-//     updatedAt: 2026-08-02T06:35:38.839Z
-//   },
-//   {
-//     _id: '6a7000000000000000000003',
-//     name: 'Jersey',
-//     slug: 'jersey',
-//     ancestorsId: [ '6a7000000000000000000001', '6a7000000000000000000002' ],
-//     createdAt: 2026-08-02T06:35:38.839Z,
-//     updatedAt: 2026-08-02T06:35:38.839Z
-//   }
-// ] breadCrumbsCa
-
-// [
-//   {
-//     _id: '6a7000000000000000000001',
-//     name: 'Olahraga & Outdoor',
-//     slug: 'olahraga-dan-outdoor',
-//     ancestorsId: [],
-//     createdAt: 2026-08-02T06:35:38.839Z,
-//     updatedAt: 2026-08-02T06:35:38.839Z
-//   },
-//   {
-//     _id: '6a7000000000000000000002',
-//     name: 'Pakaian Olahraga Pria',
-//     slug: 'pakaian-olahraga-pria',
-//     ancestorsId: [ '6a7000000000000000000001' ],
-//     createdAt: 2026-08-02T06:35:38.839Z,
-//     updatedAt: 2026-08-02T06:35:38.839Z
-//   },
-//   {
-//     _id: '6a7000000000000000000003',
-//     name: 'Jersey',
-//     slug: 'jersey',
-//     ancestorsId: [ '6a7000000000000000000001', '6a7000000000000000000002' ],
-//     createdAt: 2026-08-02T06:35:38.839Z,
-//     updatedAt: 2026-08-02T06:35:38.839Z
-//   }
-// ] category Bread

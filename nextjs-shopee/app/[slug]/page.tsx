@@ -28,12 +28,12 @@ export default async function ProdukDetailPage({ params }: Props) {
   }
 
   const breadCrumbsCategory = await getBreadCrumb(product.categoryId);
-  console.log(breadCrumbsCategory, "breadCrumbsCa");
+  
 
   return (
     <div className="bg-[#F5F5F5] w-full h-fit flex flex-col gap-2 px-20 py-4 border-b-4 border-[#EE4D2D]">
       {/* Awal Kategori */}
-      <BreadCrumbsCategory category={breadCrumbsCategory} />
+      <BreadCrumbsCategory category={breadCrumbsCategory} productName={product.name} />
       {/* Akhir Kategori */}
 
       {/* Awal Detail Produk */}

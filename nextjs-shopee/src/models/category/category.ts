@@ -1,7 +1,8 @@
 // Breadcrumb, urut dari induk kategori
 
-import { toKategoriResponse } from "@/src/helpers/utils";
+import { toKategoriResponse, toProdukResponse } from "@/src/helpers/utils";
 import { CategoryRepository } from "./category.repository";
+import { ProductRepository } from "../product/product.repository";
 
 export async function getBreadCrumb(categoryId: string) {
   const category = await CategoryRepository.findById(categoryId);
@@ -18,6 +19,29 @@ export async function getBreadCrumb(categoryId: string) {
     .filter((ancestor) => ancestor !== undefined);
 
   return [...sortedAncestors, category].map(toKategoriResponse);
+}
+
+// Ambil semua produk yang ada di kategori ini dan turunannya
+export async function getProductsBySlug(slug: string) {
+  const category = await CategoryRepository.findBySlug(slug);
+
+  if (!category) {
+    return null;
+  }
+
+  const descendants = await CategoryRepository.findDescendants(category._id);
+
+  const categoryIds = [
+    category._id,
+    ...descendants.map((descendat) => descendat._id),
+  ];
+
+  const products = await ProductRepository.findByCategoryIds(categoryIds);
+
+  return {
+    category: toKategoriResponse(category),
+    products: products.map((product) => toProdukResponse(product)),
+  };
 }
 
 //   {
