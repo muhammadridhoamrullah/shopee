@@ -1,5 +1,6 @@
 import { getDB } from "@/src/db/config";
 import { ProdukDokumen } from "@/src/type/produk";
+import { escapeRegex } from "@/src/utils/Navbar/navbar";
 import { ObjectId } from "mongodb";
 
 const COLLECTION_NAME = "products";
@@ -63,5 +64,26 @@ export class ProductRepository {
       .collection<ProdukDokumen>(COLLECTION_NAME)
       .find({ categoryId: { $in: categoryIds } })
       .toArray();
+  }
+
+  static async findByKeyword(keyword: string, limit: number, skip: number) {
+    const db = await getDB();
+
+    return db
+      .collection<ProdukDokumen>(COLLECTION_NAME)
+      .find({
+        name: { $regex: escapeRegex(keyword), $options: "i" },
+      })
+      .skip(skip)
+      .limit(limit)
+      .toArray();
+  }
+
+  static async countByKeyword(keyword: string) {
+    const db = await getDB();
+
+    return db.collection<ProdukDokumen>(COLLECTION_NAME).countDocuments({
+      name: { $regex: escapeRegex(keyword), $options: "i" },
+    });
   }
 }

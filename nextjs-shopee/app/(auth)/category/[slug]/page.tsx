@@ -9,6 +9,7 @@ import { CiFilter } from "react-icons/ci";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+import SemuaProdukKanan from "@/src/components/Category/SemuaProdukKanan";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -24,7 +25,7 @@ export default async function CategorySlugPage({ params }: Props) {
   }
 
   return (
-    <div className="bg-[#F5F5F5] w-full h-fit px-20 py-4 flex flex-col gap-4 border-b-4 border-[#EE4D2D]">
+    <div className="bg-[#F5F5F5] w-full h-fit px-20 py-4 flex flex-col gap-4 border-b-4 border-[#EE4D2D] text-sm">
       {/* Awal List Brand */}
       <div className="bg-white w-full h-80 flex flex-col justify-between items-center">
         {/* Awal Shopee Mall dan Lihat Semua */}
@@ -70,50 +71,15 @@ export default async function CategorySlugPage({ params }: Props) {
       </div>
       {/* Akhir List Brand */}
 
+      {/* Ingatkan saya ganti jadi h-fit */}
       {/* Awal Semua Kategori (Kiri) dan Semua Produk (Kanan) */}
-      <div className="bg-pink-500 w-full h-90 flex justify-between items-start gap-2">
+      <div className=" w-full min-h-90 flex justify-between items-start gap-2">
         {/* Awal Semua Kategori (Kiri) */}
         <div className="bg-green-300 w-60 h-full">Semua Kategori</div>
         {/* Akhir Semua Kategori (Kiri) */}
 
         {/* Awal Semua Produk (Kanan) */}
-        <div className="bg-pink-400 flex-1 h-full flex flex-col gap-2 justify-start items-start">
-          {/* Awal Filter Produk */}
-          <div className="bg-amber-300 w-full h-18 flex justify-between items-center">
-            {/* Awal Filter */}
-            <div>Filter</div>
-            {/* Akhir Filter */}
-
-            {/* Awal Jumlah Page dan Previous/Next */}
-            <div className="flex items-center gap-2">
-              {/* Awal Jumlah Page */}
-              <span>1/8</span>
-              {/* Akhir Jumlah Page */}
-
-              {/* Awal Previous/Next */}
-              <div className="flex items-center">
-                {/* Awal Previous */}
-                <button className="p-2">
-                  <MdKeyboardArrowLeft />
-                </button>
-                {/* Akhir Previous */}
-
-                {/* Awal Next */}
-                <button className="p-2">
-                  <MdKeyboardArrowRight />
-                </button>
-                {/* Akhir Next */}
-              </div>
-              {/* Akhir Previous/Next */}
-            </div>
-            {/* Akhir Jumlah Page dan Previous/Next */}
-          </div>
-          {/* Akhir Filter Produk */}
-
-          {/* Awal List Produk */}
-          <div>Produk</div>
-          {/* Akhir List Produk */}
-        </div>
+        <SemuaProdukKanan produk={getAllProductsBySlug.products} />
         {/* Akhir Semua Produk (Kanan) */}
       </div>
       {/* Akhir Semua Kategori (Kiri) dan Semua Produk (Kanan) */}

@@ -193,132 +193,132 @@ export const imageBannerKecil: menuLinks[] = [
 export const kategoriMenuLists: menuLinks[] = [
   {
     name: "Elektronik",
-    link: "/kategori/elektronik",
+    link: "/category/elektronik",
     image: "/images/mainpage/kategori/elektronik.webp",
   },
   {
     name: "Komputer & Aksesoris",
-    link: "/kategori/komputer-dan-aksesoris",
+    link: "/category/komputer-dan-aksesoris",
     image: "/images/mainpage/kategori/komputerDanAksesoris.webp",
   },
   {
     name: "Handphone & Aksesoris",
-    link: "/kategori/handphone-dan-aksesoris",
+    link: "/category/handphone-dan-aksesoris",
     image: "/images/mainpage/kategori/handphoneDanAksesoris.webp",
   },
   {
     name: "Pakaian Pria",
-    link: "/kategori/pakaian-pria",
+    link: "/category/pakaian-pria",
     image: "/images/mainpage/kategori/pakaianPria.webp",
   },
   {
     name: "Sepatu Pria",
-    link: "/kategori/sepatu-pria",
+    link: "/category/sepatu-pria",
     image: "/images/mainpage/kategori/sepatuPria.webp",
   },
   {
     name: "Tas Pria",
-    link: "/kategori/tas-pria",
+    link: "/category/tas-pria",
     image: "/images/mainpage/kategori/tasPria.webp",
   },
   {
     name: "Aksesoris Fashion",
-    link: "/kategori/aksesoris-fashion",
+    link: "/category/aksesoris-fashion",
     image: "/images/mainpage/kategori/aksesorisFashion.webp",
   },
   {
     name: "Jam Tangan",
-    link: "/kategori/jam-tangan",
+    link: "/category/jam-tangan",
     image: "/images/mainpage/kategori/jamTangan.webp",
   },
   {
     name: "Kesehatan",
-    link: "/kategori/kesehatan",
+    link: "/category/kesehatan",
     image: "/images/mainpage/kategori/kesehatan.webp",
   },
   {
     name: "Hobi & Koleksi",
-    link: "/kategori/hobi-dan-koleksi",
+    link: "/category/hobi-dan-koleksi",
     image: "/images/mainpage/kategori/hobiDanKoleksi.webp",
   },
   {
     name: "Olahraga & Outdoor",
-    link: "/kategori/olahraga-dan-outdoor",
+    link: "/category/olahraga-dan-outdoor",
     image: "/images/mainpage/kategori/olahragaDanOutdoor.webp",
   },
   {
     name: "Souvenir & Perlengkapan",
-    link: "/kategori/souvenir-dan-perlengkapan",
+    link: "/category/souvenir-dan-perlengkapan",
     image: "/images/mainpage/kategori/souvenirDanPerlengkapan.webp",
   },
   {
     name: "Voucher",
-    link: "/kategori/voucher",
+    link: "/category/voucher",
     image: "/images/mainpage/kategori/voucher.webp",
   },
   {
     name: "Makanan & Minuman",
-    link: "/kategori/makanan-dan-minuman",
+    link: "/category/makanan-dan-minuman",
     image: "/images/mainpage/kategori/makananDanMinuman.webp",
   },
   {
     name: "Perawatan & Kecantikan",
-    link: "/kategori/perawatan-dan-kecantikan",
+    link: "/category/perawatan-dan-kecantikan",
     image: "/images/mainpage/kategori/perawatanDanKecantikan.webp",
   },
   {
     name: "Perlengkapan Rumah",
-    link: "/kategori/perlengkapan-rumah",
+    link: "/category/perlengkapan-rumah",
     image: "/images/mainpage/kategori/perlengkapanRumah.webp",
   },
   {
     name: "Pakaian Wanita",
-    link: "/kategori/pakaian-wanita",
+    link: "/category/pakaian-wanita",
     image: "/images/mainpage/kategori/pakaianWanita.webp",
   },
   {
     name: "Fashion Muslim",
-    link: "/kategori/fashion-muslim",
+    link: "/category/fashion-muslim",
     image: "/images/mainpage/kategori/fashionMuslim.webp",
   },
   {
     name: "Fashion Bayi & Anak",
-    link: "/kategori/fashion-bayi-dan-anak",
+    link: "/category/fashion-bayi-dan-anak",
     image: "/images/mainpage/kategori/fashionBayiDanAnak.webp",
   },
   {
     name: "Ibu & Bayi",
-    link: "/kategori/ibu-dan-bayi",
+    link: "/category/ibu-dan-bayi",
     image: "/images/mainpage/kategori/ibuDanBayi.webp",
   },
   {
     name: "Sepatu Wanita",
-    link: "/kategori/sepatu-wanita",
+    link: "/category/sepatu-wanita",
     image: "/images/mainpage/kategori/sepatuWanita.webp",
   },
   {
     name: "Tas Wanita",
-    link: "/kategori/tas-wanita",
+    link: "/category/tas-wanita",
     image: "/images/mainpage/kategori/tasWanita.webp",
   },
   {
     name: "Otomotif",
-    link: "/kategori/otomotif",
+    link: "/category/otomotif",
     image: "/images/mainpage/kategori/otomotif.webp",
   },
   {
     name: "Buku & Alat Tulis",
-    link: "/kategori/buku-dan-alat-tulis",
+    link: "/category/buku-dan-alat-tulis",
     image: "/images/mainpage/kategori/bukuDanAlatTulis.webp",
   },
   {
     name: "Fotografi",
-    link: "/kategori/fotografi",
+    link: "/category/fotografi",
     image: "/images/mainpage/kategori/fotografi.webp",
   },
   {
     name: "Deals Sekitarmu",
-    link: "/kategori/deals-sekitarmu",
+    link: "/category/deals-sekitarmu",
     image: "/images/mainpage/kategori/dealsSekitarmu.webp",
   },
 ];
@@ -708,5 +708,9 @@ export function toStoreResponse(doc: StoreDokumen): StoreResponse {
 }
 
 export function toKategoriResponse(doc: KategoriDokumen): KategoriResponse {
-  return { ...doc, _id: doc._id.toString(), ancestorsId: doc.ancestorsId.map((id) => id.toString()) };
+  return {
+    ...doc,
+    _id: doc._id.toString(),
+    ancestorsId: doc.ancestorsId.map((id) => id.toString()),
+  };
 }
