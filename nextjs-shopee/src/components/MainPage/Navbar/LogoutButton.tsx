@@ -42,7 +42,7 @@ export default function LogoutButton({ user }: Props) {
     dispatch(doLogout());
   }
 
-  let foto =
+  const foto =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYCvh28vxeu-b1NkyId4bXXkRK1NFzjKPBzpskKWOTPZzql6B0mABj1yk&s=10";
 
   return (
