@@ -50,7 +50,6 @@ export default async function SearchPage({ searchParams }: Props) {
   const currentPage = Number(page) || 1;
 
   const resultSearch = await getSearchProducts(keyword, currentPage);
-  console.log(resultSearch, "resultSearch");
 
   return (
     <div className="bg-[#F5F5F5] w-full h-fit px-20 py-4 flex justify-between items-start gap-4 border-b-4 border-[#EE4D2D] text-sm">
