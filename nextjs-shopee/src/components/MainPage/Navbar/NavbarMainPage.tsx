@@ -52,6 +52,7 @@ export default async function NavbarMainPage() {
       user = await verifyToken(token);
     } catch (error) {
       // Token tidak valid atau sudah kedaluwarsa, dianggap tamu
+      console.error("Token tidak valid:", error);
       user = null;
     }
   }

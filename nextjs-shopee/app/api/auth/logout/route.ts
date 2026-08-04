@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
+    console.log(
+      request.cookies.get("access_token"),
+      "ini cookie access_token sebelum dihapus",
+    );
     const response = NextResponse.json(
       {
         success: true,

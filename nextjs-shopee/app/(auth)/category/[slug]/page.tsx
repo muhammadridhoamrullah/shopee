@@ -3,22 +3,29 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { IoListSharp } from "react-icons/io5";
-import { MdOutlineArrowRight } from "react-icons/md";
-import { CiFilter } from "react-icons/ci";
-import { MdKeyboardArrowDown } from "react-icons/md";
-import { FaStar } from "react-icons/fa";
-import { MdKeyboardArrowLeft } from "react-icons/md";
+
 import SemuaProdukKanan from "@/src/components/Category/SemuaProdukKanan";
 
 interface Props {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ page?: string; sort?: string }>;
 }
 
-export default async function CategorySlugPage({ params }: Props) {
-  const { slug } = await params;
+// import { IoListSharp } from "react-icons/io5";
+// import { MdOutlineArrowRight } from "react-icons/md";
+// import { CiFilter } from "react-icons/ci";
+// import { MdKeyboardArrowDown } from "react-icons/md";
+// import { FaStar } from "react-icons/fa";
+// import { MdKeyboardArrowLeft } from "react-icons/md";
 
-  const getAllProductsBySlug = await getProductsBySlug(slug);
+export default async function CategorySlugPage({
+  params,
+  searchParams,
+}: Props) {
+  const { slug } = await params;
+  const { page, sort } = await searchParams;
+  const currentPage = Math.max(Number(page) || 1, 1); // Default ke halaman 1 jika tidak ada parameter page, dan pastikan minimal halaman adalah 1
+  const getAllProductsBySlug = await getProductsBySlug(slug, currentPage, sort);
 
   if (!getAllProductsBySlug) {
     notFound();
@@ -79,7 +86,10 @@ export default async function CategorySlugPage({ params }: Props) {
         {/* Akhir Semua Kategori (Kiri) */}
 
         {/* Awal Semua Produk (Kanan) */}
-        <SemuaProdukKanan produk={getAllProductsBySlug.products} />
+        <SemuaProdukKanan
+          data={getAllProductsBySlug}
+          sort={sort ?? "populer"}
+        />
         {/* Akhir Semua Produk (Kanan) */}
       </div>
       {/* Akhir Semua Kategori (Kiri) dan Semua Produk (Kanan) */}

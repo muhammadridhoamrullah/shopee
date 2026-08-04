@@ -3,6 +3,7 @@
 import { toKategoriResponse, toProdukResponse } from "@/src/helpers/utils";
 import { CategoryRepository } from "./category.repository";
 import { ProductRepository } from "../product/product.repository";
+import { SORT_OPTIONS } from "@/src/type/category";
 
 export async function getBreadCrumb(categoryId: string) {
   const category = await CategoryRepository.findById(categoryId);
@@ -22,7 +23,11 @@ export async function getBreadCrumb(categoryId: string) {
 }
 
 // Ambil semua produk yang ada di kategori ini dan turunannya
-export async function getProductsBySlug(slug: string) {
+export async function getProductsBySlug(
+  slug: string,
+  page: number,
+  sort?: string,
+) {
   const category = await CategoryRepository.findBySlug(slug);
 
   if (!category) {
@@ -36,12 +41,36 @@ export async function getProductsBySlug(slug: string) {
     ...descendants.map((descendat) => descendat._id),
   ];
 
-  const products = await ProductRepository.findByCategoryIds(categoryIds);
+  const limit = 12; // Jumlah produk per halaman
+  const skip = (page - 1) * limit; // Hitung jumlah produk yang dilewati berdasarkan halaman
+
+  const sortOption =
+    SORT_OPTIONS[sort as keyof typeof SORT_OPTIONS] ?? SORT_OPTIONS.populer;
+
+  const products = await ProductRepository.findByCategoryIds(
+    categoryIds,
+    limit,
+    skip,
+    sortOption,
+  );
+  const totalProducts = await ProductRepository.countByCategoryIds(categoryIds);
 
   return {
     category: toKategoriResponse(category),
     products: products.map((product) => toProdukResponse(product)),
+    totalProducts,
+    page,
+    totalPages: Math.ceil(totalProducts / limit),
   };
+}
+
+export async function getCategoryBySlug(slug: string) {
+  const category = await CategoryRepository.findBySlug(slug);
+
+  if (!category) {
+    return null;
+  }
+  return toKategoriResponse(category);
 }
 
 //   {

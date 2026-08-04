@@ -17,9 +17,7 @@ interface Props {
 }
 
 export default function LogoutButton({ user }: Props) {
-  const { dataLogout, errorLogout, loadingLogout } = useAppSelector(
-    (state) => state.logout,
-  );
+  const { dataLogout, errorLogout } = useAppSelector((state) => state.logout);
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -47,7 +45,7 @@ export default function LogoutButton({ user }: Props) {
 
   return (
     <button
-      className="bg-red-500 flex items-center gap-1 px-2 py-1 rounded-md hover:bg-red-600 transition-colors duration-300"
+      className="bg-red-500 flex items-center gap-1 px-2 py-1 rounded-md hover:bg-red-600 transition-colors duration-300 cursor-pointer"
       onClick={handleLogout}
     >
       {/* Awal Foto Profil */}
