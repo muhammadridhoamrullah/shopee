@@ -1,5 +1,5 @@
 import NavbarMainPage from "@/src/components/MainPage/Navbar/NavbarMainPage";
-import { getProductsBySlug } from "@/src/models/category/category";
+import { getCategoryBySlug } from "@/src/models/category/category";
 import { Metadata } from "next";
 
 interface Props {
@@ -7,11 +7,19 @@ interface Props {
   children: React.ReactNode;
 }
 
+// _id: string;
+// name: string;
+// slug: string;
+// ancestorsId: string[];
+// createdAt: Date;
+// updatedAt: Date;
+// deletedAt?: Date;
+
 export async function generateMetadata({
   params,
 }: Omit<Props, "children">): Promise<Metadata> {
   const { slug } = await params;
-  const category = await getProductsBySlug(slug);
+  const category = await getCategoryBySlug(slug);
 
   if (!category) {
     return {
@@ -19,17 +27,17 @@ export async function generateMetadata({
     };
   }
 
-  const description = `Beli produk di kategori ${category.category.name} hanya di Shopee Indonesia.`;
+  const description = `Beli produk di kategori ${category.name} hanya di Shopee Indonesia.`;
 
   return {
-    title: `${category.category.name} | Shopee Indonesia`,
+    title: `${category.name} | Shopee Indonesia`,
     description,
     openGraph: {
-      title: category.category.name,
+      title: category.name,
       description,
       images: [
         {
-          url: category.products[0]?.images[0] || "/shopee1.png",
+          url: "/shopee1.png",
           width: 800,
           height: 800,
         },

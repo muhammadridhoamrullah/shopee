@@ -49,11 +49,14 @@ export default function InputSearchMainPage() {
     e.preventDefault();
 
     if (!keyword.trim()) return;
+
     router.push(`/search?keyword=${encodeURIComponent(keyword.trim())}`);
   }
 
   const showSuggestions =
     results.keyword === keyword.trim() && results.items.length > 0;
+
+
   return (
     <div className="flex-1 min-w-0 h-full flex flex-col justify-between items-center gap-2  pt-1.5">
       {/* Awal Input */}
@@ -105,7 +108,6 @@ export default function InputSearchMainPage() {
       {/* Awal Rekomendasi Search */}
       <div className=" w-full h-fit flex justify-between items-center">
         {/* Awal Mapping */}
-
         {randomRecommendations.map((item, index) => (
           <Link
             href={`/search?keyword=${encodeURIComponent(item)}`}

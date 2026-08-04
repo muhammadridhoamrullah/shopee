@@ -27,3 +27,10 @@ export interface StoreResponse {
   updatedAt: Date;
   deletedAt: Date | null;
 }
+
+export interface StoreRingkas {
+  _id: string;
+  name: string;
+  slug: string;
+  image: string;
+}

@@ -1,7 +1,7 @@
 import { getDB } from "@/src/db/config";
 import { ProdukDokumen } from "@/src/type/produk";
 import { escapeRegex } from "@/src/utils/Navbar/navbar";
-import { ObjectId } from "mongodb";
+import { ObjectId, Sort } from "mongodb";
 
 const COLLECTION_NAME = "products";
 
@@ -57,16 +57,37 @@ export class ProductRepository {
     );
   }
 
-  static async findByCategoryIds(categoryIds: ObjectId[]) {
+  static async findByCategoryIds(
+    categoryIds: ObjectId[],
+    limit: number,
+    skip: number,
+    sort: Sort,
+  ) {
     const db = await getDB();
 
     return db
       .collection<ProdukDokumen>(COLLECTION_NAME)
       .find({ categoryId: { $in: categoryIds } })
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
       .toArray();
   }
 
-  static async findByKeyword(keyword: string, limit: number, skip: number) {
+  static async countByCategoryIds(categoryIds: ObjectId[]) {
+    const db = await getDB();
+
+    return db.collection<ProdukDokumen>(COLLECTION_NAME).countDocuments({
+      categoryId: { $in: categoryIds },
+    });
+  }
+
+  static async findByKeyword(
+    keyword: string,
+    limit: number,
+    skip: number,
+    sort: Sort,
+  ) {
     const db = await getDB();
 
     return db
@@ -74,6 +95,7 @@ export class ProductRepository {
       .find({
         name: { $regex: escapeRegex(keyword), $options: "i" },
       })
+      .sort(sort)
       .skip(skip)
       .limit(limit)
       .toArray();
