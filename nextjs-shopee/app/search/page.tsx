@@ -3,7 +3,7 @@ import { getSearchProducts } from "@/src/models/product/product";
 import { Metadata } from "next";
 
 interface Props {
-  searchParams: Promise<{ keyword?: string; page?: string }>;
+  searchParams: Promise<{ keyword?: string; page?: string; sort?: string }>;
 }
 
 export async function generateMetadata({
@@ -37,7 +37,7 @@ export async function generateMetadata({
 }
 
 export default async function SearchPage({ searchParams }: Props) {
-  const { keyword, page } = await searchParams;
+  const { keyword, page, sort } = await searchParams;
 
   if (!keyword) {
     return (
@@ -47,9 +47,11 @@ export default async function SearchPage({ searchParams }: Props) {
     );
   }
 
-  const currentPage = Number(page) || 1;
+  const currentPage = Math.max(Number(page) || 1, 1); // Default ke halaman 1 jika tidak ada parameter page, dan pastikan minimal halaman adalah 1
 
-  const resultSearch = await getSearchProducts(keyword, currentPage);
+  const resultSearch = await getSearchProducts(keyword, currentPage, sort);
+
+  console.log(resultSearch, "resultSearch gweh");
 
   return (
     <div className="bg-[#F5F5F5] w-full h-fit px-20 py-4 flex justify-between items-start gap-4 border-b-4 border-[#EE4D2D] text-sm">
@@ -58,11 +60,31 @@ export default async function SearchPage({ searchParams }: Props) {
       {/* Akhir Filter Kiri */}
 
       {/* Awal Toko Yang Terkait dan Produk */}
-      <TokoDanProdukSearch />
+      <TokoDanProdukSearch
+        data={resultSearch}
+        keyword={keyword}
+        sort={sort ?? "populer"}
+      />
       {/* Akhir Toko Yang Terkait dan Produk */}
     </div>
   );
 }
+
+// [
+//   {
+//     _id: new ObjectId('6a8000000000000000000001'),
+//     userId: new ObjectId('6a572ab6e15a597dfea5bcbc'),
+//     name: 'Haerin Jersey Collection',
+//     slug: 'haerin-jersey-collection',
+//     image: 'https://i.pinimg.com/474x/19/eb/32/19eb32ead6d19cf5f54f7e7b48c1a56f.jpg',
+//     phone: '081234567890',
+//     city: 'Seoul',
+//     description: 'Toko jersey bola original untuk klub dan timnas favoritmu',
+//     createdAt: 2026-08-02T06:35:24.213Z,
+//     updatedAt: 2026-08-02T06:35:24.213Z,
+//     deletedAt: null
+//   }
+// ] toko asli
 
 // {
 //   products: [

@@ -26,4 +26,17 @@ export class StoreRepository {
     const collection = db.collection<StoreDokumen>(COLLECTION_NAME);
     return collection.findOne({ _id: new ObjectId(storeId) });
   }
+
+  static async findStoreByIds(storeIds: string[]) {
+    const db = await getDB();
+
+    return db
+      .collection<StoreDokumen>(COLLECTION_NAME)
+      .aggregate<Pick<StoreDokumen, "_id" | "name" | "slug" | "image">>([
+        { $match: { _id: { $in: storeIds.map((id) => new ObjectId(id)) } } },
+        { $sample: { size: 4 } },
+        { $project: { _id: 1, name: 1, slug: 1, image: 1 } },
+      ])
+      .toArray();
+  }
 }
