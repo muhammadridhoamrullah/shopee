@@ -9,6 +9,9 @@ import { IoIosGlobe } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { GrCart } from "react-icons/gr";
 import InputSearchMainPage from "./InputSearchMainPage";
+import { cookies } from "next/headers";
+import { verifyToken } from "../../VerifyToken";
+import LogoutButton from "./LogoutButton";
 
 const menuLinks = [
   { name: "Seller Center", link: "/seller-center" },
@@ -38,7 +41,21 @@ const notificationLinks = [
   { name: "Bahasa", link: "/bahasa", icon: <IoIosGlobe /> },
 ];
 
-export default function NavbarMainPage() {
+export default async function NavbarMainPage() {
+  const authCookies = await cookies();
+  const token = authCookies.get("access_token")?.value;
+
+  let user = null;
+
+  if (token) {
+    try {
+      user = await verifyToken(token);
+    } catch (error) {
+      // Token tidak valid atau sudah kedaluwarsa, dianggap tamu
+      user = null;
+    }
+  }
+
   return (
     <nav className="bg-[#EE4D2D] w-full h-30 py-2 px-20 flex flex-col justify-between items-center text-white text-[13px]">
       {/* Awal Link */}
@@ -86,14 +103,20 @@ export default function NavbarMainPage() {
           {/* Akhir Notifikasi, Bantuan, Bahasa */}
 
           {/* Awal Daftar Login */}
-          <div className=" w-fit h-fit flex justify-start items-center divide-x divide-gray-400 [&>*:not(:first-child)]:pl-2 [&>*:not(:last-child)]:pr-2 font-semibold">
-            {/* Awal Link Daftar */}
-            <Link href={"/register"}>Daftar</Link>
-            {/* Akhir Link Daftar */}
-            {/* Awal Link Login */}
-            <Link href={"/login"}>Login</Link>
-            {/* Akhir Link Login */}
-          </div>
+          {user ? (
+            <LogoutButton user={user} />
+          ) : (
+            <>
+              <div className=" w-fit h-fit flex justify-start items-center divide-x divide-gray-400 [&>*:not(:first-child)]:pl-2 [&>*:not(:last-child)]:pr-2 font-semibold">
+                {/* Awal Link Daftar */}
+                <Link href={"/register"}>Daftar</Link>
+                {/* Akhir Link Daftar */}
+                {/* Awal Link Login */}
+                <Link href={"/login"}>Login</Link>
+                {/* Akhir Link Login */}
+              </div>
+            </>
+          )}
           {/* Akhir Daftar Login */}
         </div>
         {/* Akhir Login/Daftar etc  */}
@@ -127,3 +150,11 @@ export default function NavbarMainPage() {
     </nav>
   );
 }
+
+// {
+//   _id: '6a572ab6e15a597dfea5bcbc',
+//   username: 'kanghaerin',
+//   email: 'kanghaerin@gmail.com',
+//   role: 'user',
+//   iat: 1785249235
+// } user NavbarMainPage

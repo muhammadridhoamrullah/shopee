@@ -11,7 +11,7 @@ export default function CardProductRekomendasi({ product }: Props) {
   return (
     <Link
       href={`/${product.slug}`}
-      className="w-full rounded-md overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out h-70 flex flex-col justify-between items-start"
+      className="bg-white w-full rounded-md overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 ease-in-out h-70 flex flex-col justify-between items-start hover:scale-102"
     >
       {/* Awal Foto Produk */}
       <div className="relative w-full  h-45">

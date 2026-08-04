@@ -5,6 +5,7 @@ import verifyEmailReducer from "./slice/verifyEmailSlice";
 import tambahKeranjangReducer from "./slice/detailPage/tambahKeranjangSlice";
 import beliSekarangReducer from "./slice/detailPage/beliSekarangSlice";
 import checkoutKeranjangReducer from "./slice/cart/checkoutKeranjangSlice";
+import logoutReducer from "./slice/logoutSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     tambahKeranjang: tambahKeranjangReducer,
     beliSekarang: beliSekarangReducer,
     checkoutKeranjang: checkoutKeranjangReducer,
+    logout: logoutReducer,
   },
 });
 
