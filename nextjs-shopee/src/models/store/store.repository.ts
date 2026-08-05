@@ -39,4 +39,12 @@ export class StoreRepository {
       ])
       .toArray();
   }
+
+  static async findStoreBySlug(slug: string) {
+    const db = await getDB();
+
+    return db.collection<StoreDokumen>(COLLECTION_NAME).findOne({
+      slug,
+    });
+  }
 }
