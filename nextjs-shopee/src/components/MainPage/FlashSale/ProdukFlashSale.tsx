@@ -42,7 +42,7 @@ export default function ProdukFlashSale() {
   };
 
   return (
-    <div className="relative w-full flex-1">
+    <div className="bg-red-900 relative w-full flex-1">
       {/* Awal Tombol Scroll Kiri */}
       {canScrollLeft && (
         <button
@@ -59,7 +59,7 @@ export default function ProdukFlashSale() {
       <div
         ref={scrollRef}
         onScroll={updateScrollState}
-        className=" overflow-x-auto scroll-smooth flex-1 w-full h-full grid grid-flow-col gap-2 grid-rows-1 scrollbar-none"
+        className="bg-amber-400 overflow-x-auto scroll-smooth flex-1 w-full h-full grid grid-flow-col gap-2 grid-rows-1 scrollbar-none justify-start"
       >
         {/* Awal Mapping Produk Flash Sale */}
         {flashSaleLists.map((produk, index) => (

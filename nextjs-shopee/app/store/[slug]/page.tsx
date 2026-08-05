@@ -6,6 +6,8 @@ import { FiUserPlus } from "react-icons/fi";
 import { LuUsers } from "react-icons/lu";
 import { MdOutlineStarOutline } from "react-icons/md";
 import { LuUserRoundCheck } from "react-icons/lu";
+import StoreMenuBar from "@/src/components/Store/StoreMenuBar";
+import StoreVoucher from "@/src/components/Store/StoreVoucher";
 
 interface Props {
   params: Promise<{
@@ -18,16 +20,68 @@ export default async function StoreDetail({ params }: Props) {
 
   const menuBar = [
     { name: "Halaman Utama", section: "" },
-    { name: "Produk", section: "products" },
-    { name: "Kaos", section: "kaos" },
-    { name: "Jersey", section: "jersey" },
-    { name: "Sepatu", section: "sepatu" },
-    { name: "Aksesoris", section: "aksesoris" },
+    { name: "Produk", section: "#products" },
+    { name: "Kaos", section: "#kaos" },
+    { name: "Jersey", section: "#jersey" },
+    { name: "Sepatu", section: "#sepatu" },
+    { name: "Aksesoris", section: "#aksesoris" },
   ];
+
+  const dummyVouchers = [
+    {
+      _id: "vc-001",
+      code: "DISKON1RB",
+      discountAmount: 1000, // Rp1RB
+      minPurchase: 50000, // Min. Blj Rp50RB
+      expiredAt: new Date("2026-09-16"), // Hingga: 16.09.2026
+      stock: 5, // x5
+    },
+    {
+      _id: "vc-002",
+      code: "DISKON5RB",
+      discountAmount: 5000, // Rp5RB
+      minPurchase: 100000, // Min. Blj Rp100RB
+      expiredAt: new Date("2026-09-30"), // Hingga: 30.09.2026
+      stock: 12, // x12
+    },
+    {
+      _id: "vc-003",
+      code: "DISKON10RB",
+      discountAmount: 10000, // Rp10RB
+      minPurchase: 200000, // Min. Blj Rp200RB
+      expiredAt: new Date("2026-10-15"), // Hingga: 15.10.2026
+      stock: 8, // x8
+    },
+    {
+      _id: "vc-004",
+      code: "DISKON1RB",
+      discountAmount: 1000, // Rp1RB
+      minPurchase: 50000, // Min. Blj Rp50RB
+      expiredAt: new Date("2026-09-16"), // Hingga: 16.09.2026
+      stock: 5, // x5
+    },
+    {
+      _id: "vc-005",
+      code: "DISKON5RB",
+      discountAmount: 5000, // Rp5RB
+      minPurchase: 100000, // Min. Blj Rp100RB
+      expiredAt: new Date("2026-09-30"), // Hingga: 30.09.2026
+      stock: 12, // x12
+    },
+    {
+      _id: "vc-006",
+      code: "DISKON10RB",
+      discountAmount: 10000, // Rp10RB
+      minPurchase: 200000, // Min. Blj Rp200RB
+      expiredAt: new Date("2026-10-15"), // Hingga: 15.10.2026
+      stock: 8, // x8
+    },
+  ];
+
   return (
-    <div className="bg-pink-700 w-full min-h-screen flex flex-col gap-5 justify-start items-start">
+    <div className="bg-[#F5F5F5] w-full min-h-screen flex flex-col gap-5 justify-start items-start">
       {/* Awal Info Store */}
-      <div className="bg-white w-full h-60 px-20 flex flex-col justify-between items-start">
+      <div className="bg-white w-full h-60 px-20 flex flex-col justify-between items-start shadow-md">
         {/* Awal Info Store */}
         <div className=" flex-1 w-full flex justify-between items-center gap-2">
           {/* Awal Foto Store */}
@@ -206,25 +260,13 @@ export default async function StoreDetail({ params }: Props) {
         {/* Akhir Info Store */}
 
         {/* Awal Bar */}
-        <div className="bg-pink-400 w-full h-15 grid grid-cols-6">
-          {menuBar.map((menu, index) => (
-            <a
-              key={index}
-              href={`#${menu.section}`}
-              className="bg-amber-200 w-full h-full  flex justify-center items-center  hover:bg-pink-500 text-sm"
-            >
-              {menu.name}
-            </a>
-          ))}
-        </div>
+        <StoreMenuBar menuBar={menuBar} />
         {/* Akhir Bar */}
       </div>
       {/* Akhir Info Store */}
 
       {/* Awal Voucher */}
-      <div className="bg-amber-300 w-full h-50 px-20">
-        <div className="bg-white w-full h-full p-6"></div>
-      </div>
+      <StoreVoucher vouchers={dummyVouchers} />
       {/* Akhir Voucher */}
 
       {/* Awal Mungkin Kamu Suka */}
