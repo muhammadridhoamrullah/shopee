@@ -33,3 +33,15 @@ export interface ProdukResponse {
   deletedAt?: Date;
   storeId: string;
 }
+
+export interface ProdukRingkas {
+  _id: string;
+  name: string;
+  slug: string;
+  images: string[];
+  price: number;
+  discountPercent?: number;
+  sold: number;
+}
+
+  

@@ -53,3 +53,12 @@ export async function getSearchProducts(
     })),
   };
 }
+
+export async function getProductByStoreId(storeId: string) {
+  const products = await ProductRepository.findByStoreId(storeId);
+
+  return products.map((el) => ({
+    ...el,
+    _id: el._id.toString(),
+  }));
+}

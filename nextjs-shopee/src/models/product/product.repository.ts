@@ -108,4 +108,40 @@ export class ProductRepository {
       name: { $regex: escapeRegex(keyword), $options: "i" },
     });
   }
+
+  static async findByStoreId(storeId: string) {
+    const db = await getDB();
+
+    return db
+      .collection<ProdukDokumen>(COLLECTION_NAME)
+      .aggregate<
+        Pick<
+          ProdukDokumen,
+          | "_id"
+          | "name"
+          | "slug"
+          | "images"
+          | "price"
+          | "discountPercent"
+          | "sold"
+        >
+      >([
+        { $match: { storeId: new ObjectId(storeId) } },
+        {
+          $sample: { size: 5 },
+        },
+        {
+          $project: {
+            _id: 1,
+            name: 1,
+            slug: 1,
+            images: 1,
+            price: 1,
+            discountPercent: 1,
+            sold: 1,
+          },
+        },
+      ])
+      .toArray();
+  }
 }

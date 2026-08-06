@@ -1,8 +1,6 @@
-import type { Metadata } from "next";
-import { getProductBySlug } from "@/src/models/product/product";
-import { formatRupiah } from "@/src/helpers/utils";
 import NavbarMainPage from "@/src/components/MainPage/Navbar/NavbarMainPage";
-
+import { getStoreBySlug } from "@/src/models/store/store";
+import { Metadata } from "next";
 
 interface Props {
   params: Promise<{
@@ -15,27 +13,25 @@ export async function generateMetadata({
   params,
 }: Omit<Props, "children">): Promise<Metadata> {
   const { slug } = await params;
-  const product = await getProductBySlug(slug);
+  const store = await getStoreBySlug(slug);
 
-  if (!product) {
+  if (!store) {
     return {
-      title: "Produk Tidak Ditemukan | Shopee Indonesia",
+      title: "Toko Tidak Ditemukan | Shopee Indonesia",
     };
   }
 
-  const description = `Beli ${product.name} seharga ${formatRupiah(
-    product.price,
-  )} hanya di Shopee Indonesia.`;
+  const description = `Beli produk dari ${store.name} hanya di Shopee Indonesia.`;
 
   return {
-    title: `${product.name} | Shopee Indonesia`,
+    title: `${store.name} | Shopee Indonesia`,
     description,
     openGraph: {
-      title: product.name,
+      title: store.name,
       description,
       images: [
         {
-          url: product.images[0],
+          url: store.image,
           width: 800,
           height: 800,
         },
@@ -44,7 +40,7 @@ export async function generateMetadata({
   };
 }
 
-export default function ProdukDetailLayout({ children }: Props) {
+export default function StorePageLayout({ children }: Props) {
   return (
     <>
       <NavbarMainPage />

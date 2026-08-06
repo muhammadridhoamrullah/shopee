@@ -34,3 +34,17 @@ export interface StoreRingkas {
   slug: string;
   image: string;
 }
+
+export interface MenuBarItem {
+  name: string;
+  section: string;
+}
+
+export interface Voucher {
+  _id: string;
+  code: string;
+  discountAmount: number; // dalam Rupiah
+  minPurchase: number; // dalam Rupiah
+  expiredAt: Date;
+  stock: number; // sisa voucher yang bisa diklaim
+}
