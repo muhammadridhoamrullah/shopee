@@ -20,6 +20,7 @@ interface Props {
 
 export default async function StoreDetail({ params }: Props) {
   const { slug } = await params;
+  console.log(slug, "slug di store detail");
   const storeId = "6a8000000000000000000001";
 
   const menuBar = [
