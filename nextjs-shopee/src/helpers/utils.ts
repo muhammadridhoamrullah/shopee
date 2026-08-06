@@ -1,5 +1,5 @@
 import { KategoriDokumen, KategoriResponse } from "../type/category";
-import { ProdukDokumen, ProdukResponse } from "../type/produk";
+import { ProdukDokumen, ProdukResponse, ProdukRingkas } from "../type/produk";
 import { StoreDokumen, StoreResponse } from "../type/store";
 import {
   FlashSaleItem,
@@ -557,6 +557,8 @@ export function formatRupiah(amount: number): string {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(amount);
 }
 
@@ -714,3 +716,5 @@ export function toKategoriResponse(doc: KategoriDokumen): KategoriResponse {
     ancestorsId: doc.ancestorsId.map((id) => id.toString()),
   };
 }
+
+

@@ -43,7 +43,14 @@ export async function getStoreByUserId(userId: string) {
   return store ? toStoreResponse(store) : null;
 }
 
-export const getStoreById = async (storeId: string) => {
+export async function getStoreById(storeId: string) {
   const store = await StoreRepository.findStoreById(storeId);
   return store ? toStoreResponse(store) : null;
-};
+}
+
+export async function getStoreBySlug(slug: string) {
+  const store = await StoreRepository.findStoreBySlug(slug);
+
+  return store ? toStoreResponse(store) : null;
+}
+
