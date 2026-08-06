@@ -1,5 +1,5 @@
 import { KategoriDokumen, KategoriResponse } from "../type/category";
-import { ProdukDokumen, ProdukResponse, ProdukRingkas } from "../type/produk";
+import { ProdukDokumen, ProdukResponse } from "../type/produk";
 import { StoreDokumen, StoreResponse } from "../type/store";
 import {
   FlashSaleItem,

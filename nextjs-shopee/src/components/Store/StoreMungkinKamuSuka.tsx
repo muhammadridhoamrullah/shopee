@@ -2,7 +2,6 @@ import { getProductByStoreId } from "@/src/models/product/product";
 import Link from "next/link";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import CardProdukMungkinKamuSuka from "./CardProdukMungkinKamuSuka";
-import { FaStar } from "react-icons/fa";
 
 interface Props {
   storeId: string;
