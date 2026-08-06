@@ -8,6 +8,7 @@ import { MdOutlineStarOutline } from "react-icons/md";
 import { LuUserRoundCheck } from "react-icons/lu";
 import StoreMenuBar from "@/src/components/Store/StoreMenuBar";
 import StoreVoucher from "@/src/components/Store/StoreVoucher";
+import StoreMungkinKamuSuka from "@/src/components/Store/StoreMungkinKamuSuka";
 
 interface Props {
   params: Promise<{
@@ -17,6 +18,7 @@ interface Props {
 
 export default async function StoreDetail({ params }: Props) {
   const { slug } = await params;
+  const storeId = "6a8000000000000000000001";
 
   const menuBar = [
     { name: "Halaman Utama", section: "" },
@@ -270,6 +272,7 @@ export default async function StoreDetail({ params }: Props) {
       {/* Akhir Voucher */}
 
       {/* Awal Mungkin Kamu Suka */}
+      <StoreMungkinKamuSuka storeId={storeId} />
       {/* Akhir Mungkin Kamu Suka */}
 
       {/* Awal Banner */}

@@ -53,3 +53,4 @@ export async function getStoreBySlug(slug: string) {
 
   return store ? toStoreResponse(store) : null;
 }
+

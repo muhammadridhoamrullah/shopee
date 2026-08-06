@@ -57,7 +57,7 @@ export default function StoreVoucher({ vouchers }: Props) {
             onClick={() => scrollByAmount("left")}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out"
           >
-            <IoIosArrowDropleftCircle className="w-10 h-10" />
+            <IoIosArrowDropleftCircle className="w-10 h-10 text-red-800" />
           </button>
         )}
         {/* Akhir Scroll Left */}
@@ -113,7 +113,7 @@ export default function StoreVoucher({ vouchers }: Props) {
             onClick={() => scrollByAmount("right")}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out"
           >
-            <IoIosArrowDroprightCircle className="w-10 h-10 " />
+            <IoIosArrowDroprightCircle className="w-10 h-10 text-red-800" />
           </button>
         )}
         {/* Akhir Scroll Right */}
