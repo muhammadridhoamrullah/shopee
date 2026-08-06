@@ -42,7 +42,7 @@ export default function ProdukFlashSale() {
   };
 
   return (
-    <div className="bg-red-900 relative w-full flex-1">
+    <div className=" relative w-full flex-1">
       {/* Awal Tombol Scroll Kiri */}
       {canScrollLeft && (
         <button
@@ -51,7 +51,7 @@ export default function ProdukFlashSale() {
           aria-label="Geser ke kiri"
           className="absolute left-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out"
         >
-          <IoIosArrowDropleftCircle className="w-10 h-10 text-white" />
+          <IoIosArrowDropleftCircle className="w-10 h-10 text-[#EE4D2D]" />
         </button>
       )}
       {/* Akhir Tombol Scroll Kiri */}
@@ -59,7 +59,7 @@ export default function ProdukFlashSale() {
       <div
         ref={scrollRef}
         onScroll={updateScrollState}
-        className="bg-amber-400 overflow-x-auto scroll-smooth flex-1 w-full h-full grid grid-flow-col gap-2 grid-rows-1 scrollbar-none justify-start"
+        className=" overflow-x-auto scroll-smooth flex-1 w-full h-full grid grid-flow-col gap-2 grid-rows-1 scrollbar-none justify-start"
       >
         {/* Awal Mapping Produk Flash Sale */}
         {flashSaleLists.map((produk, index) => (
@@ -131,7 +131,7 @@ export default function ProdukFlashSale() {
           aria-label="Geser ke kanan"
           className="absolute right-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out"
         >
-          <IoIosArrowDroprightCircle className="w-10 h-10 text-white " />
+          <IoIosArrowDroprightCircle className="w-10 h-10 text-[#EE4D2D] " />
         </button>
       )}
       {/* Akhir Tombol Scroll Kanan */}

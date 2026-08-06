@@ -9,6 +9,8 @@ import { LuUserRoundCheck } from "react-icons/lu";
 import StoreMenuBar from "@/src/components/Store/StoreMenuBar";
 import StoreVoucher from "@/src/components/Store/StoreVoucher";
 import StoreMungkinKamuSuka from "@/src/components/Store/StoreMungkinKamuSuka";
+import StoreBannerSlide from "@/src/components/Store/StoreBannerSlide";
+import StoreBannerStatis from "@/src/components/Store/StoreBannerStatis";
 
 interface Props {
   params: Promise<{
@@ -276,6 +278,13 @@ export default async function StoreDetail({ params }: Props) {
       {/* Akhir Mungkin Kamu Suka */}
 
       {/* Awal Banner */}
+      {/* Awal Banner Slide */}
+      <StoreBannerSlide />
+      {/* Akhir Banner Slide */}
+
+      {/* Awal Banner Statis */}
+      <StoreBannerStatis />
+      {/* Akhir Banner Statis */}
       {/* Akhir Banner */}
 
       {/* Awal Produk Terlaris */}
