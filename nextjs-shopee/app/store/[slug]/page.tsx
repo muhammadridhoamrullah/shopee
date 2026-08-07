@@ -8,9 +8,9 @@ import { MdOutlineStarOutline } from "react-icons/md";
 import { LuUserRoundCheck } from "react-icons/lu";
 import StoreMenuBar from "@/src/components/Store/StoreMenuBar";
 import StoreVoucher from "@/src/components/Store/StoreVoucher";
-import StoreMungkinKamuSuka from "@/src/components/Store/StoreMungkinKamuSuka";
 import StoreBannerSlide from "@/src/components/Store/StoreBannerSlide";
 import StoreBannerStatis from "@/src/components/Store/StoreBannerStatis";
+import StoreProdukSectionByType from "@/src/components/Store/StoreProdukSectionByType";
 
 interface Props {
   params: Promise<{
@@ -275,7 +275,7 @@ export default async function StoreDetail({ params }: Props) {
       {/* Akhir Voucher */}
 
       {/* Awal Mungkin Kamu Suka */}
-      <StoreMungkinKamuSuka storeId={storeId} />
+      <StoreProdukSectionByType storeId={storeId} type="mungkinKamuSuka" />
       {/* Akhir Mungkin Kamu Suka */}
 
       {/* Awal Banner */}
@@ -289,6 +289,7 @@ export default async function StoreDetail({ params }: Props) {
       {/* Akhir Banner */}
 
       {/* Awal Produk Terlaris */}
+      <StoreProdukSectionByType storeId={storeId} type="terlaris" />
       {/* Akhir Produk Terlaris */}
 
       {/* Awal Kategori dan List Semua Produk */}
