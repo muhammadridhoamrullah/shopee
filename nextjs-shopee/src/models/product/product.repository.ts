@@ -1,7 +1,7 @@
 import { getDB } from "@/src/db/config";
 import { ProdukDokumen } from "@/src/type/produk";
 import { escapeRegex } from "@/src/utils/Navbar/navbar";
-import { ObjectId, Sort } from "mongodb";
+import { Document, ObjectId, Sort } from "mongodb";
 
 const COLLECTION_NAME = "products";
 
@@ -109,8 +109,32 @@ export class ProductRepository {
     });
   }
 
-  static async findByStoreId(storeId: string) {
+  static async findByStoreId(storeId: string, sortBy?: string) {
     const db = await getDB();
+
+    const pipeline: Document[] = [
+      { $match: { storeId: new ObjectId(storeId) } },
+    ];
+
+    if (sortBy === "terlaris") {
+      pipeline.push({ $sort: { sold: -1 } }, { $limit: 5 });
+    } else if (sortBy === "terbaru") {
+      pipeline.push({ $sort: { createdAt: -1 } }, { $limit: 5 });
+    } else if (sortBy === "mungkinKamuSuka") {
+      pipeline.push({ $sample: { size: 5 } });
+    }
+
+    pipeline.push({
+      $project: {
+        _id: 1,
+        name: 1,
+        slug: 1,
+        images: 1,
+        price: 1,
+        discountPercent: 1,
+        sold: 1,
+      },
+    });
 
     return db
       .collection<ProdukDokumen>(COLLECTION_NAME)
@@ -125,23 +149,7 @@ export class ProductRepository {
           | "discountPercent"
           | "sold"
         >
-      >([
-        { $match: { storeId: new ObjectId(storeId) } },
-        {
-          $sample: { size: 5 },
-        },
-        {
-          $project: {
-            _id: 1,
-            name: 1,
-            slug: 1,
-            images: 1,
-            price: 1,
-            discountPercent: 1,
-            sold: 1,
-          },
-        },
-      ])
+      >(pipeline)
       .toArray();
   }
 }
