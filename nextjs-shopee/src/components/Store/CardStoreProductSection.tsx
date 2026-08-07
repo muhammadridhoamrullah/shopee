@@ -14,6 +14,8 @@ export default function CardStoreProductSection({
   link,
   produk,
 }: Props) {
+  console.log(title, "title");
+
   return (
     <div className="w-full h-80 px-20">
       {/* Awal Mungkin Kamu Suka */}
