@@ -17,6 +17,7 @@ export default async function StoreProdukSectionByType({
 }: Props) {
   const { title, path } = SECTION_CONFIG[type as keyof typeof SECTION_CONFIG];
   const produk = await getProductByStoreId(storeId, type);
+
   return (
     <CardStoreProductSection
       title={title}
