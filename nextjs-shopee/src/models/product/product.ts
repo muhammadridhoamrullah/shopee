@@ -54,8 +54,8 @@ export async function getSearchProducts(
   };
 }
 
-export async function getProductByStoreId(storeId: string) {
-  const products = await ProductRepository.findByStoreId(storeId);
+export async function getProductByStoreId(storeId: string, sortBy?: string) {
+  const products = await ProductRepository.findByStoreId(storeId, sortBy);
 
   return products.map((el) => ({
     ...el,
