@@ -57,4 +57,4 @@ jobs:
             docker pull ghcr.io/${{ github.repository }}/nextjs-shopee:latest
             docker stop shopee-nextjs || true
             docker rm shopee-nextjs || true
-            docker run -d -p 3001:3000 --env-file .env.production --name shopee-nextjs ghcr.io/${{ github.repository }}/nextjs-shopee:latest
+            docker run -d --name shopee-nextjs --restart unless-stopped -m 350m --memory-swap 700m -p 3001:3000 --env-file /home/ubuntu/.env.production ghcr.io/muhammadridhoamrullah/shopee/nextjs-shopee:latest
