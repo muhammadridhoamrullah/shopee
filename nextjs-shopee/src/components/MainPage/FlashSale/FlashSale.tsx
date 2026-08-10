@@ -2,8 +2,16 @@ import Link from "next/link";
 import TimerFlashSale from "./TimerFlashSale";
 import { IoIosArrowForward } from "react-icons/io";
 import ProdukFlashSale from "./ProdukFlashSale";
+import { getActiveFlashSale } from "@/src/models/flashSale/flashSale";
 
-export default function FlashSale() {
+export default async function FlashSale() {
+  const itemsFlashSale = await getActiveFlashSale();
+  console.log(itemsFlashSale, "FLASH SALE GWEH");
+
+  if (itemsFlashSale.length === 0) {
+    return null;
+  }
+
   return (
     <div className="bg-white w-full h-75 flex flex-col justify-between items-start">
       {/* Awal Flash Sale */}
@@ -15,7 +23,7 @@ export default function FlashSale() {
           {/* Akhir Text Flash Sale */}
 
           {/* Awal Timer Flash Sale */}
-          <TimerFlashSale />
+          <TimerFlashSale endTime={itemsFlashSale[0].endTime} />
           {/* Akhir Timer Flash Sale */}
         </div>
         {/* Akhir Text dan Timer Flash Sale */}
@@ -35,7 +43,7 @@ export default function FlashSale() {
       {/* Akhir Flash Sale */}
 
       {/* Awal Mapping Produk Flash Sale */}
-      <ProdukFlashSale />
+      <ProdukFlashSale items={itemsFlashSale} />
       {/* Akhir Mapping Produk Flash Sale */}
     </div>
   );

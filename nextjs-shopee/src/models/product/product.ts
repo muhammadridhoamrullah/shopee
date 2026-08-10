@@ -21,6 +21,15 @@ export const getAllProducts = cache(async () => {
   return products.map((product) => toProdukResponse(product));
 });
 
+export async function getProductsForRecommendation(sample: number) {
+  const products = await ProductRepository.findRandomRecommendation(sample);
+
+  return products.map((el) => ({
+    ...el,
+    _id: el._id.toString(),
+  }));
+}
+
 export async function getSearchProducts(
   keyword: string,
   page: number,
@@ -54,7 +63,10 @@ export async function getSearchProducts(
   };
 }
 
-export async function getProductByStoreId(storeId: string, sortBy?: string) {
+export async function getProductByStoreIdWithSort(
+  storeId: string,
+  sortBy?: string,
+) {
   const products = await ProductRepository.findByStoreId(storeId, sortBy);
 
   return products.map((el) => ({

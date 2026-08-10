@@ -20,12 +20,48 @@ export class ProductRepository {
 
   static async findAll() {
     const db = await getDB();
+
     const findAllProducts = db
       .collection<ProdukDokumen>(COLLECTION_NAME)
       .find()
       .toArray();
 
     return findAllProducts;
+  }
+
+  static async findRandomRecommendation(sample: number) {
+    const db = await getDB();
+
+    const result = db
+      .collection<ProdukDokumen>(COLLECTION_NAME)
+      .aggregate<
+        Pick<
+          ProdukDokumen,
+          | "_id"
+          | "name"
+          | "slug"
+          | "images"
+          | "price"
+          | "discountPercent"
+          | "sold"
+        >
+      >([
+        { $sample: { size: sample } },
+        {
+          $project: {
+            _id: 1,
+            name: 1,
+            slug: 1,
+            images: 1,
+            price: 1,
+            discountPercent: 1,
+            sold: 1,
+          },
+        },
+      ])
+      .toArray();
+
+    return result;
   }
 
   static async findById(id: string) {
@@ -109,6 +145,53 @@ export class ProductRepository {
     });
   }
 
+  static async countByStoreId(storeId: string) {
+    const db = await getDB();
+
+    return db.collection<ProdukDokumen>(COLLECTION_NAME).countDocuments({
+      storeId: new ObjectId(storeId),
+    });
+  }
+
+  static async findByStoreIdProfile(
+    storeId: string,
+    limit: number,
+    skip: number,
+    sort: Sort,
+  ) {
+    const db = await getDB();
+
+    return db
+      .collection<ProdukDokumen>(COLLECTION_NAME)
+      .find({
+        storeId: new ObjectId(storeId),
+      })
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
+      .project<
+        Pick<
+          ProdukDokumen,
+          | "_id"
+          | "name"
+          | "slug"
+          | "images"
+          | "price"
+          | "discountPercent"
+          | "sold"
+        >
+      >({
+        _id: 1,
+        name: 1,
+        slug: 1,
+        images: 1,
+        price: 1,
+        discountPercent: 1,
+        sold: 1,
+      })
+      .toArray();
+  }
+
   static async findByStoreId(storeId: string, sortBy?: string) {
     const db = await getDB();
 
@@ -150,6 +233,17 @@ export class ProductRepository {
           | "sold"
         >
       >(pipeline)
+      .toArray();
+  }
+
+  static async findByIds(productIds: ObjectId[]) {
+    const db = await getDB();
+
+    return db
+      .collection<ProdukDokumen>(COLLECTION_NAME)
+      .find({
+        _id: { $in: productIds },
+      })
       .toArray();
   }
 }
