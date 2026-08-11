@@ -1,9 +1,6 @@
 import CardProdukUtama from "../../CardProduk/CardProdukUtama";
-import CardProductRekomendasi from "./CardProdukRekomendasi";
-import {
-  getAllProducts,
-  getProductsForRecommendation,
-} from "@/src/models/product/product";
+
+import { getProductsForRecommendation } from "@/src/models/product/product";
 
 export default async function ProdukRekomendasi() {
   const allProducts = await getProductsForRecommendation(30);

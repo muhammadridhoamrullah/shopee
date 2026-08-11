@@ -1,7 +1,7 @@
 "use client";
 
 import { useCountdownFlashSale } from "@/src/helpers/hooks";
-import { flashSaleEndTime, pad } from "@/src/helpers/utils";
+import { pad } from "@/src/helpers/utils";
 
 interface Props {
   endTime: Date;

@@ -1,4 +1,6 @@
+import { FLASH_SALE_SLOTS, jadikanWIB } from "@/src/helpers/flashSale";
 import { ProductRepository } from "../product/product.repository";
+import { StoreRepository } from "../store/store.repository";
 import { FlashSaleRepository } from "./flashSale.repository";
 
 export async function getActiveFlashSale() {
@@ -45,4 +47,86 @@ export async function getActiveFlashSale() {
       };
     })
     .filter((item) => item !== null); // Filter out null values
+}
+
+export async function createFlashSaleItem(input: {
+  userId: string;
+  productId: string;
+  flashPrice: number;
+  flashStock: number;
+  tanggal: string;
+  slotStart: number;
+}) {
+  // 1. User harus punya toko
+  const storeUser = await StoreRepository.findStoreByUserId(input.userId);
+
+  if (!storeUser) {
+    throw new Error("User tidak memiliki toko");
+  }
+
+  // 2. Produk harus ada dan milik si User
+  const product = await ProductRepository.findById(input.productId);
+
+  if (!product) {
+    throw new Error("Produk tidak ditemukan");
+  }
+
+  if (!product.storeId.equals(storeUser._id)) {
+    throw new Error("Produk tidak dimiliki oleh user ini");
+  }
+
+  // 3. Harga flash sale harus lebih kecil dari harga normal
+  if (input.flashPrice >= product.price) {
+    throw new Error("Harga flash sale harus lebih kecil dari harga normal");
+  }
+
+  // 4. Kuota flash sale harus lebih kecil dari stok produk
+  if (input.flashStock > product.quantity) {
+    throw new Error(
+      "Kuota flash sale tidak boleh lebih besar dari stok produk",
+    );
+  }
+
+  // 5. Slot flash sale harus yang terdaftar
+  const slot = FLASH_SALE_SLOTS.find((el) => el.start === input.slotStart);
+
+  if (!slot) {
+    throw new Error("Slot flash sale tidak valid");
+  }
+
+  // 6. Hitung waktu sesungguhnya dari tanggal + slot
+  const [tahun, bulan, hari] = input.tanggal.split("-").map(Number);
+  const startTime = jadikanWIB(tahun, bulan, hari, slot.start);
+  const endTime = jadikanWIB(tahun, bulan, hari, slot.end);
+
+  // 7. Slot waktu belum lewat
+  if (endTime <= new Date()) {
+    throw new Error("Slot flash sale sudah lewat");
+  }
+
+  // 8. Pastikan produk belum terdaftar di flash sale yang sama
+  const existingFlashSale = await FlashSaleRepository.findOverlapping(
+    product._id,
+    startTime,
+    endTime,
+  );
+
+  if (existingFlashSale) {
+    throw new Error("Produk sudah terdaftar di flash sale pada slot ini");
+  }
+
+  // 9. Buat entri flash sale
+  const inputFlashSaleItem = await FlashSaleRepository.create({
+    productId: product._id,
+    storeId: storeUser._id,
+    flashPrice: input.flashPrice,
+    flashStock: input.flashStock,
+    flashSold: 0,
+    startTime,
+    endTime,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  });
+
+  return inputFlashSaleItem.insertedId.toString();
 }

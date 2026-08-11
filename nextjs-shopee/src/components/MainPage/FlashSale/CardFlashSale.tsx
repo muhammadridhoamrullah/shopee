@@ -1,9 +1,5 @@
 import { formatRupiah } from "@/src/helpers/utils";
-import {
-  FlashSaleItemResponse,
-  FlashSaleProdukResponse,
-} from "@/src/type/flashSale";
-import { FlashSaleItem } from "@/src/type/type";
+import { FlashSaleProdukResponse } from "@/src/type/flashSale";
 import Image from "next/image";
 import Link from "next/link";
 

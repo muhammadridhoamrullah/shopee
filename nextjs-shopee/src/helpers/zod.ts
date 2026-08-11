@@ -24,3 +24,18 @@ export const schemaAddToCartDanBeliSekarang = z.object({
   productId: z.string().min(1, { message: "Product ID is required" }),
   quantity: z.number().int().min(1, { message: "Quantity must be at least 1" }),
 });
+
+export const schemaCreateFlashSaleItem = z.object({
+  productId: z.string().min(1, { message: "Product ID is required" }),
+  flashPrice: z
+    .number()
+    .positive({ message: "Flash price must be a positive number" }),
+  flashStock: z
+    .number()
+    .int()
+    .positive({ message: "Flash stock must be a positive integer" }),
+  tanggal: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+    message: "Format tanggal tidak valid",
+  }),
+  slotStart: z.number().int().min(0).max(23),
+});

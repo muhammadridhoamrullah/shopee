@@ -1,12 +1,3 @@
-import Image from "next/image";
-import { FiPlus } from "react-icons/fi";
-import { IoChatboxEllipsesOutline } from "react-icons/io5";
-import { IoStorefrontOutline } from "react-icons/io5";
-import { FiUserPlus } from "react-icons/fi";
-import { LuUsers } from "react-icons/lu";
-import { MdOutlineStarOutline } from "react-icons/md";
-import { LuUserRoundCheck } from "react-icons/lu";
-import StoreMenuBar from "@/src/components/Store/StoreMenuBar";
 import StoreVoucher from "@/src/components/Store/StoreVoucher";
 import StoreBannerSlide from "@/src/components/Store/StoreBannerSlide";
 import StoreBannerStatis from "@/src/components/Store/StoreBannerStatis";
@@ -104,7 +95,10 @@ export default async function StoreDetail({ params, searchParams }: Props) {
   return (
     <div className="bg-[#F5F5F5] w-full min-h-screen flex flex-col gap-5 justify-start items-start border-b-4 border-b-[#EE4D2D] pb-10">
       {/* Awal Info Store */}
-      <StoreInfo data={dataStoreInfo.data} totalProducts={dataStoreInfo.totalProducts} />
+      <StoreInfo
+        data={dataStoreInfo.data}
+        totalProducts={dataStoreInfo.totalProducts}
+      />
 
       {/* Akhir Info Store */}
 
