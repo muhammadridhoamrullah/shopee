@@ -10,6 +10,7 @@ async function seedProducts() {
     await collection.deleteMany({}); // Hapus semua dokumen yang ada
     const result = await collection.insertMany(produkSeedData); // Masukkan data seed
     await collection.createIndex({ slug: 1 }, { unique: true }); // Membuat index unik pada field slug
+    await collection.createIndex({ sold: -1, createdAt: -1, _id: -1 }); // Membuat index untuk sorting produk terlaris
 
     console.log(`Seeded ${result.insertedCount} products.`);
   } catch (error) {

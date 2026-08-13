@@ -246,4 +246,42 @@ export class ProductRepository {
       })
       .toArray();
   }
+
+  static async findProdukTerlaris(limit: number, skip: number) {
+    const db = await getDB();
+
+    return db
+      .collection<ProdukDokumen>(COLLECTION_NAME)
+      .find()
+      .sort({ sold: -1, createdAt: -1, _id: -1 })
+      .skip(skip)
+      .limit(limit)
+      .project<
+        Pick<
+          ProdukDokumen,
+          | "_id"
+          | "name"
+          | "slug"
+          | "images"
+          | "price"
+          | "discountPercent"
+          | "sold"
+        >
+      >({
+        _id: 1,
+        name: 1,
+        slug: 1,
+        images: 1,
+        price: 1,
+        discountPercent: 1,
+        sold: 1,
+      })
+      .toArray();
+  }
+
+  static async countAllProduk() {
+    const db = await getDB();
+
+    return db.collection<ProdukDokumen>(COLLECTION_NAME).countDocuments();
+  }
 }

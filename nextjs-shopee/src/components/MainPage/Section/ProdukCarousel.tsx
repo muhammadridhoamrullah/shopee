@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { IoIosArrowDroprightCircle } from "react-icons/io";
-import { IoIosArrowDropleftCircle } from "react-icons/io";
-import CardFlashSale from "./CardFlashSale";
-import { FlashSaleProdukResponse } from "@/src/type/flashSale";
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from "react-icons/io";
 
 interface Props {
-  items: FlashSaleProdukResponse[];
+  children: React.ReactNode;
 }
 
-export default function ProdukFlashSale({ items }: Props) {
+export default function ProdukCarousel({ children }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -45,7 +45,7 @@ export default function ProdukFlashSale({ items }: Props) {
   };
 
   return (
-    <div className=" relative w-full flex-1">
+    <div className="relative w-full flex-1">
       {/* Awal Tombol Scroll Kiri */}
       {canScrollLeft && (
         <button
@@ -62,12 +62,10 @@ export default function ProdukFlashSale({ items }: Props) {
       <div
         ref={scrollRef}
         onScroll={updateScrollState}
-        className=" overflow-x-auto scroll-smooth flex-1 w-full h-full grid grid-flow-col gap-2 grid-rows-1 scrollbar-none justify-start"
+        className=" overflow-x-auto scroll-smooth  w-full h-full grid grid-flow-col gap-4 grid-rows-1 scrollbar-none justify-start"
       >
         {/* Awal Mapping Produk Flash Sale */}
-        {items.map((produk) => (
-          <CardFlashSale key={produk._id} produk={produk} />
-        ))}
+        {children}
         {/* Akhir Mapping Produk Flash Sale */}
       </div>
 
