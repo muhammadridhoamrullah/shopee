@@ -21,6 +21,15 @@ export const getAllProducts = cache(async () => {
   return products.map((product) => toProdukResponse(product));
 });
 
+export async function getProductsForRecommendation(sample: number) {
+  const products = await ProductRepository.findRandomRecommendation(sample);
+
+  return products.map((el) => ({
+    ...el,
+    _id: el._id.toString(),
+  }));
+}
+
 export async function getSearchProducts(
   keyword: string,
   page: number,
@@ -54,11 +63,41 @@ export async function getSearchProducts(
   };
 }
 
-export async function getProductByStoreId(storeId: string, sortBy?: string) {
+export async function getProductByStoreIdWithSort(
+  storeId: string,
+  sortBy?: string,
+) {
   const products = await ProductRepository.findByStoreId(storeId, sortBy);
 
   return products.map((el) => ({
     ...el,
     _id: el._id.toString(),
   }));
+}
+
+export async function getProductTerlarisPreview() {
+  const products = await ProductRepository.findProdukTerlaris(12, 0);
+
+  return products.map((el) => ({
+    ...el,
+    _id: el._id.toString(),
+  }));
+}
+
+export async function getProductTerlarisPage(page: number) {
+  const limit = 12; // Jumlah produk per halaman
+  const skip = (page - 1) * limit; // Hitung jumlah produk yang dilewati berdasarkan halaman
+
+  const products = await ProductRepository.findProdukTerlaris(limit, skip);
+  const totalProducts = await ProductRepository.countAllProduk();
+
+  return {
+    products: products.map((el) => ({
+      ...el,
+      _id: el._id.toString(),
+    })),
+    totalProducts,
+    page,
+    totalPages: Math.ceil(totalProducts / limit),
+  };
 }

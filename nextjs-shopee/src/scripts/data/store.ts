@@ -18,6 +18,7 @@ export const storeSeedData: StoreDokumen[] = [
     description: "Toko jersey bola original untuk klub dan timnas favoritmu",
     createdAt: new Date(),
     updatedAt: new Date(),
+    lastLogin: null,
     deletedAt: null,
   },
 ];
