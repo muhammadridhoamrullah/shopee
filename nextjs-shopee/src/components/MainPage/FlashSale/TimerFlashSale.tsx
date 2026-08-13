@@ -1,11 +1,14 @@
 "use client";
 
 import { useCountdownFlashSale } from "@/src/helpers/hooks";
-import { flashSaleEndTime, pad } from "@/src/helpers/utils";
+import { pad } from "@/src/helpers/utils";
 
-export default function TimerFlashSale() {
-  const { hours, minutes, seconds, isExpired } =
-    useCountdownFlashSale(flashSaleEndTime);
+interface Props {
+  endTime: Date;
+}
+
+export default function TimerFlashSale({ endTime }: Props) {
+  const { hours, minutes, seconds, isExpired } = useCountdownFlashSale(endTime);
 
   if (isExpired) {
     return (

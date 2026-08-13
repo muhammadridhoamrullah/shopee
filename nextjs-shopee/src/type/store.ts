@@ -11,6 +11,7 @@ export interface StoreDokumen {
   phone: string;
   createdAt: Date;
   updatedAt: Date;
+  lastLogin: Date | null;
   deletedAt: Date | null;
 }
 
@@ -25,6 +26,7 @@ export interface StoreResponse {
   phone?: string;
   createdAt: Date;
   updatedAt: Date;
+  lastLogin: Date | null;
   deletedAt: Date | null;
 }
 

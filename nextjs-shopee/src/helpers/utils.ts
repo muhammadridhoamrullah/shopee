@@ -716,5 +716,3 @@ export function toKategoriResponse(doc: KategoriDokumen): KategoriResponse {
     ancestorsId: doc.ancestorsId.map((id) => id.toString()),
   };
 }
-
-

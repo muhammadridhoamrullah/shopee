@@ -1,4 +1,4 @@
-import { getProductByStoreId } from "@/src/models/product/product";
+import { getProductByStoreIdWithSort } from "@/src/models/product/product";
 import CardStoreProductSection from "./CardStoreProductSection";
 
 interface Props {
@@ -16,7 +16,7 @@ export default async function StoreProdukSectionByType({
   type,
 }: Props) {
   const { title, path } = SECTION_CONFIG[type as keyof typeof SECTION_CONFIG];
-  const produk = await getProductByStoreId(storeId, type);
+  const produk = await getProductByStoreIdWithSort(storeId, type);
 
   return (
     <CardStoreProductSection

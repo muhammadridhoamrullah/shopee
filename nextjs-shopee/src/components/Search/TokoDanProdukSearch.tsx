@@ -30,7 +30,6 @@ interface Props {
 
 export default function TokoDanProdukSearch({ data, keyword, sort }: Props) {
   const [dropdownHarga, setDropDownHarga] = useState(false);
-  console.log(data.stores, "my store gwehhh");
 
   const router = useRouter();
 
@@ -143,7 +142,7 @@ export default function TokoDanProdukSearch({ data, keyword, sort }: Props) {
         {/* Akhir Hasil Pencarian "Keyword" */}
 
         {/* Awal Filter */}
-        <div className="bg-gray-200 w-full h-18 flex justify-between items-center p-2">
+        <div className="bg-gray-300 w-full h-18 flex justify-between items-center p-2">
           {/* Awal Filter */}
           <div className=" flex items-center gap-2 text-black font-medium">
             {/* Awal Text Urutkan */}
@@ -153,7 +152,7 @@ export default function TokoDanProdukSearch({ data, keyword, sort }: Props) {
             {/* Awal Populer */}
             <button
               onClick={() => handleSort("populer")}
-              className={`px-5 py-2  transition-colors duration-300 ease-in-out cursor-pointer ${sort === "populer" ? "bg-[#EE4D2D] text-white  hover:bg-[#c43d24] " : " bg-white hover:bg-gray-200"}`}
+              className={`px-5 py-2  transition-colors duration-300 ease-in-out cursor-pointer ${sort === "populer" ? "bg-[#EE4D2D] text-white  hover:bg-[#C43D24] " : " bg-white hover:bg-gray-200"}`}
             >
               Populer
             </button>
@@ -179,7 +178,7 @@ export default function TokoDanProdukSearch({ data, keyword, sort }: Props) {
 
             {/* Awal Harga */}
             <button
-              className="bg-white w-52 h-fit p-2 flex justify-between items-center rounded-md hover:bg-gray-200 transition-colors duration-300 ease-in-out cursor-pointer relative"
+              className="bg-white w-52 h-fit p-2 flex justify-between items-center hover:bg-gray-200 transition-colors duration-300 ease-in-out cursor-pointer relative"
               onClick={handleDropdownHarga}
             >
               {/* Awal Harga */}

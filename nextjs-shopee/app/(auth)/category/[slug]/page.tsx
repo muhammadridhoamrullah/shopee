@@ -11,12 +11,7 @@ interface Props {
   searchParams: Promise<{ page?: string; sort?: string }>;
 }
 
-// import { IoListSharp } from "react-icons/io5";
-// import { MdOutlineArrowRight } from "react-icons/md";
-// import { CiFilter } from "react-icons/ci";
-// import { MdKeyboardArrowDown } from "react-icons/md";
-// import { FaStar } from "react-icons/fa";
-// import { MdKeyboardArrowLeft } from "react-icons/md";
+
 
 export default async function CategorySlugPage({
   params,
