@@ -80,4 +80,5 @@ jobs:
             # 5. Bersihkan image lama yang tidak digunakan lagi
 
             docker logout ghcr.io
-            docker images "$IMAGE" --format '{{.Repository}}:{{.Tag}} {{.ID}}' | grep -v "$TAG" | xargs -r docker rmi -f || true
+            docker images "$IMAGE" --format '{{.Repository}}:{{.Tag}}' | grep -v ":$TAG$" | xargs -r docker rmi -f || true
+            docker image prune -f || true
