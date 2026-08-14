@@ -20,7 +20,7 @@ export default function Rekomendasi() {
           href={"/rekomendasi"}
           className="bg-[#EE4D2D] px-20 py-2 text-sm text-white font-semibold rounded-lg hover:bg-[#d13f1e] transition-colors duration-300 ease-in-out"
         >
-          Lihat Lainnya
+          Lihat Rekomendasi Lainnya
         </Link>
       </div>
       {/* Akhir Lihat Lainnya */}
