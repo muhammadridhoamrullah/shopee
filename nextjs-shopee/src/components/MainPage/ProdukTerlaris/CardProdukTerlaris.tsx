@@ -41,7 +41,7 @@ export default function CardProduKTerlaris({ produk }: Props) {
 
       {/* Awal Nama, Harga, Rating, Terjual Produk */}
       <span className=" w-full min-10 shrink-0 line-clamp-2 px-2 text-sm font-semibold text-center ">
-        {produk.name} - {produk._id}
+        {produk.name}
       </span>
       {/* Akhir Nama, Harga, Rating, Terjual Produk */}
     </Link>
