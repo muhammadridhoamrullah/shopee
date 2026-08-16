@@ -16,7 +16,7 @@ export default function CardProduKTerlaris({ produk }: Props) {
       className=" w-43 h-full flex flex-col gap-1 justify-between items-center shrink-0 hover:scale-102 transition-transform duration-300 ease-in-out"
     >
       {/* Awal Foto Produk */}
-      <div className="bg-green-600 relative flex-1 w-full shrink-0 overflow-hidden rounded-xl">
+      <div className="bg-gray-400 relative flex-1 w-full shrink-0 overflow-hidden rounded-xl">
         <Image
           src={produk.images[0]}
           alt={produk.name}

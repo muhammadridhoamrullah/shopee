@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import { toast } from "react-toastify";
 import FormFlashSale from "./FormFlashSale";
+import PetunjukFlashSale from "./PetunjukFlashSale";
 
 export default function DaftarFlashSale() {
   const [formFlashSale, setFormFlashSale] = useState(false);
@@ -48,13 +48,7 @@ export default function DaftarFlashSale() {
       {/* Akhir Text Daftar Flash Sale */}
 
       {/* Awal Form Daftar Flash Sale */}
-      {formFlashSale ? (
-        <FormFlashSale />
-      ) : (
-        <div>
-          <h1>Pake Baju Pasar Aku Masih Sabi</h1>
-        </div>
-      )}
+      {formFlashSale ? <FormFlashSale /> : <PetunjukFlashSale />}
       {/* Akhir Form Daftar Flash Sale */}
     </div>
   );
