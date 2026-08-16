@@ -7,6 +7,7 @@ const protectedPaths = [
   "/api/order",
   "/cart",
   "/api/flashSale",
+  "/portal",
 ];
 const guestOnlyPaths = ["/login", "/register"];
 
@@ -81,5 +82,6 @@ export const config = {
     "/api/order/:path*",
     "/cart/:path*",
     "/api/flashSale/:path*",
+    "/portal/:path*",
   ],
 };
