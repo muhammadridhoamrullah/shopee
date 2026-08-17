@@ -4,13 +4,19 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import FormFlashSale from "./FormFlashSale";
 import PetunjukFlashSale from "./PetunjukFlashSale";
+import { ProdukRingkas } from "@/src/type/produk";
 
-export default function DaftarFlashSale() {
+interface Props {
+  products: ProdukRingkas[];
+}
+
+export default function DaftarFlashSale({ products }: Props) {
   const [formFlashSale, setFormFlashSale] = useState(false);
 
   function handleFormFlashSale() {
     setFormFlashSale(!formFlashSale);
   }
+  
   return (
     <div className="bg-white w-full h-fit p-5 rounded-md shadow-md flex flex-col gap-4 justify-start items-start">
       {/* Awal Text Daftar Flash Sale */}
@@ -48,7 +54,11 @@ export default function DaftarFlashSale() {
       {/* Akhir Text Daftar Flash Sale */}
 
       {/* Awal Form Daftar Flash Sale */}
-      {formFlashSale ? <FormFlashSale /> : <PetunjukFlashSale />}
+      {formFlashSale ? (
+        <FormFlashSale products={products} />
+      ) : (
+        <PetunjukFlashSale />
+      )}
       {/* Akhir Form Daftar Flash Sale */}
     </div>
   );

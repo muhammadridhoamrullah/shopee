@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { MdDoubleArrow } from "react-icons/md";
-
+import { Fragment } from "react";
 export default function PetunjukFlashSale() {
   const info = [
     {
@@ -23,11 +23,9 @@ export default function PetunjukFlashSale() {
   return (
     <div className=" w-full h-90 flex justify-between items-center gap-2">
       {info.map((item, index) => (
-        <>
-          <div
-            key={index}
-            className=" w-full h-full flex flex-col gap-2 justify-start items-center rounded-md overflow-hidden"
-          >
+        <Fragment key={index}>
+          {/* Awal Info */}
+          <div className=" w-full h-full flex flex-col gap-2 justify-start items-center rounded-md overflow-hidden">
             {/* Awal Image */}
             <div className=" w-full flex-1 relative">
               <Image src={item.image} alt={item.name} fill objectFit="cover" />
@@ -48,10 +46,14 @@ export default function PetunjukFlashSale() {
             </div>
             {/* Akhir Judul dan Deskripsi */}
           </div>
+          {/* Akhir Info */}
+
+          {/* Awal Arrow */}
           {index !== info.length - 1 && (
             <MdDoubleArrow className="text-[#EE4D2D] text-8xl" />
           )}
-        </>
+          {/* Akhir Arrow */}
+        </Fragment>
       ))}
     </div>
   );

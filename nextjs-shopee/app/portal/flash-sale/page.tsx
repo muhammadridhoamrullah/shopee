@@ -24,7 +24,6 @@ export default async function FlashSalePage() {
   }
 
   const myProducts = await getProductsMilikStore(myStore._id);
-  console.log(myProducts, "myProducts flash-sale");
 
   return (
     <div className=" flex-1 h-full p-5 flex flex-col justify-start items-start gap-5">
@@ -49,7 +48,7 @@ export default async function FlashSalePage() {
       {/* Akhir Performa Flash Sale Toko Saya */}
 
       {/* Awal Daftar Flash Sale */}
-      <DaftarFlashSale />
+      <DaftarFlashSale products={myProducts} />
       {/* Akhir Daftar Flash Sale */}
     </div>
   );
