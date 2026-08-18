@@ -1,18 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import PetunjukFlashSale from "./PetunjukFlashSale";
-import { ProdukRingkas } from "@/src/type/produk";
 import AdaDaftarFlashSale from "./AdaDaftarFlashSale";
 import Link from "next/link";
 
-interface Props {
-  products: ProdukRingkas[];
-}
-
-export default function DaftarFlashSale({ products }: Props) {
-  const [adaFlashSale, setAdaFlashSale] = useState(false);
+export default function DaftarFlashSale() {
+  const adaFlashSale = true; // Ganti dengan kondisi yang sesuai untuk menentukan apakah ada flash sale atau tidak
 
   return (
     <div className="bg-white w-full h-fit p-5 rounded-md shadow-md flex flex-col gap-4 justify-start items-start">

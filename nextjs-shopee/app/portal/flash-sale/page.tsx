@@ -1,8 +1,5 @@
 import DaftarFlashSale from "@/src/components/Portal/FlashSale/DaftarFlashSale";
-import {
-  getProductsMilikStore,
-  getStoreByUserId,
-} from "@/src/models/store/store";
+import { getStoreByUserId } from "@/src/models/store/store";
 import { headers } from "next/headers";
 import { RiErrorWarningFill } from "react-icons/ri";
 
@@ -22,8 +19,6 @@ export default async function FlashSalePage() {
       </div>
     );
   }
-
-  const myProducts = await getProductsMilikStore(myStore._id);
 
   return (
     <div className=" flex-1 h-full p-5 flex flex-col justify-start items-start gap-5">
@@ -48,7 +43,7 @@ export default async function FlashSalePage() {
       {/* Akhir Performa Flash Sale Toko Saya */}
 
       {/* Awal Daftar Flash Sale */}
-      <DaftarFlashSale products={myProducts} />
+      <DaftarFlashSale />
       {/* Akhir Daftar Flash Sale */}
     </div>
   );

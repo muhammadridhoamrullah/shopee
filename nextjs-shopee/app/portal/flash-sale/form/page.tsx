@@ -1,11 +1,10 @@
 import InputFormFlashSale from "@/src/components/Portal/FlashSale/InputFormFlashSale";
-import { FLASH_SALE_SLOTS, tanggalHariIni } from "@/src/helpers/flashSale";
+import { tanggalHariIni } from "@/src/helpers/flashSale";
 import {
   getProductsMilikStore,
   getStoreByUserId,
 } from "@/src/models/store/store";
 import { headers } from "next/headers";
-import { FaCheck } from "react-icons/fa6";
 
 export default async function FormFlashSale() {
   const headerLists = await headers();
