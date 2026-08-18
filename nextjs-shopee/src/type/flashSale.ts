@@ -41,3 +41,11 @@ export interface FlashSaleProdukResponse {
   flashSold: number;
   endTime: Date;
 }
+
+export interface InputItemFlashSale {
+  productId: string;
+  flashPrice: number;
+  flashStock: number;
+  tanggal: string;
+  slotStart: number;
+}

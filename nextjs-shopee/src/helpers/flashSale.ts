@@ -19,3 +19,11 @@ export function jadikanWIB(
 ): Date {
   return new Date(Date.UTC(tahun, bulan - 1, tanggal, jamWIB - OFFSET));
 }
+
+export function tanggalHariIni() {
+  const wib = new Date(Date.now() + OFFSET * 60 * 60 * 1000);
+  const tahun = wib.getUTCFullYear();
+  const bulan = String(wib.getUTCMonth() + 1).padStart(2, "0");
+  const tanggal = String(wib.getUTCDate()).padStart(2, "0");
+  return `${tahun}-${bulan}-${tanggal}`;
+}

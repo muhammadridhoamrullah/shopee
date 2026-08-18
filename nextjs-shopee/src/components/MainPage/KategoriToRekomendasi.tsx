@@ -20,10 +20,6 @@ export default function KategoriToRekomendasi() {
       {/* Awal Rekomendasi */}
       <Rekomendasi />
       {/* Akhir Rekomendasi */}
-
-      {/* Awal Footer */}
-      {/* <Footer /> */}
-      {/* Akhir Footer */}
     </div>
   );
 }
