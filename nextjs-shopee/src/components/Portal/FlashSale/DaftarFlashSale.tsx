@@ -2,21 +2,18 @@
 
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import FormFlashSale from "./FormFlashSale";
 import PetunjukFlashSale from "./PetunjukFlashSale";
 import { ProdukRingkas } from "@/src/type/produk";
+import AdaDaftarFlashSale from "./AdaDaftarFlashSale";
+import Link from "next/link";
 
 interface Props {
   products: ProdukRingkas[];
 }
 
 export default function DaftarFlashSale({ products }: Props) {
-  const [formFlashSale, setFormFlashSale] = useState(false);
+  const [adaFlashSale, setAdaFlashSale] = useState(false);
 
-  function handleFormFlashSale() {
-    setFormFlashSale(!formFlashSale);
-  }
-  
   return (
     <div className="bg-white w-full h-fit p-5 rounded-md shadow-md flex flex-col gap-4 justify-start items-start">
       {/* Awal Text Daftar Flash Sale */}
@@ -29,16 +26,18 @@ export default function DaftarFlashSale({ products }: Props) {
 
           {/* Awal Petunjuk Flash Sale */}
           <span className="text-sm text-gray-400">
-            Atur produk yang ingin ditampilkan di halaman Flash Sale
-            tokomu!Pelajari Lebih Lanjut
+            Atur produk yang ingin ditampilkan di halaman Flash Sale tokomu!{" "}
+            <span className="text-blue-500 underline cursor-pointer">
+              Pelajari Lebih Lanjut
+            </span>
           </span>
           {/* Akhir Petunjuk Flash Sale */}
         </div>
         {/* Akhir Text Daftar Flash Sale */}
 
         {/* Awal Button Form Flash Sale */}
-        <button
-          onClick={handleFormFlashSale}
+        <Link
+          href={"/portal/flash-sale/form"}
           className="bg-[#EE4D2D] py-2 px-4 flex justify-between items-center gap-2 text-white rounded-md cursor-pointer hover:bg-[#d13f1e] transition-all duration-300"
         >
           {/* Awal Icon + */}
@@ -48,17 +47,13 @@ export default function DaftarFlashSale({ products }: Props) {
           {/* Awal Text Buat */}
           <span>Buat</span>
           {/* Akhir Text Buat */}
-        </button>
+        </Link>
         {/* Akhir Button Form Flash Sale */}
       </div>
       {/* Akhir Text Daftar Flash Sale */}
 
       {/* Awal Form Daftar Flash Sale */}
-      {formFlashSale ? (
-        <FormFlashSale products={products} />
-      ) : (
-        <PetunjukFlashSale />
-      )}
+      {adaFlashSale ? <AdaDaftarFlashSale /> : <PetunjukFlashSale />}
       {/* Akhir Form Daftar Flash Sale */}
     </div>
   );
