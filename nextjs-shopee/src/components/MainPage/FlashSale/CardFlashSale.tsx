@@ -57,7 +57,7 @@ export default function CardFlashSale({ produk }: Props) {
 
           {/* Awal Jumlah Terjual */}
           <span className="absolute text-white">
-            {produk.flashStock - produk.flashSold} TERJUAL
+            {`${produk.flashSold} TERJUAL`}
           </span>
           {/* Akhir Jumlah Terjual */}
         </div>
