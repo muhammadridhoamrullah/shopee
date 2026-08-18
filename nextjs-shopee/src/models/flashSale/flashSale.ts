@@ -130,3 +130,5 @@ export async function createFlashSaleItem(input: {
 
   return inputFlashSaleItem.insertedId.toString();
 }
+
+

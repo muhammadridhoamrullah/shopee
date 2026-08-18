@@ -6,6 +6,7 @@ import tambahKeranjangReducer from "./slice/detailPage/tambahKeranjangSlice";
 import beliSekarangReducer from "./slice/detailPage/beliSekarangSlice";
 import checkoutKeranjangReducer from "./slice/cart/checkoutKeranjangSlice";
 import logoutReducer from "./slice/logoutSlice";
+import tambahItemFlashSaleReducer from "./slice/flashSale/tambahItemFlashSale";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     beliSekarang: beliSekarangReducer,
     checkoutKeranjang: checkoutKeranjangReducer,
     logout: logoutReducer,
+    tambahItemFlashSale: tambahItemFlashSaleReducer,
   },
 });
 
