@@ -1,4 +1,5 @@
 import { KategoriDokumen, KategoriResponse } from "../type/category";
+import { FlashSaleItemDokumen, FlashSaleItemResponse } from "../type/flashSale";
 import { ProdukDokumen, ProdukResponse } from "../type/produk";
 import { StoreDokumen, StoreResponse } from "../type/store";
 import {
@@ -696,12 +697,16 @@ export function formatAngka(angka: number): string {
   return `${angka}`;
 }
 
-export function toProdukResponse(doc: ProdukDokumen): ProdukResponse {
+export function toProdukResponse(
+  doc: ProdukDokumen,
+  flashSale?: FlashSaleItemDokumen,
+): ProdukResponse {
   return {
     ...doc,
     _id: doc._id.toString(),
     storeId: doc.storeId.toString(),
     categoryId: doc.categoryId.toString(),
+    flashSale: flashSale ? toFlashSaleItemResponse(flashSale) : undefined,
   };
 }
 
@@ -714,5 +719,16 @@ export function toKategoriResponse(doc: KategoriDokumen): KategoriResponse {
     ...doc,
     _id: doc._id.toString(),
     ancestorsId: doc.ancestorsId.map((id) => id.toString()),
+  };
+}
+
+export function toFlashSaleItemResponse(
+  doc: FlashSaleItemDokumen,
+): FlashSaleItemResponse {
+  return {
+    ...doc,
+    _id: doc._id.toString(),
+    productId: doc.productId.toString(),
+    storeId: doc.storeId.toString(),
   };
 }

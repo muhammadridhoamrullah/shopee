@@ -45,6 +45,27 @@ export class FlashSaleRepository {
     return result;
   }
 
+  // Cek apakah produk-produk ini sedang berlangsung flash sale atau tidak?
+  static async findActiveFlashSaleItemsByProductIds(productIds: ObjectId[]) {
+    const db = await getDB();
+    const now = new Date();
+
+    const result = await db
+      .collection<FlashSaleItemDokumen>(COLLECTION_NAME)
+      .find({
+        productId: { $in: productIds },
+        startTime: {
+          $lte: now,
+        },
+        endTime: {
+          $gt: now,
+        },
+      })
+      .toArray();
+
+    return result;
+  }
+
   static async create(item: Omit<FlashSaleItemDokumen, "_id">) {
     const db = await getDB();
     const result = await db.collection(COLLECTION_NAME).insertOne(item);

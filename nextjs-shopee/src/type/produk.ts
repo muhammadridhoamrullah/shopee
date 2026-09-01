@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+import { FlashSaleItemDokumen, FlashSaleItemResponse } from "./flashSale";
 
 export interface ProdukDokumen {
   _id: ObjectId;
@@ -15,6 +16,7 @@ export interface ProdukDokumen {
   updatedAt: Date;
   deletedAt?: Date;
   storeId: ObjectId;
+  flashSale?: FlashSaleItemDokumen;
 }
 
 export interface ProdukResponse {
@@ -32,6 +34,7 @@ export interface ProdukResponse {
   updatedAt: Date;
   deletedAt?: Date;
   storeId: string;
+  flashSale?: FlashSaleItemResponse;
 }
 
 export interface ProdukRingkas {
@@ -43,5 +46,3 @@ export interface ProdukRingkas {
   discountPercent?: number;
   sold: number;
 }
-
-  

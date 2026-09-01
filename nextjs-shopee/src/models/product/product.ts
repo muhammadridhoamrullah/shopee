@@ -3,6 +3,7 @@ import { ProductRepository } from "./product.repository";
 import { cache } from "react";
 import { SORT_OPTIONS } from "@/src/type/category";
 import { StoreRepository } from "../store/store.repository";
+import { FlashSaleRepository } from "../flashSale/flashSale.repository";
 
 export const getProductBySlug = cache(async (slug: string) => {
   // Ambil data produk dari repository
@@ -12,13 +13,26 @@ export const getProductBySlug = cache(async (slug: string) => {
     return null;
   }
 
-  return toProdukResponse(product);
+  const flashSale =
+    await FlashSaleRepository.findActiveFlashSaleItemByProductId(product._id);
+
+  return toProdukResponse(product, flashSale ?? undefined);
 });
 
 export const getAllProducts = cache(async () => {
   const products = await ProductRepository.findAll();
 
-  return products.map((product) => toProdukResponse(product));
+  const flashSaleItems =
+    await FlashSaleRepository.findActiveFlashSaleItemsByProductIds(
+      products.map((el) => el._id),
+    );
+
+  return products.map((product) =>
+    toProdukResponse(
+      product,
+      flashSaleItems.find((el) => el.productId.equals(product._id)),
+    ),
+  );
 });
 
 export async function getProductsForRecommendation(sample: number) {
@@ -47,12 +61,25 @@ export async function getSearchProducts(
     skip,
     sortOption,
   );
+  console.log(products, "pada products");
+
+  const flashSaleItems =
+    await FlashSaleRepository.findActiveFlashSaleItemsByProductIds(
+      products.map((el) => el._id),
+    );
+  console.log(flashSaleItems, "pada search");
+
   const totalProducts = await ProductRepository.countByKeyword(keyword);
   const tokoTerkait = [...new Set(products.map((el) => el.storeId.toString()))];
   const tokoTerkaitData = await StoreRepository.findStoreByIds(tokoTerkait);
 
   return {
-    products: products.map(toProdukResponse),
+    products: products.map((product) =>
+      toProdukResponse(
+        product,
+        flashSaleItems.find((el) => el.productId.equals(product._id)),
+      ),
+    ),
     totalProducts,
     page,
     totalPages: Math.ceil(totalProducts / limit),
@@ -62,7 +89,8 @@ export async function getSearchProducts(
     })),
   };
 }
-
+// _id: new ObjectId('6a6ee56e0798c70ca1aa8400'),
+// productId: new ObjectId('6a6ee56e0798c70ca1aa8400'),
 export async function getProductByStoreIdWithSort(
   storeId: string,
   sortBy?: string,
