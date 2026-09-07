@@ -19,6 +19,48 @@ interface Props {
   product: ProdukResponse;
 }
 
+// {
+//   _id: '6a6ee56e0798c70ca1aa8404',
+//   name: 'Jersey Inter Milan Home 25/26',
+//   slug: 'jersey-inter-milan-home-25-26',
+//   categoryId: '6a7000000000000000000003',
+//   storeId: '6a8000000000000000000001',
+//   images: [
+//     'https://picsum.photos/600/600?random=10',
+//     'https://picsum.photos/600/600?random=60',
+//     'https://picsum.photos/600/600?random=110',
+//     'https://picsum.photos/600/600?random=160',
+//     'https://picsum.photos/600/600?random=210',
+//     'https://picsum.photos/600/600?random=260'
+//   ],
+//   price: 269000,
+//   originalPrice: 375000,
+//   discountPercent: 28,
+//   quantity: 49,
+//   sold: 641,
+//   createdAt: 2026-08-02T06:36:28.105Z,
+//   updatedAt: 2026-08-02T12:22:05.706Z,
+//   flashSale: {
+//     _id: '6a9826c90fd6bb363bcb2df9',
+//     productId: '6a6ee56e0798c70ca1aa8404',
+//     storeId: '6a8000000000000000000001',
+//     flashPrice: 250000,
+//     flashStock: 1,
+//     flashSold: 0,
+//     startTime: 2026-09-02T11:00:00.000Z,
+//     endTime: 2026-09-02T14:00:00.000Z,
+//     createdAt: 2026-09-02T13:38:17.282Z,
+//     updatedAt: 2026-09-02T13:38:17.282Z
+//   },
+//   discount: undefined,
+//   harga: {
+//     effectivePrice: 250000,
+//     strikePrice: 269000,
+//     discountPercentage: 7,
+//     promoSource: 'flashSale'
+//   }
+// } productBySlug
+
 export default function CardDetailProduk({ product }: Props) {
   const [quantity, setQuantity] = useState<number>(1);
 
@@ -164,24 +206,24 @@ export default function CardDetailProduk({ product }: Props) {
           <div className="bg-[#F5F5F5] w-full h-fit flex justify-start items-center gap-2 p-2 ">
             {/* Awal Harga Setelah Diskon */}
             <span className="text-3xl font-semibold text-[#EE4D2D]">
-              {formatRupiah(product.price)}
+              {formatRupiah(product.harga.effectivePrice)}
             </span>
             {/* Akhir Harga Setelah Diskon */}
 
             {/* Awal Harga Sebelum Diskon */}
-            {product.originalPrice && (
+            {product.harga.strikePrice && (
               <span className="line-through  text-gray-500">
-                {formatRupiah(product.originalPrice)}
+                {formatRupiah(product.harga.strikePrice)}
               </span>
             )}
             {/* Akhir Harga Sebelum Diskon */}
 
             {/* Awal Diskon */}
-            {product.discountPercent && (
+            {product.harga.discountPercentage ? (
               <span className="bg-red-500 text-white  font-bold px-2 py-1">
-                {product.discountPercent}% OFF
+                {product.harga.discountPercentage}% OFF
               </span>
-            )}
+            ) : null}
             {/* Akhir Diskon */}
           </div>
           {/* Akhir Harga Produk */}

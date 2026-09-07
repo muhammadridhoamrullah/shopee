@@ -42,16 +42,16 @@ export default function CardProdukMungkinKamuSuka({ data }: Props) {
         <div className="flex items-center gap-2 text-[#EE4D2D]">
           {/* Awal Harga Produk */}
           <span className="font-semibold text-lg">
-            {formatRupiah(data.price)}
+            {formatRupiah(data.harga.effectivePrice)}
           </span>
           {/* Akhir Harga Produk */}
 
           {/* Awal Discount */}
-          {data.discountPercent && (
+          {data.harga.discountPercentage ? (
             <span className="text-[10px] bg-red-800 text-white py-0.5 px-1">
-              -{data.discountPercent}%
+              -{data.harga.discountPercentage}%
             </span>
-          )}
+          ) : null}
           {/* Akhir Discount */}
         </div>
         {/* Akhir Harga Produk dan Discount */}

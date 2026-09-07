@@ -1,5 +1,5 @@
-import { schemaCreateFlashSaleItem } from "@/src/helpers/zod";
-import { createFlashSaleItem } from "@/src/models/flashSale/flashSale";
+import { schemaCreateDiscount } from "@/src/helpers/zod";
+import { createDiscount } from "@/src/models/discount/discount";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 
@@ -7,19 +7,15 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const schemaCreate = schemaCreateFlashSaleItem.safeParse(body);
+    const schemaCreate = schemaCreateDiscount.safeParse(body);
 
-    if (!schemaCreate.success) {
-      throw schemaCreate.error;
-    }
+    if (!schemaCreate.success) throw schemaCreate.error;
 
     const userId = request.headers.get("UserId");
 
-    if (!userId) {
-      throw new Error("Unauthorized: UserId header is missing");
-    }
+    if (!userId) throw new Error("Unauthorized: UserId header is missing");
 
-    const flashSaleId = await createFlashSaleItem({
+    const discountId = await createDiscount({
       userId,
       ...schemaCreate.data,
     });
@@ -27,16 +23,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        data: { flashSaleId },
-        message: "Flash sale item created successfully",
+        data: { discountId },
+        message: "Discount created successfully",
       },
       {
         status: 201,
       },
     );
   } catch (error) {
-    console.log(error, "error");
-
     if (error instanceof z.ZodError) {
       const path = error.issues[0].path[0];
       const message = error.issues[0].message;

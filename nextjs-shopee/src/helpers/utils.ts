@@ -1,5 +1,12 @@
 import { KategoriDokumen, KategoriResponse } from "../type/category";
-import { ProdukDokumen, ProdukResponse } from "../type/produk";
+import { DiscountDokumen, DiscountResponse } from "../type/discount";
+import { FlashSaleItemDokumen, FlashSaleItemResponse } from "../type/flashSale";
+import {
+  ProdukDokumen,
+  ProdukResponse,
+  ProdukRingkas,
+  ProdukRingkasDokumen,
+} from "../type/produk";
 import { StoreDokumen, StoreResponse } from "../type/store";
 import {
   FlashSaleItem,
@@ -7,6 +14,7 @@ import {
   Product,
   TimeLeftFlashSale,
 } from "../type/type";
+import { hitungHarga } from "../utils/Discount/discount";
 
 export const API_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -642,8 +650,6 @@ function generateProduct(index: number): Product {
   const id = index + 1;
 
   const price = randomInt(category.price[0], category.price[1]);
-  const discountPercent = randomInt(5, 70); // semua produk pasti ada diskon
-  const originalPrice = Math.round(price / (1 - discountPercent / 100));
 
   const badge = randomFrom(badges);
 
@@ -653,8 +659,6 @@ function generateProduct(index: number): Product {
     slug: slugify(`${brand} ${category.name}`, id),
     image: `https://picsum.photos/400/400?random=${id}`,
     price,
-    originalPrice,
-    discountPercent,
     sold: randomInt(1, 20000),
     rating:
       Math.random() < 0.85
@@ -696,12 +700,31 @@ export function formatAngka(angka: number): string {
   return `${angka}`;
 }
 
-export function toProdukResponse(doc: ProdukDokumen): ProdukResponse {
+export function toProdukResponse(
+  doc: ProdukDokumen,
+  flashSale?: FlashSaleItemDokumen,
+  discount?: DiscountDokumen,
+): ProdukResponse {
   return {
     ...doc,
     _id: doc._id.toString(),
     storeId: doc.storeId.toString(),
     categoryId: doc.categoryId.toString(),
+    flashSale: flashSale ? toFlashSaleItemResponse(flashSale) : undefined,
+    discount: discount ? toDiscountResponse(discount) : undefined,
+    harga: hitungHarga(doc.price, flashSale, discount),
+  };
+}
+
+export function toProdukRingkasResponse(
+  doc: ProdukRingkasDokumen,
+  flashSale?: FlashSaleItemDokumen,
+  discount?: DiscountDokumen,
+): ProdukRingkas {
+  return {
+    ...doc,
+    _id: doc._id.toString(),
+    harga: hitungHarga(doc.price, flashSale, discount),
   };
 }
 
@@ -714,5 +737,25 @@ export function toKategoriResponse(doc: KategoriDokumen): KategoriResponse {
     ...doc,
     _id: doc._id.toString(),
     ancestorsId: doc.ancestorsId.map((id) => id.toString()),
+  };
+}
+
+export function toFlashSaleItemResponse(
+  doc: FlashSaleItemDokumen,
+): FlashSaleItemResponse {
+  return {
+    ...doc,
+    _id: doc._id.toString(),
+    productId: doc.productId.toString(),
+    storeId: doc.storeId.toString(),
+  };
+}
+
+export function toDiscountResponse(doc: DiscountDokumen): DiscountResponse {
+  return {
+    ...doc,
+    _id: doc._id.toString(),
+    productId: doc.productId.toString(),
+    storeId: doc.storeId.toString(),
   };
 }

@@ -7,6 +7,22 @@ interface Props {
   produk: FlashSaleProdukResponse;
 }
 
+// [
+//   {
+//     _id: '6a9826c90fd6bb363bcb2df9',
+//     productId: '6a6ee56e0798c70ca1aa8404',
+//     name: 'Jersey Inter Milan Home 25/26',
+//     slug: 'jersey-inter-milan-home-25-26',
+//     image: 'https://picsum.photos/600/600?random=10',
+//     flashPrice: 250000,
+//     normalPrice: 269000,
+//     discountPercent: 7,
+//     flashStock: 1,
+//     flashSold: 0,
+//     endTime: 2026-09-02T14:00:00.000Z
+//   }
+// ] FLASH SALE GWEH
+
 export default function CardFlashSale({ produk }: Props) {
   return (
     <Link
@@ -20,9 +36,19 @@ export default function CardFlashSale({ produk }: Props) {
           src={produk.image}
           alt={produk.name}
           fill
-          className="object-contain"
+          className="object-cover"
           sizes="172px"
         />
+
+        {/* Awal Badge Discount */}
+
+        {produk.discountPercent && (
+          <span className="absolute z-10 top-0 right-0 bg-[#EE4D2D] p-1 text-xs font-semibold text-white rounded-bl-md">
+            {produk.discountPercent}% OFF
+          </span>
+        )}
+
+        {/* Akhir Badge Discount */}
       </div>
       {/* Akhir Foto Produk */}
 
