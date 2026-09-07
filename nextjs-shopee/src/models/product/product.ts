@@ -1,9 +1,10 @@
-import { toProdukResponse } from "@/src/helpers/utils";
+import { toProdukResponse, toProdukRingkasResponse } from "@/src/helpers/utils";
 import { ProductRepository } from "./product.repository";
 import { cache } from "react";
 import { SORT_OPTIONS } from "@/src/type/category";
 import { StoreRepository } from "../store/store.repository";
 import { FlashSaleRepository } from "../flashSale/flashSale.repository";
+import { DiscountRepository } from "../discount/discount.repository";
 
 export const getProductBySlug = cache(async (slug: string) => {
   // Ambil data produk dari repository
@@ -16,7 +17,15 @@ export const getProductBySlug = cache(async (slug: string) => {
   const flashSale =
     await FlashSaleRepository.findActiveFlashSaleItemByProductId(product._id);
 
-  return toProdukResponse(product, flashSale ?? undefined);
+  const discount = await DiscountRepository.findActiveDiscountByProductId(
+    product._id,
+  );
+
+  return toProdukResponse(
+    product,
+    flashSale ?? undefined,
+    discount ?? undefined,
+  );
 });
 
 export const getAllProducts = cache(async () => {
@@ -27,10 +36,25 @@ export const getAllProducts = cache(async () => {
       products.map((el) => el._id),
     );
 
+  const discounts = await DiscountRepository.findActiveDiscountsByProductIds(
+    products.map((el) => el._id),
+  );
+
+  // Peta produk flash sale berdasarkan productId
+  const petaProductFlashSale = new Map(
+    flashSaleItems.map((el) => [el.productId.toString(), el]),
+  );
+
+  // Peta produk diskon berdasarkan productId
+  const petaProductDiscount = new Map(
+    discounts.map((el) => [el.productId.toString(), el]),
+  );
+
   return products.map((product) =>
     toProdukResponse(
       product,
-      flashSaleItems.find((el) => el.productId.equals(product._id)),
+      petaProductFlashSale.get(product._id.toString()),
+      petaProductDiscount.get(product._id.toString()),
     ),
   );
 });
@@ -38,10 +62,34 @@ export const getAllProducts = cache(async () => {
 export async function getProductsForRecommendation(sample: number) {
   const products = await ProductRepository.findRandomRecommendation(sample);
 
-  return products.map((el) => ({
-    ...el,
-    _id: el._id.toString(),
-  }));
+  // Cek apakah produk-produk ini memiliki flash sale?
+  const flashSaleItems =
+    await FlashSaleRepository.findActiveFlashSaleItemsByProductIds(
+      products.map((el) => el._id),
+    );
+
+  // Cek apakah produk-produk ini memiliki diskon?
+  const discounts = await DiscountRepository.findActiveDiscountsByProductIds(
+    products.map((el) => el._id),
+  );
+
+  // Peta Produk flash sale berdasarkan productId
+  const petaProductFlashSale = new Map(
+    flashSaleItems.map((el) => [el.productId.toString(), el]),
+  );
+
+  // Peta Produk discount berdasarkan productId
+  const petaProductDiscount = new Map(
+    discounts.map((el) => [el.productId.toString(), el]),
+  );
+
+  return products.map((product) =>
+    toProdukRingkasResponse(
+      product,
+      petaProductFlashSale.get(product._id.toString()),
+      petaProductDiscount.get(product._id.toString()),
+    ),
+  );
 }
 
 export async function getSearchProducts(
@@ -61,23 +109,36 @@ export async function getSearchProducts(
     skip,
     sortOption,
   );
-  console.log(products, "pada products");
 
   const flashSaleItems =
     await FlashSaleRepository.findActiveFlashSaleItemsByProductIds(
       products.map((el) => el._id),
     );
-  console.log(flashSaleItems, "pada search");
+
+  const discounts = await DiscountRepository.findActiveDiscountsByProductIds(
+    products.map((el) => el._id),
+  );
 
   const totalProducts = await ProductRepository.countByKeyword(keyword);
   const tokoTerkait = [...new Set(products.map((el) => el.storeId.toString()))];
   const tokoTerkaitData = await StoreRepository.findStoreByIds(tokoTerkait);
 
+  // Peta produk flash sale berdasarkan productId
+  const petaProductFlashSale = new Map(
+    flashSaleItems.map((el) => [el.productId.toString(), el]),
+  );
+
+  // Peta produk discount berdasarkan productId
+  const petaProductDiscount = new Map(
+    discounts.map((el) => [el.productId.toString(), el]),
+  );
+
   return {
     products: products.map((product) =>
       toProdukResponse(
         product,
-        flashSaleItems.find((el) => el.productId.equals(product._id)),
+        petaProductFlashSale.get(product._id.toString()),
+        petaProductDiscount.get(product._id.toString()),
       ),
     ),
     totalProducts,
@@ -89,27 +150,74 @@ export async function getSearchProducts(
     })),
   };
 }
-// _id: new ObjectId('6a6ee56e0798c70ca1aa8400'),
-// productId: new ObjectId('6a6ee56e0798c70ca1aa8400'),
+
 export async function getProductByStoreIdWithSort(
   storeId: string,
   sortBy?: string,
 ) {
   const products = await ProductRepository.findByStoreId(storeId, sortBy);
 
-  return products.map((el) => ({
-    ...el,
-    _id: el._id.toString(),
-  }));
+  // Cek apakah produk-produk ini memiliki flashSale?
+  const flashSaleItems =
+    await FlashSaleRepository.findActiveFlashSaleItemsByProductIds(
+      products.map((el) => el._id),
+    );
+
+  // Cek apakah produk-produk ini memiliki diskon?
+  const discounts = await DiscountRepository.findActiveDiscountsByProductIds(
+    products.map((el) => el._id),
+  );
+
+  // Peta Produk flash sale berdasarkan productId
+  const petaProductFlashSale = new Map(
+    flashSaleItems.map((el) => [el.productId.toString(), el]),
+  );
+
+  // Peta Produk discount berdasarkan productId
+  const petaProductDiscount = new Map(
+    discounts.map((el) => [el.productId.toString(), el]),
+  );
+
+  return products.map((product) =>
+    toProdukRingkasResponse(
+      product,
+      petaProductFlashSale.get(product._id.toString()),
+      petaProductDiscount.get(product._id.toString()),
+    ),
+  );
 }
 
 export async function getProductTerlarisPreview() {
   const products = await ProductRepository.findProdukTerlaris(12, 0);
 
-  return products.map((el) => ({
-    ...el,
-    _id: el._id.toString(),
-  }));
+  // Cek apakah produk-produk ini memiliki flashSale?
+  const flashSaleItems =
+    await FlashSaleRepository.findActiveFlashSaleItemsByProductIds(
+      products.map((el) => el._id),
+    );
+
+  // Cek apakah produk-produk ini memiliki diskon?
+  const discounts = await DiscountRepository.findActiveDiscountsByProductIds(
+    products.map((el) => el._id),
+  );
+
+  // Peta Produk flash sale berdasarkan productId
+  const petaProductFlashSale = new Map(
+    flashSaleItems.map((el) => [el.productId.toString(), el]),
+  );
+
+  // Peta Produk discount berdasarkan productId
+  const petaProductDiscount = new Map(
+    discounts.map((el) => [el.productId.toString(), el]),
+  );
+
+  return products.map((product) =>
+    toProdukRingkasResponse(
+      product,
+      petaProductFlashSale.get(product._id.toString()),
+      petaProductDiscount.get(product._id.toString()),
+    ),
+  );
 }
 
 export async function getProductTerlarisPage(page: number) {
@@ -119,11 +227,35 @@ export async function getProductTerlarisPage(page: number) {
   const products = await ProductRepository.findProdukTerlaris(limit, skip);
   const totalProducts = await ProductRepository.countAllProduk();
 
+  // Cek apakah produk-produk ini memiliki flash sale?
+  const flashSaleItems =
+    await FlashSaleRepository.findActiveFlashSaleItemsByProductIds(
+      products.map((el) => el._id),
+    );
+
+  // Cek apakah produk-produk ini memiliki diskon?
+  const discounts = await DiscountRepository.findActiveDiscountsByProductIds(
+    products.map((el) => el._id),
+  );
+
+  // Peta Produk flash sale berdasarkan productId
+  const petaProductFlashSale = new Map(
+    flashSaleItems.map((el) => [el.productId.toString(), el]),
+  );
+
+  // Peta Produk discount berdasarkan productId
+  const petaProductDiscount = new Map(
+    discounts.map((el) => [el.productId.toString(), el]),
+  );
+
   return {
-    products: products.map((el) => ({
-      ...el,
-      _id: el._id.toString(),
-    })),
+    products: products.map((product) =>
+      toProdukRingkasResponse(
+        product,
+        petaProductFlashSale.get(product._id.toString()),
+        petaProductDiscount.get(product._id.toString()),
+      ),
+    ),
     totalProducts,
     page,
     totalPages: Math.ceil(totalProducts / limit),

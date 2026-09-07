@@ -11,7 +11,8 @@
     "setup:cart-index": "tsx --env-file=.env src/scripts/setup/setup-cart-index.ts",
     "seed:stores": "tsx --env-file=.env src/scripts/seed/seed-store.ts",
     "seed:categories": "tsx --env-file=.env src/scripts/seed/seed-category.ts",
-    "seed:flashsale": "tsx --env-file=.env src/scripts/seed/seed-flashSale.ts"
+    "seed:flashsale": "tsx --env-file=.env src/scripts/seed/seed-flashSale.ts",
+    "seed:discounts": "tsx --env-file=.env src/scripts/seed/seed-discount.ts"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.12.0",

@@ -22,6 +22,8 @@ export default function InputFormFlashSale({
   products,
   tanggalHariIni,
 }: Props) {
+  console.log(products, "Portal - Flash Sale - Product");
+
   const {
     loadingTambahItemFlashSale,
     dataTambahItemFlashSale,
@@ -113,6 +115,7 @@ export default function InputFormFlashSale({
     const [tahun, bulan, tanggal] = formFlashSale.tanggal
       .split("-")
       .map(Number);
+
     const endTime = jadikanWIB(tahun, bulan, tanggal, slot.end);
 
     return endTime <= new Date();

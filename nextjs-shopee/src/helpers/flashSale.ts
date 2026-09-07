@@ -16,8 +16,11 @@ export function jadikanWIB(
   bulan: number,
   tanggal: number,
   jamWIB: number,
+  menit?: number,
 ): Date {
-  return new Date(Date.UTC(tahun, bulan - 1, tanggal, jamWIB - OFFSET));
+  return new Date(
+    Date.UTC(tahun, bulan - 1, tanggal, jamWIB - OFFSET, menit || 0),
+  );
 }
 
 export function tanggalHariIni() {

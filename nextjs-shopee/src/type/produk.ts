@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb";
-import { FlashSaleItemDokumen, FlashSaleItemResponse } from "./flashSale";
+import { FlashSaleItemResponse } from "./flashSale";
+import { DiscountResponse, HasilHitungHarga } from "./discount";
 
 export interface ProdukDokumen {
   _id: ObjectId;
@@ -8,15 +9,12 @@ export interface ProdukDokumen {
   categoryId: ObjectId;
   images: string[];
   price: number;
-  originalPrice?: number;
-  discountPercent?: number;
   quantity: number;
   sold: number;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date;
   storeId: ObjectId;
-  flashSale?: FlashSaleItemDokumen;
 }
 
 export interface ProdukResponse {
@@ -26,8 +24,6 @@ export interface ProdukResponse {
   categoryId: string;
   images: string[];
   price: number;
-  originalPrice?: number;
-  discountPercent?: number;
   quantity: number;
   sold: number;
   createdAt: Date;
@@ -35,6 +31,8 @@ export interface ProdukResponse {
   deletedAt?: Date;
   storeId: string;
   flashSale?: FlashSaleItemResponse;
+  discount?: DiscountResponse;
+  harga: HasilHitungHarga;
 }
 
 export interface ProdukRingkas {
@@ -43,6 +41,11 @@ export interface ProdukRingkas {
   slug: string;
   images: string[];
   price: number;
-  discountPercent?: number;
   sold: number;
+  harga: HasilHitungHarga;
 }
+
+export type ProdukRingkasDokumen = Pick<
+  ProdukDokumen,
+  "_id" | "name" | "slug" | "images" | "price" | "sold"
+>;

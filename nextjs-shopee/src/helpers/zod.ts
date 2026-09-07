@@ -39,3 +39,28 @@ export const schemaCreateFlashSaleItem = z.object({
   }),
   slotStart: z.number().int().min(0).max(23),
 });
+
+export const schemaCreateDiscount = z.object({
+  productId: z.string().min(1, { message: "Product ID is required" }),
+  discountPrice: z
+    .number()
+    .positive({ message: "Discount price must be a positive number" }),
+  tanggalAwal: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+    message: "Format tanggalAwal tidak valid",
+  }),
+  jamAwal: z.string().regex(/^(0[0-9]|1[0-9]|2[0-3])$/, {
+    message: "Jam harus berformat 2 digit antara 00 - 23",
+  }),
+  menitAwal: z.string().regex(/^([0-5]?[0-9])$/, {
+    message: "Menit harus berformat 2 digit antara 00 - 59",
+  }),
+  tanggalAkhir: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
+    message: "Format tanggalAkhir tidak valid",
+  }),
+  jamAkhir: z.string().regex(/^(0[0-9]|1[0-9]|2[0-3])$/, {
+    message: "Jam harus berformat 2 digit antara 00 - 23",
+  }),
+  menitAkhir: z.string().regex(/^([0-5]?[0-9])$/, {
+    message: "Menit harus berformat 2 digit antara 00 - 59",
+  }),
+});

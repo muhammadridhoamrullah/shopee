@@ -11,8 +11,6 @@ interface Props {
   searchParams: Promise<{ page?: string; sort?: string }>;
 }
 
-
-
 export default async function CategorySlugPage({
   params,
   searchParams,

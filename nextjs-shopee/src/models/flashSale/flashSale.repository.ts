@@ -19,6 +19,7 @@ export class FlashSaleRepository {
         endTime: {
           $gt: now,
         },
+        deletedAt: { $exists: false },
       })
       .toArray();
 
@@ -40,6 +41,8 @@ export class FlashSaleRepository {
         endTime: {
           $gt: now,
         },
+        deletedAt: { $exists: false },
+        $expr: { $lt: ["$flashSold", "$flashStock"] }, // Pastikan flashSold < flashStock
       });
 
     return result;
@@ -60,6 +63,8 @@ export class FlashSaleRepository {
         endTime: {
           $gt: now,
         },
+        deletedAt: { $exists: false },
+        $expr: { $lt: ["$flashSold", "$flashStock"] }, // Pastikan flashSold < flashStock
       })
       .toArray();
 
@@ -83,6 +88,7 @@ export class FlashSaleRepository {
       productId,
       startTime: { $lt: endTime },
       endTime: { $gt: startTime },
+      deletedAt: { $exists: false },
     });
   }
 }

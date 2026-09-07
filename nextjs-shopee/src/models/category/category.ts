@@ -4,6 +4,8 @@ import { toKategoriResponse, toProdukResponse } from "@/src/helpers/utils";
 import { CategoryRepository } from "./category.repository";
 import { ProductRepository } from "../product/product.repository";
 import { SORT_OPTIONS } from "@/src/type/category";
+import { FlashSaleRepository } from "../flashSale/flashSale.repository";
+import { DiscountRepository } from "../discount/discount.repository";
 
 export async function getBreadCrumb(categoryId: string) {
   const category = await CategoryRepository.findById(categoryId);
@@ -53,11 +55,39 @@ export async function getProductsBySlug(
     skip,
     sortOption,
   );
+
+  // Cek apakah produk-produk ini memiliki flash sale?
+  const flashSaleItems =
+    await FlashSaleRepository.findActiveFlashSaleItemsByProductIds(
+      products.map((el) => el._id),
+    );
+
+  // Cek apakah produk-produk ini memiliki diskon?
+  const discounts = await DiscountRepository.findActiveDiscountsByProductIds(
+    products.map((el) => el._id),
+  );
+
+  // Peta produk flash sale berdasarkan productId
+  const petaProductFlashSale = new Map(
+    flashSaleItems.map((el) => [el.productId.toHexString(), el]),
+  );
+
+  // Peta produk discount berdasarkan productId
+  const petaProdukDiscount = new Map(
+    discounts.map((el) => [el.productId.toString(), el]),
+  );
+
   const totalProducts = await ProductRepository.countByCategoryIds(categoryIds);
 
   return {
     category: toKategoriResponse(category),
-    products: products.map((product) => toProdukResponse(product)),
+    products: products.map((product) =>
+      toProdukResponse(
+        product,
+        petaProductFlashSale.get(product._id.toString()),
+        petaProdukDiscount.get(product._id.toString()),
+      ),
+    ),
     totalProducts,
     page,
     totalPages: Math.ceil(totalProducts / limit),

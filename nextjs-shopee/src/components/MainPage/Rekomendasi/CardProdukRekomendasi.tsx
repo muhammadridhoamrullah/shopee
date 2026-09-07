@@ -29,11 +29,11 @@ export default function CardProductRekomendasi({ product }: Props) {
         {/* Akhir Badge */}
 
         {/* Awal Discount  */}
-        {product.discountPercent && (
+        {product.harga.discountPercentage ? (
           <span className="absolute top-0 right-0 bg-[#EE4D2D] text-white text-sm font-semibold px-1 py-0.5 rounded-bl-md">
-            {product.discountPercent}% OFF
+            {product.harga.discountPercentage}% OFF
           </span>
-        )}
+        ) : null}
         {/* Akhir Discount  */}
       </div>
       {/* Akhir Foto Produk */}
@@ -48,7 +48,7 @@ export default function CardProductRekomendasi({ product }: Props) {
         <div className="w-full flex justify-between items-center gap-1">
           {/* Awal Harga */}
           <span className=" line-clamp-1 flex-1 text-sm font-semibold text-[#EE4D2D]">
-            {formatRupiah(product.price)}
+            {formatRupiah(product.harga.effectivePrice)}
           </span>
           {/* Akhir Harga */}
 
