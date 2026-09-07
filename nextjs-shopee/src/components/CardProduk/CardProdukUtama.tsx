@@ -7,6 +7,29 @@ interface Props {
   produk: ProdukRingkas;
 }
 
+//  {
+//     _id: '6a6ee56e0798c70ca1aa83ff',
+//     name: 'Jersey Arsenal Third 25/26',
+//     slug: 'jersey-arsenal-third-25-26',
+//     images: [
+//       'https://picsum.photos/600/600?random=5',
+//       'https://picsum.photos/600/600?random=55',
+//       'https://picsum.photos/600/600?random=105',
+//       'https://picsum.photos/600/600?random=155',
+//       'https://picsum.photos/600/600?random=205',
+//       'https://picsum.photos/600/600?random=255'
+//     ],
+//     price: 275000,
+//     sold: 890,
+//     harga: {
+//       effectivePrice: 147158,
+//       strikePrice: 275000,
+//       discountPercentage: 46,
+//       promoSource: 'discount'
+//     }
+//   }
+// ] Rekomendasi - allProducts
+
 export default function CardProdukUtama({ produk }: Props) {
   return (
     <Link
@@ -29,11 +52,11 @@ export default function CardProdukUtama({ produk }: Props) {
         {/* Akhir Badge */}
 
         {/* Awal Discount  */}
-        {produk.discountPercent && (
+        {produk.harga.discountPercentage ? (
           <span className="absolute top-0 right-0 bg-[#EE4D2D] text-white text-sm font-semibold px-1 py-0.5 rounded-bl-md">
-            {produk.discountPercent}% OFF
+            {produk.harga.discountPercentage}% OFF
           </span>
-        )}
+        ) : null}
         {/* Akhir Discount  */}
       </div>
       {/* Akhir Foto Produk */}
@@ -48,7 +71,7 @@ export default function CardProdukUtama({ produk }: Props) {
         <div className="w-full flex justify-between items-center gap-1">
           {/* Awal Harga */}
           <span className=" line-clamp-1 flex-1 text-sm font-semibold text-[#EE4D2D]">
-            {formatRupiah(produk.price)}
+            {formatRupiah(produk.harga.effectivePrice)}
           </span>
           {/* Akhir Harga */}
 

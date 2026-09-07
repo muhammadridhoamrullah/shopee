@@ -37,13 +37,7 @@ export class ProductRepository {
       .aggregate<
         Pick<
           ProdukDokumen,
-          | "_id"
-          | "name"
-          | "slug"
-          | "images"
-          | "price"
-          | "discountPercent"
-          | "sold"
+          "_id" | "name" | "slug" | "images" | "price" | "sold"
         >
       >([
         { $sample: { size: sample } },
@@ -54,7 +48,6 @@ export class ProductRepository {
             slug: 1,
             images: 1,
             price: 1,
-            discountPercent: 1,
             sold: 1,
           },
         },
@@ -172,13 +165,7 @@ export class ProductRepository {
       .project<
         Pick<
           ProdukDokumen,
-          | "_id"
-          | "name"
-          | "slug"
-          | "images"
-          | "price"
-          | "discountPercent"
-          | "sold"
+          "_id" | "name" | "slug" | "images" | "price" | "sold"
         >
       >({
         _id: 1,
@@ -186,7 +173,6 @@ export class ProductRepository {
         slug: 1,
         images: 1,
         price: 1,
-        discountPercent: 1,
         sold: 1,
       })
       .toArray();
@@ -214,7 +200,6 @@ export class ProductRepository {
         slug: 1,
         images: 1,
         price: 1,
-        discountPercent: 1,
         sold: 1,
       },
     });
@@ -224,13 +209,7 @@ export class ProductRepository {
       .aggregate<
         Pick<
           ProdukDokumen,
-          | "_id"
-          | "name"
-          | "slug"
-          | "images"
-          | "price"
-          | "discountPercent"
-          | "sold"
+          "_id" | "name" | "slug" | "images" | "price" | "sold"
         >
       >(pipeline)
       .toArray();
@@ -259,13 +238,7 @@ export class ProductRepository {
       .project<
         Pick<
           ProdukDokumen,
-          | "_id"
-          | "name"
-          | "slug"
-          | "images"
-          | "price"
-          | "discountPercent"
-          | "sold"
+          "_id" | "name" | "slug" | "images" | "price" | "sold"
         >
       >({
         _id: 1,
@@ -273,7 +246,6 @@ export class ProductRepository {
         slug: 1,
         images: 1,
         price: 1,
-        discountPercent: 1,
         sold: 1,
       })
       .toArray();

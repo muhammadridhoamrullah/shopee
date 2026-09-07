@@ -19,6 +19,7 @@ export class FlashSaleRepository {
         endTime: {
           $gt: now,
         },
+        deletedAt: { $exists: false },
       })
       .toArray();
 
@@ -40,7 +41,32 @@ export class FlashSaleRepository {
         endTime: {
           $gt: now,
         },
+        deletedAt: { $exists: false },
+        $expr: { $lt: ["$flashSold", "$flashStock"] }, // Pastikan flashSold < flashStock
       });
+
+    return result;
+  }
+
+  // Cek apakah produk-produk ini sedang berlangsung flash sale atau tidak?
+  static async findActiveFlashSaleItemsByProductIds(productIds: ObjectId[]) {
+    const db = await getDB();
+    const now = new Date();
+
+    const result = await db
+      .collection<FlashSaleItemDokumen>(COLLECTION_NAME)
+      .find({
+        productId: { $in: productIds },
+        startTime: {
+          $lte: now,
+        },
+        endTime: {
+          $gt: now,
+        },
+        deletedAt: { $exists: false },
+        $expr: { $lt: ["$flashSold", "$flashStock"] }, // Pastikan flashSold < flashStock
+      })
+      .toArray();
 
     return result;
   }
@@ -62,6 +88,7 @@ export class FlashSaleRepository {
       productId,
       startTime: { $lt: endTime },
       endTime: { $gt: startTime },
+      deletedAt: { $exists: false },
     });
   }
 }
